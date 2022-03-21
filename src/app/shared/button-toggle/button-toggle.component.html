@@ -1,0 +1,6 @@
+<app-field-title [title]="configuration.fieldTitle"></app-field-title>
+
+<mat-button-toggle-group (change)="onToggle($event)" [value]="configuration.value" aria-label="Rodzaj rat">
+    <mat-button-toggle [value]="installmentEqual">równe</mat-button-toggle>
+    <mat-button-toggle [value]="installmentDeacrising">malejące</mat-button-toggle>
+</mat-button-toggle-group>

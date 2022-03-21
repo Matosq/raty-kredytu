@@ -1,0 +1,17 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    align-content: center;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 20px;
+}

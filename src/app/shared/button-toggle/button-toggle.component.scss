@@ -1,0 +1,33 @@
+:host {
+    width: 281px;
+}
+
+.mat-button-toggle-group {
+    left: 40px;
+    // color: var(--antique-white);
+    // background-color: var(--kimberly);
+    border-radius: 6px;
+    border-color: var(--antique-white);
+    // width: 201px;
+
+}
+
+.mat-button-toggle {
+    color: var(--antique-white);
+    background-color: rgba(var(--scampi));
+}
+
+.mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
+    border-left: solid 1px var(--antique-white);
+}
+
+.mat-button-toggle-checked {
+    background-color: var(--kimberly);
+}
+
+.mat-button-toggle:focus {
+    border-color: coral;
+}
+
+.mat-button-toggle-focused {
+}

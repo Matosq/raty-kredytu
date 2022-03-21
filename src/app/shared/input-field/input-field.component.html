@@ -1,0 +1,19 @@
+<app-field-title [title]="configuration.fieldTitle"></app-field-title>
+
+<div class="input-field-container">
+
+    <button (click)="decrease()" mat-icon-button aria-label="Example icon button with a heart icon">
+        <mat-icon>remove</mat-icon>
+    </button>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{configuration?.label}}</mat-label>
+        <input matInput placeholder={{configuration?.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
+        <mat-hint>{{configuration?.hint}}</mat-hint>
+    </mat-form-field>
+
+    <button (click)="increase()" mat-icon-button aria-label="Example icon button with a heart icon">
+        <mat-icon>add</mat-icon>
+    </button>
+
+</div>
