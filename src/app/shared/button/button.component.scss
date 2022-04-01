@@ -8,10 +8,10 @@
     font-size: 18px;
     border-color: var(--antique-white);
     &:hover {
-        border: 3px solid var(--antique-white);
+        outline: 3px solid var(--antique-white);
     }
 }
 
 .mat-icon {
-    margin: 0px 10px;
+    margin-right: 10px;
 }

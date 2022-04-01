@@ -1,3 +1,8 @@
 export interface SectionCard {
-    cardHeader: string;
+    cardHeader: SectionCardHeader;
+}
+
+export enum SectionCardHeader {
+    LOAN = 'parametry kredytu',
+    TRANCHES = 'transze'
 }

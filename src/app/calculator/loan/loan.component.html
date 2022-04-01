@@ -24,10 +24,8 @@
 
     </div>
 
-    <div class="btn">
-        <app-button
-        [text]="'Oblicz raty'"
-        [icon]="'currency_exchange'"
+    <div class="action-button-right">
+        <app-button [configuration]="calculateButton"
         [onClick]="calculateLoan"
         ></app-button>
     </div>

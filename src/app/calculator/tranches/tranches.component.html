@@ -1,8 +1,40 @@
 <section class="card-wrapper">
 
     <app-card-header [header]="cardHeader"></app-card-header>
-    <app-button></app-button>
-    <app-input-field></app-input-field>
+
+    <div class="flexbox-wrapper">
+        <span class="tranche-index">1</span>
+        <span class="tranche-date">{{firstTranche.date}}</span>
+
+        <div class="tranche-value-flex-wrapper">
+            <app-input-field class="tranche-rate" [configuration]="firstTranchePercentageInput"
+            (valueChange)="updateFirstTrancheValueOnRateChanges($event)"></app-input-field>
+            <span class="tranche-value">{{firstTranche.value | currency:'zł'}}</span>
+        </div>
+    </div>
 
 
+    <div *ngFor="let tranche of tranchesView; index as i">
+        <div class="flexbox-wrapper">
+            <span class="tranche-index">{{i + 2}}</span>
+            <app-datepicker [configuration]="trancheDatepicker"
+            (valueChange)="updateTranchesDateByTrancheId($event, tranche.trancheIndex)"></app-datepicker>
+
+            <div class="tranche-value-flex-wrapper">
+                <app-input-field class="tranche-rate" [configuration]="tranche.inputFieldConfig"
+                (valueChange)="updateTrancheValueOnRateChangesByTrancheId($event, tranche.trancheIndex)"></app-input-field>
+                <span class="tranche-value">{{tranche.value | currency:'zł'}}</span>
+            </div>
+
+            <div>
+                <app-button class="delete-button" [configuration]="removeTrancheButton" (click)="removeTranche(tranche.trancheIndex)"></app-button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="action-button-right">
+        <app-button [configuration]="addTrancheButton" (click)="addTranche()"></app-button>
+    </div>
 </section>

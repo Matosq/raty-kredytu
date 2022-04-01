@@ -1,6 +1,42 @@
+
+@media screen and (max-width: 768px) {
+    .simulation-card {
+        background: coral;
+        padding: 1rem 0.6rem;
+    }
+}
+
 .simulation-card {
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(117, 115, 169, 0.8) 0%, rgba(31, 23, 46, 0.56) 42.26%);
     // font-size: 18px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .flex-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .month-year {
+        flex-grow: 1;
+        display: none;
+    }
+    
+    .interest-rate {
+        flex-grow: 1;
+        display: none;
+    }
+
+    .installment {
+        color: white;
+        font-weight: bold;
+        flex-grow: 2;
+        display: none;
+    }
 }
 
 .flex-wrapper {
@@ -17,10 +53,12 @@
 
 .month-year {
     flex-grow: 1;
+    // display: none;
 }
 
 .interest-rate {
     flex-grow: 1;
+    // display: none;
 }
 
 .principal {
@@ -37,6 +75,7 @@
     color: white;
     font-weight: bold;
     flex-grow: 2;
+    // display: none;
 }
 
 .extra-costs {

@@ -2,7 +2,7 @@
 
 <mat-form-field appearance="outline" (click)="dp.open()">
   <mat-label>{{configuration.label}}</mat-label>
-  <input matInput [matDatepicker]="dp" [formControl]="date" tabindex="-1">
+  <input inputmode='none' matInput [matDatepicker]="dp" [formControl]="date" tabindex="-1">
   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
   <mat-datepicker #dp
                   startView="multi-year"

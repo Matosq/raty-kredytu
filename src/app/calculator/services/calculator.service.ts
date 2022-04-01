@@ -17,12 +17,12 @@ export class CalculatorService {
   ) { }
 
   public calculateLoan(): void {
-    this.monthCalculationDate = cloneDeep(this.loanParams.getStartDate());
-    if (this.loanParams.getInstallments() == Installments.EQUAL) {
+    this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
+    if (this.loanParams.getInstallments() === Installments.EQUAL) {
       this.calculateEqualInstallments();
       return;
     }
-    if (this.loanParams.getInstallments() == Installments.DEACRISING) {
+    if (this.loanParams.getInstallments() === Installments.DEACRISING) {
       this.calculateDeacrisingInstallments();
       return;
     }

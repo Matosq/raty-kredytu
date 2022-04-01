@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
+import { ButtonConfig } from '../models/button-config.model';
 
 @Component({
   selector: 'app-button',
@@ -6,8 +7,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
-  @Input() text = 'Dodaj';
-  @Input() icon = 'add';
+  @Input() configuration!: ButtonConfig;
   @Input() onClick = () => {};
   constructor() { }
 

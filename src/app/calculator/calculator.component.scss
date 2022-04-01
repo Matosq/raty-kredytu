@@ -1,12 +1,28 @@
+.flexbox-row-container {
+    display: flex;
+    flex-direction: row;
+    // row-gap: 30px;
+    // // align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
 .flexbox-container {
     display: flex;
     flex-direction: column;
     row-gap: 30px;
-    align-items: center;
+    // align-items: center;
     height: 100%;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .scroll-container {
     overflow-y: scroll;
+    overflow-x: hidden;
 }

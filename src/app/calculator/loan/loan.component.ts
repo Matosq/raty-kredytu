@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { Moment } from 'moment';
 import { Installments } from 'src/app/shared/button-toggle/installment.model';
+import { ButtonConfig } from 'src/app/shared/models/button-config.model';
+import { IconName } from 'src/app/shared/models/icon-names.model';
 import { CreditParameterButtonTogle, CreditParameterDatepicker, CreditParameterInputField } from '../models/credit-parameter.model';
-import { SectionCard } from '../models/section-card.model';
+import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CalculatorService } from '../services/calculator.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 
@@ -13,7 +15,7 @@ import { LoanParametersService } from '../services/loan-parameters.service';
   styleUrls: ['./loan.component.scss']
 })
 export class LoanComponent implements SectionCard, OnInit {
-  public readonly cardHeader = 'parametry kredytu';
+  public readonly cardHeader = SectionCardHeader.LOAN;
 
   public amountLoanField: CreditParameterInputField = {
     fieldTitle: 'kwota kredytu',
@@ -51,6 +53,10 @@ export class LoanComponent implements SectionCard, OnInit {
     label: 'miesiąc i rok',
   }
 
+  public calculateButton: ButtonConfig = {
+    text: 'Oblicz raty',
+    icon: IconName.CURRENCY_EXCHANGE
+  }
   
   constructor(
     private loanParametersService: LoanParametersService,

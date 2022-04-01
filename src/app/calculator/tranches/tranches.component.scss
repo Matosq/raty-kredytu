@@ -1,0 +1,42 @@
+.flexbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 45px;
+}
+
+.tranche-index {
+    // width: 20px;
+}
+
+.tranche-value-flex-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.tranche-date {
+    width: 180px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-left: 10.5px;
+    padding-right: 10.5px;
+}
+
+.tranche-value {
+    width: 120px;
+    text-align: right;
+}
+
+.delete-button {
+    padding-left: 40px;
+}
+
+::ng-deep .delete-button .mat-stroked-button {
+    width: 120px !important;
+}
+
+::ng-deep .tranche-rate .mat-form-field {
+    width: 120px !important;
+}
