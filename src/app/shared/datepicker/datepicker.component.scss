@@ -1,33 +1,13 @@
-.example-month-picker .mat-calendar-period-button {
-    pointer-events: none;
-}
-  
-.example-month-picker .mat-calendar-arrow {
-    display: none;
-}
 
 :host {
     width: 281px;
 }
 
-.mat-datepicker-toggle {
-    color: var(--antique-white);
-}
-
-.mat-datepicker-toggle-active {
-    color: var(--swiss-coffe);
+.datepicker {
+    width: 201px;
 }
 
 .mat-form-field {
-    width: 201px;
+    cursor: pointer;
     left: 40px;
-    cursor: pointer;
-}
-
-.mat-form-field-wrapper {
-    border: solid 1px var(--antique-white);
-}
-
-input {
-    cursor: pointer;
 }

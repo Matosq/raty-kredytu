@@ -1,63 +1,50 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CreditParameterDatepicker, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
-import { DatepickerFormat } from 'src/app/calculator/models/date.model';
-
+import { DatepickerRangeFormat, DateRange } from 'src/app/calculator/models/date.model';
 const moment = _rollupMoment || _moment;
 
 @Component({
-  selector: 'app-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
+  selector: 'app-datepicker-range',
+  templateUrl: './datepicker-range.component.html',
+  styleUrls: ['./datepicker-range.component.scss'],
   providers: [
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-
     {
       provide: MAT_DATE_FORMATS,
-      useValue: DatepickerFormat
-    },
+      useValue: DatepickerRangeFormat
+    }
   ]
 })
-export class DatepickerComponent implements ParameterField, OnInit {
+export class DatepickerRangeComponent implements ParameterField, OnInit {
   @Input() configuration!: CreditParameterDatepicker;
-  @Output() valueChange = new EventEmitter<Moment>();
-  public date = new FormControl(moment());
+  @Output() readonly valueChange = new EventEmitter<DateRange>();
+  public readonly dateSelectorGroup = new FormGroup({
+    startDate: new FormControl(),
+    endDate: new FormControl()
+  });
   private dateChangesSubscription: Subscription = new Subscription();
   constructor(private adapter: DateAdapter<Date>) { }
 
   ngOnInit(): void {
     this.adapter.setLocale("pl");
-    this.dateChangesSubscription = this.date.valueChanges.subscribe(
-      (value: Moment) => {
-        if (value.isValid()) {
+    this.dateChangesSubscription = this.dateSelectorGroup.valueChanges.subscribe(
+      (value: DateRange) => {
+        if (value.startDate?.isValid() && value.endDate?.isValid()) {
           this.valueChange.emit(value);
         }
       }
     );
-  }
-
-  public chosenYearHandler(normalizedYear: Moment) {
-    const ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());;
-    this.date.setValue(ctrlValue);
-  }
-
-  public chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.date.value;
-    ctrlValue.month(normalizedMonth.month());
-    this.date.setValue(ctrlValue);
-    datepicker.close();
   }
 
   public onDestroy(): void {

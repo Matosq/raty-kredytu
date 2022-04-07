@@ -1,0 +1,12 @@
+<app-field-title [title]="configuration.fieldTitle"></app-field-title>
+
+
+<mat-form-field class="range-datepicker" appearance="outline" (click)="picker.open()">
+    <mat-label>{{configuration.label}}</mat-label>
+    <mat-date-range-input [formGroup]="dateSelectorGroup" [rangePicker]="picker">
+        <input formControlName="startDate" matStartDate placeholder="początek" tabindex="-1" readonly>
+        <input formControlName="endDate" matEndDate placeholder="koniec" tabindex="-1" readonly>
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker startView="multi-year"></mat-date-range-picker>
+</mat-form-field>

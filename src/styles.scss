@@ -53,7 +53,8 @@ $custom-typography: mat-typography-config(
 
 @media screen and (max-width: 768px) {
     .card-wrapper {
-        // width: 100%;
+        // przyjrzec sie szerokosci kart dla malych ekranow
+        min-width: 90vw;
         // max-width: 100%
     }
 }
@@ -81,7 +82,7 @@ $custom-typography: mat-typography-config(
 }
 
 .mat-button-toggle-checked .mat-button-toggle-focus-overlay {
-    border-bottom: solid 48px !important;
+    border-bottom: solid 52px !important;
 }
 
 .action-button-right {
@@ -89,4 +90,66 @@ $custom-typography: mat-typography-config(
     flex-direction: row;
     justify-content: flex-end;
     padding-top: 20px;
+}
+
+.mat-input-element {
+    caret-color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.mat-select-arrow {
+    color: var(--antique-white);
+}
+
+.mat-select-value {
+    color: var(--antique-white);
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: var(--swiss-coffe);
+}
+
+.mat-select-panel {
+    background: var(--scampi);
+}
+
+.mat-option {
+    color: var(--antique-white);
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: var(--swiss-coffe);
+}
+
+// .example-month-picker .mat-calendar-period-button {
+//     pointer-events: none;
+// }
+
+// .example-month-picker .mat-calendar-arrow {
+//     display: none;
+// }
+
+// .mat-form-field-wrapper {
+//     border: solid 1px var(--antique-white);
+// }
+
+input {
+    cursor: pointer;
+}
+
+.mat-datepicker-toggle {
+    color: var(--antique-white);
+}
+
+.mat-datepicker-toggle-active {
+    color: var(--swiss-coffe);
 }
