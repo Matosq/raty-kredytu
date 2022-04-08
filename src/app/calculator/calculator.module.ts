@@ -10,6 +10,10 @@ import { ButtonToggleModule } from '../shared/button-toggle/button-toggle.module
 import { DatepickerModule } from '../shared/datepicker/datepicker.module';
 import { CardComponent } from './card/card.component';
 import { SimulationComponent } from './simulation/simulation.component';
+import { CostsComponent } from './costs/costs.component';
+import { TextFieldModule } from '../shared/text-field/text-field.module';
+import { SelectFieldModule } from '../shared/select-field/select-field.module';
+import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-range.module';
 
 
 
@@ -19,7 +23,8 @@ import { SimulationComponent } from './simulation/simulation.component';
     LoanComponent,
     TranchesComponent,
     CardComponent,
-    SimulationComponent
+    SimulationComponent,
+    CostsComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +32,10 @@ import { SimulationComponent } from './simulation/simulation.component';
     InputFieldModule,
     CardHeaderModule,
     ButtonToggleModule,
-    DatepickerModule
+    DatepickerModule,
+    TextFieldModule,
+    SelectFieldModule,
+    DatepickerRangeModule
   ],
   exports: [
     CalculatorComponent

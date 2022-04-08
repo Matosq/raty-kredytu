@@ -1,0 +1,28 @@
+<section class="card-wrapper">
+
+    <app-card-header [header]="cardHeader"></app-card-header>
+
+    <div class="flex-row-wrapper">
+
+        <app-text-field [configuration]="costsName" (valueChange)="onCostsNameChange($event)"></app-text-field>
+
+        <app-datepicker-range [configuration]="dateRangepPicker" (valueChange)="onDateRangeChange($event)">
+        </app-datepicker-range>
+
+        <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
+
+        <app-input-field *ngIf="selectedCostsType == CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
+            (valueChange)="onInputFieldChange($event)">
+        </app-input-field>
+        <app-input-field *ngIf="selectedCostsType == CostsType.BALANCE_RATE"
+            [configuration]="costsBalanceRateInputField" (valueChange)="onInputFieldChange($event)">
+        </app-input-field>
+        <app-input-field *ngIf="selectedCostsType == CostsType.CREDIT_AMOUNT_RATE"
+            [configuration]="costsCreditRateInputField" (valueChange)="onInputFieldChange($event)"></app-input-field>
+
+    </div>
+    <div class="action-button-right">
+        <app-button [configuration]="addCostsButton" (click)="addCost()"></app-button>
+    </div>
+
+</section>
