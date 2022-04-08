@@ -1,0 +1,8 @@
+
+<app-field-title [title]="configuration.fieldTitle"></app-field-title>
+
+<mat-form-field appearance="outline">
+    <!-- <mat-label>Favorite food</mat-label> -->
+    <input type="text" matInput placeholder={{configuration.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
+</mat-form-field>
+  
