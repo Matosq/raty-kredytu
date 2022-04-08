@@ -4,5 +4,6 @@ export interface SectionCard {
 
 export enum SectionCardHeader {
     LOAN = 'parametry kredytu',
-    TRANCHES = 'transze'
+    TRANCHES = 'transze',
+    COSTS = 'koszty dodatkowe'
 }

@@ -1,19 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreditParameterInputField, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
+import { fadeSlideInAnimation } from 'src/app/core/animations/fadeSlideIn';
 
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
-  styleUrls: ['./input-field.component.scss']
+  styleUrls: ['./input-field.component.scss'],
+  animations: [fadeSlideInAnimation]
 })
-export class InputFieldComponent implements ParameterField, OnInit {
+export class InputFieldComponent implements ParameterField, OnInit, AfterContentInit {
   @Input() configuration!: CreditParameterInputField;
   @Output() valueChange = new EventEmitter<number>();
-
+  public show = false;
   constructor() { }
 
   ngOnInit(): void {
+  
+  }
+
+  ngAfterContentInit(): void {
+    this.show = true;
   }
 
   public onChange(value: number): void {

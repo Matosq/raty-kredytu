@@ -15,8 +15,12 @@
 }
 
 .mat-button-toggle {
-    color: var(--antique-white);
+    color: var(--swiss-coffe);
     background-color: rgba(var(--scampi));
+}
+
+.mat-button-toggle-checked {
+    color: var(--antique-white);
 }
 
 .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
@@ -32,3 +36,7 @@
 .mat-button-toggle-checked {
     background-color: var(--kimberly);
 }
+
+// .mat-button-toggle-checked .mat-button-toggle-label-content {
+//     color: red !important;
+// }

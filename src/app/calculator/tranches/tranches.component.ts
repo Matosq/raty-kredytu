@@ -106,7 +106,7 @@ export class TranchesComponent implements SectionCard, OnInit {
 
   private updateDataForFirstTranche(tranches: Tranche[]): void {
     const firstTranche = tranches.find((tranche: Tranche) => (tranche.trancheId === 1)) as Tranche;
-    this.firstTranche.date = firstTranche.date.locale('pl').format('MMM') + ' ' + firstTranche.date.year();
+    this.firstTranche.date = firstTranche.date.locale('pl').format('MMMM') + ' ' + firstTranche.date.year();
     this.firstTranche.value = firstTranche.value;
     this.firstTranchePercentageInput.value = firstTranche.percentage;
   }
