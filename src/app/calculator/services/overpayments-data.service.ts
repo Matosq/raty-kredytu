@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Moment } from 'moment';
-import { Overpayment } from '../models/overpayments.model';
+import { MonthsPeriodIndexes } from '../models/date.model';
 import { OverpaymentPosition, OverpaymentsService } from '../overpayments/overpayments.service';
+import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { LoanParametersService } from './loan-parameters.service';
 
-export interface OverpaymentData {
-  startMonth: number;
-  endMonth: number;
-  value: number
-};
+export type OverpaymentData = OverpaymentPosition & MonthsPeriodIndexes;
 
 export interface SumOfOverpaymentsData {
   value: number,
@@ -19,41 +15,27 @@ export interface SumOfOverpaymentsData {
   providedIn: 'root'
 })
 export class OverpaymentsDataService {
-  private absoluteMonthsOfFirstDate!: number;
   private overpayments: OverpaymentPosition[] = [];
   private overpaymentsData: OverpaymentData[] = [];
   private sumOfOverpaymentsData: SumOfOverpaymentsData[] = [];
   constructor(private overpaymentsService: OverpaymentsService,
-    private loanParametersService: LoanParametersService
+    private loanParametersService: LoanParametersService,
+    private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
 
   public calculateOverpayments(): void {
-    this.absoluteMonthsOfFirstDate = this.getAbsoluteMonths(this.loanParametersService.getFirstPaymentDate());
     this.overpayments = this.overpaymentsService.getOverpayments();
     this.calculateMonthsForOverpayments();
     this.sumOfOverpayments();
   }
 
   private calculateMonthsForOverpayments(): void {
-    this.overpayments.forEach((overpayment: Overpayment) => {
+    this.overpayments.forEach((overpayment: OverpaymentPosition) => {
       this.overpaymentsData.push({
-        startMonth: 1 + this.getMonthsNumberBetweenFirstDate(overpayment.period.startDate as Moment),
-        endMonth: 1 + this.getMonthsNumberBetweenFirstDate(overpayment.period.endDate as Moment),
-        value: overpayment.value
+        ...overpayment,
+        ...this.datePeriodIndexerService.translateDatePeriodToIndexOfMonths(overpayment.period)
       });
     })
-  }
-
-  private getMonthsNumberBetweenFirstDate(startOverpaymentDate: Moment): number {
-    const monthsBetween = this.getAbsoluteMonths(startOverpaymentDate) - this.absoluteMonthsOfFirstDate;
-    if (monthsBetween < 0) { return 0; }
-    return monthsBetween;
-  }
-
-  private getAbsoluteMonths(date: Moment): number {
-    const months = Number(date.format('MM'));
-    const years = Number(date.format('YYYY'));
-    return months + (years * 12);
   }
 
   private sumOfOverpayments(): void {
@@ -74,5 +56,4 @@ export class OverpaymentsDataService {
     }
     console.log(this.sumOfOverpaymentsData);
   }
- 
 }

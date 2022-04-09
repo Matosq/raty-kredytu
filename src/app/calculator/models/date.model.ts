@@ -5,6 +5,11 @@ export interface DateRange {
   endDate: Moment | null;
 }
 
+export interface MonthsPeriodIndexes {
+  startMonth: number,
+  endMonth: number
+}
+
 export const DatepickerFormat = {
   parse: {
     dateInput: 'MMMM YYYY',

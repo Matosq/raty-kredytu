@@ -6,6 +6,8 @@ import { cloneDeep } from 'lodash';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from './simulation-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';
+import { CostsDataService } from './costs-data.service';
+import { DatePeriodIndexerService } from './date-period-indexer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class CalculatorService {
   constructor(
     private loanParams: LoanParametersService,
     private simulationData: SimulationDataService,
-    private overpaymentsDataService: OverpaymentsDataService
+    private overpaymentsDataService: OverpaymentsDataService,
+    private costsDataService: CostsDataService,
+    private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
 
   public calculateLoan(): void {
@@ -41,8 +45,9 @@ export class CalculatorService {
 
   private calculateDeacrisingInstallments(): void {
 
+    this.datePeriodIndexerService.updateAbsoluteMonthsOfFirstDate();
     this.overpaymentsDataService.calculateOverpayments();
-
+    this.costsDataService.calculateCosts();
 
     const calculation: MonthCalculation[]  = [];
     let currentSaldo = this.loanParams.getAmountLoan();

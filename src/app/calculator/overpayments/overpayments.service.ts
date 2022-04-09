@@ -20,7 +20,7 @@ export class OverpaymentsService {
   }
 
   public removeOverpayment(index: number): void {
-    this.overpayments.filter((o: OverpaymentPosition) => o.indexOfOverpayment !== index)
+    this.overpayments = this.overpayments.filter((o: OverpaymentPosition) => o.indexOfOverpayment !== index)
   }
 
   public getOverpayments(): OverpaymentPosition[] {
