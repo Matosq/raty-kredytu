@@ -1,0 +1,16 @@
+<section class="card-wrapper">
+
+    <app-card-header [header]="cardHeader"></app-card-header>
+
+    <div class="flex-row-wrapper">
+        <app-input-field [configuration]="overpaymentValueInputField"
+        (valueChange)="onValueChange($event)"></app-input-field>
+
+        <app-datepicker-range [configuration]="overpaymentPeriodDateField"
+        (valueChange)="onDateChange($event)"></app-datepicker-range>
+    </div>
+
+    <div class="action-button-right">
+        <app-button [configuration]="addOverpaymentButton" (click)="addOverpayment()"></app-button>
+    </div>
+</section>

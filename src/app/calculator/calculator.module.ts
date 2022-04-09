@@ -14,6 +14,7 @@ import { CostsComponent } from './costs/costs.component';
 import { TextFieldModule } from '../shared/text-field/text-field.module';
 import { SelectFieldModule } from '../shared/select-field/select-field.module';
 import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-range.module';
+import { OverpaymentsComponent } from './overpayments/overpayments.component';
 
 
 
@@ -25,6 +26,7 @@ import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-ran
     CardComponent,
     SimulationComponent,
     CostsComponent,
+    OverpaymentsComponent
   ],
   imports: [
     CommonModule,

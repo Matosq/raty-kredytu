@@ -54,7 +54,7 @@ export class LoanComponent implements SectionCard, OnInit {
   }
 
   public calculateButton: ButtonConfig = {
-    text: 'Oblicz raty',
+    text: 'oblicz raty',
     icon: IconName.CURRENCY_EXCHANGE
   }
   
