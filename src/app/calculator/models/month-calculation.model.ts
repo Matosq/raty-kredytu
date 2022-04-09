@@ -6,7 +6,7 @@ export interface MonthCalculation {
     interest: number,
     installment: number,
     extraCosts: number,
-    excessCosts: number,
+    overpayments: number,
     payment: number,
     saldo: number,
     tranche?: number,

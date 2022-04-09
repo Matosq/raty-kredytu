@@ -14,7 +14,7 @@ export class CardComponent implements OnInit {
   // public principal = 1094.34;
   // public interest = 786.15;
   // public extraCosts = 56.27;
-  // public excess = 0.00;
+  // public overpayments = 0.00;
   // public payment = 11880.49;
   // public saldo = 375110.2312432221;
 

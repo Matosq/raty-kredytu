@@ -5,6 +5,7 @@ import { LoanParametersService } from './loan-parameters.service';
 import { cloneDeep } from 'lodash';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from './simulation-data.service';
+import { OverpaymentsDataService } from './overpayments-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CalculatorService {
   private monthCalculationDate!: Moment;
   constructor(
     private loanParams: LoanParametersService,
-    private simulationData: SimulationDataService
+    private simulationData: SimulationDataService,
+    private overpaymentsDataService: OverpaymentsDataService
   ) { }
 
   public calculateLoan(): void {
@@ -38,6 +40,10 @@ export class CalculatorService {
   }
 
   private calculateDeacrisingInstallments(): void {
+
+    this.overpaymentsDataService.calculateOverpayments();
+
+
     const calculation: MonthCalculation[]  = [];
     let currentSaldo = this.loanParams.getAmountLoan();
     let amountPrincipal = this.loanParams.getAmountLoan() / this.loanParams.getNumberOfMonths();
@@ -58,7 +64,7 @@ export class CalculatorService {
         principal: amountPrincipal,
         installment: amountPrincipal + amountInterest,
         extraCosts: 0,
-        excessCosts: 0,
+        overpayments: 0,
         payment: amountPrincipal + amountInterest,
         saldo: currentSaldo,
       }
@@ -70,8 +76,9 @@ export class CalculatorService {
   }
 
   private getFormatedDate(): string {
-    const date = this.monthCalculationDate.add(1, 'months');
-    return date.locale('pl').format('MMM') + ' ' + date.year();
+    const date = this.monthCalculationDate.locale('pl').format('MMM') + ' ' + this.monthCalculationDate.year();
+    this.monthCalculationDate.add(1, 'months');
+    return date;
   }
 
 }
