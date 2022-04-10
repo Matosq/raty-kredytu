@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';;
 import { Moment } from 'moment';
 import { Subscription } from 'rxjs';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
@@ -6,7 +6,7 @@ import { IconName } from 'src/app/shared/models/icon-names.model';
 import { CreditParameterDatepicker, CreditParameterInputField } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { Tranche } from '../models/tranche.model';
-import { TranchesDataService } from '../services/tranches-data.service';
+import { TranchesService } from './tranches.service';
 
 interface FirstTrancheView {
   date: string,
@@ -17,6 +17,7 @@ interface FirstTrancheView {
 
 interface TrancheView {
   inputFieldConfig: CreditParameterInputField;
+  datePickerConfig: CreditParameterDatepicker;
   trancheIndex: number,
   value: number
 }
@@ -51,14 +52,10 @@ export class TranchesComponent implements SectionCard, OnInit {
     text: 'usuń',
     icon: IconName.DELETE
   }
-  public readonly trancheDatepicker: CreditParameterDatepicker = {
-    fieldTitle: '',
-    label: 'miesiąc i rok',
-  }
   private tranchesDataSubscription!: Subscription;
 
   constructor(
-    private tranchesDataService: TranchesDataService,
+    private tranchesService: TranchesService,
     private changeDetector: ChangeDetectorRef
   ) { }
 
@@ -71,32 +68,32 @@ export class TranchesComponent implements SectionCard, OnInit {
   }
 
   public addTranche(): void {
-    this.tranchesDataService.addTranche();
+    this.tranchesService.addTranche();
   }
 
   public removeTranche(trancheId: number): void {
-    this.tranchesDataService.removeTranche(trancheId);
+    this.tranchesService.removeTranche(trancheId);
   }
 
   public updateFirstTrancheValueOnRateChanges(percentage: number): void {
     this.firstTranche.percentageValue = percentage;
-    this.firstTranche.value = this.tranchesDataService.getAmountLoan() * 0.01 * percentage;
-    this.tranchesDataService.setTrancheValuesByTrancheId(percentage, this.firstTranche.trancheIndex as number);
+    this.firstTranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentage;
+    this.tranchesService.setTrancheValuesByTrancheId(percentage, this.firstTranche.trancheIndex as number);
   }
 
   public updateTrancheValueOnRateChangesByTrancheId(percentage: number, id: number): void {
     const tranche = this.tranchesView.find((tranche: TrancheView) => tranche.trancheIndex === id);
     if (!tranche) { return; }
-    tranche.value = this.tranchesDataService.getAmountLoan() * 0.01 * percentage;
-    this.tranchesDataService.setTrancheValuesByTrancheId(percentage, id);
+    tranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentage;
+    this.tranchesService.setTrancheValuesByTrancheId(percentage, id);
   }
 
   public updateTranchesDateByTrancheId(date: Moment, id: number): void {
-    this.tranchesDataService.setTrancheDateByTrancheId(date, id);
+    this.tranchesService.setTrancheDateByTrancheId(date, id);
   }
 
   private subscribeToTranchesData(): void {
-    this.tranchesDataSubscription = this.tranchesDataService.getTranches$().subscribe(
+    this.tranchesDataSubscription = this.tranchesService.getTranches$().subscribe(
       (tranches: Tranche[]) => {
         this.updateDataForFirstTranche(tranches);
         this.updateDataForTranches(tranches);
@@ -114,6 +111,7 @@ export class TranchesComponent implements SectionCard, OnInit {
   private updateDataForTranches(tranches: Tranche[]): void {
     const tranchesData = tranches.filter((tranche: Tranche) => (tranche.trancheId !== 1));
     this.tranchesView = tranchesData.map((tranche: Tranche) => {
+      console.log('data transzy ', tranche.date.format('MM-YYYY'));
       return {
         trancheIndex: tranche.trancheId,
         value: tranche.value,
@@ -122,6 +120,11 @@ export class TranchesComponent implements SectionCard, OnInit {
           label: '%',
           value: tranche.percentage,
           stepValue: 5
+        },
+        datePickerConfig: {
+          fieldTitle: '',
+          label: 'miesiąc i rok',
+          date: tranche.date
         }
       }
     });

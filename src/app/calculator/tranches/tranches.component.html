@@ -17,7 +17,7 @@
     <div *ngFor="let tranche of tranchesView; index as i">
         <div class="flexbox-wrapper">
             <span class="tranche-index">{{i + 2}}</span>
-            <app-datepicker [configuration]="trancheDatepicker"
+            <app-datepicker [configuration]="tranche.datePickerConfig"
             (valueChange)="updateTranchesDateByTrancheId($event, tranche.trancheIndex)"></app-datepicker>
 
             <div class="tranche-value-flex-wrapper">
@@ -31,8 +31,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="action-button-right">
         <app-button [configuration]="addTrancheButton" (click)="addTranche()"></app-button>

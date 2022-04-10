@@ -22,7 +22,6 @@ const moment = _rollupMoment || _moment;
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-
     {
       provide: MAT_DATE_FORMATS,
       useValue: DatepickerFormat
@@ -32,12 +31,17 @@ const moment = _rollupMoment || _moment;
 export class DatepickerComponent implements ParameterField, OnInit {
   @Input() configuration!: CreditParameterDatepicker;
   @Output() valueChange = new EventEmitter<Moment>();
-  public date = new FormControl(moment());
-  private dateChangesSubscription: Subscription = new Subscription();
+  public date!: FormControl;
+  private dateChangesSubscription!: Subscription;
   constructor(private adapter: DateAdapter<Date>) { }
 
   ngOnInit(): void {
     this.adapter.setLocale("pl");
+    if (this.configuration.date?.isValid()) {
+      this.date = new FormControl(this.configuration.date);
+    } else {
+      this.date = new FormControl(moment());
+    }
     this.dateChangesSubscription = this.date.valueChanges.subscribe(
       (value: Moment) => {
         if (value.isValid()) {

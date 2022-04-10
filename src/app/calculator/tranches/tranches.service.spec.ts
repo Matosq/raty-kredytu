@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TranchesDataService } from './tranches-data.service';
+import { TranchesService } from './tranches.service';
 
 describe('TranchesService', () => {
-  let service: TranchesDataService;
+  let service: TranchesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TranchesDataService);
+    service = TestBed.inject(TranchesService);
   });
 
   it('should be created', () => {

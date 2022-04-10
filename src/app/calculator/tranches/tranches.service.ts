@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { cloneDeep } from 'lodash';
 import moment, { Moment } from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Tranche } from '../models/tranche.model';
-import { CreditPeriod, LoanParametersService } from './loan-parameters.service';
+import { CreditPeriod, LoanParametersService } from '../services/loan-parameters.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class TranchesDataService {
+export class TranchesService {
   private dateRange!: CreditPeriod;
   private tranches: Tranche[] = [];
   private amountLoan: number = 0;
@@ -23,13 +24,12 @@ export class TranchesDataService {
 
   public addTranche(): void {
     this.tranches.push({
-      date: this.dateRange.startDate,
+      date: cloneDeep(this.dateRange.startDate),
       percentage: 0,
       value: 0,
-      trancheId: this.trancheIndex
+      trancheId: this.trancheIndex++
     });
     this.tranchesSubject.next(this.tranches);
-    this.trancheIndex += 1;
   }
 
   public removeTranche(trancheId: number): void {
@@ -54,7 +54,8 @@ export class TranchesDataService {
 
   public setTrancheDateByTrancheId(date: Moment, id: number): void {
     const tranche = this.tranches.find((tranche: Tranche) => tranche.trancheId === id);
-    
+    if (!tranche) { return; }
+    tranche.date = date;
   }
 
   private subscribeToLoanParameters(): any {
@@ -65,7 +66,6 @@ export class TranchesDataService {
           firstTranche.date = creditPeriod.startDate;
         }
         this.dateRange = creditPeriod;
-        console.log(this.dateRange);
         this.tranchesSubject.next(this.tranches);
       }
 

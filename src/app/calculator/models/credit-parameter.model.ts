@@ -27,6 +27,7 @@ export interface CreditParameterButtonTogle {
 export interface CreditParameterDatepicker {
     fieldTitle: string;
     label: string;
+    date?: Moment;
     hint?: string;
 }
 
