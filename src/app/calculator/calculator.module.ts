@@ -15,7 +15,7 @@ import { TextFieldModule } from '../shared/text-field/text-field.module';
 import { SelectFieldModule } from '../shared/select-field/select-field.module';
 import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-range.module';
 import { OverpaymentsComponent } from './overpayments/overpayments.component';
-
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { OverpaymentsComponent } from './overpayments/overpayments.component';
     DatepickerModule,
     TextFieldModule,
     SelectFieldModule,
-    DatepickerRangeModule
+    DatepickerRangeModule,
+    MatDividerModule
   ],
   exports: [
     CalculatorComponent

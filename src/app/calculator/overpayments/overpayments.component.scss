@@ -1,0 +1,24 @@
+.current-overpayments {
+    padding-top: 20px;
+}
+
+.current-overpayments-index {
+
+}
+
+.current-overpayments-months-period {
+    width: 230px;
+    margin-left: 20px;
+    padding-left: 10.5px;
+    padding-right: 10.5px;
+}
+
+.current-overpayments-value {
+
+}
+
+
+::ng-deep .current-overpayments-delete-button .mat-stroked-button {
+    width: 120px !important;
+}
+

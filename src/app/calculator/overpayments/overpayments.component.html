@@ -13,4 +13,15 @@
     <div class="action-button-right">
         <app-button [configuration]="addOverpaymentButton" (click)="addOverpayment()"></app-button>
     </div>
+
+    <mat-divider *ngIf="areCurrentOverpayments()"></mat-divider>
+
+    <div *ngFor="let overpayment of currentOverpayments; index as i">
+        <div class="flex-row-wrapper current-overpayments">
+            <span class="current-overpayments-index">{{i+1}}</span>
+            <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
+            <span class="current-overpayments-value">{{overpayment.value | currency:'zł'}}</span>
+            <app-button class="current-overpayments-delete-button" [configuration]="deleteOverpaymentButton" (click)="deleteOverpayment(overpayment)"></app-button>
+        </div>
+    </div>
 </section>

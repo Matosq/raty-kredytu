@@ -10,6 +10,11 @@ export interface MonthsPeriodIndexes {
   endMonth: number
 }
 
+export interface MonthYearPeriod {
+  monthYearPeriod: string,
+  monthYearPeriodShortcut: string
+}
+
 export const DatepickerFormat = {
   parse: {
     dateInput: 'MMMM YYYY',

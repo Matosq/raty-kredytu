@@ -111,7 +111,6 @@ export class TranchesComponent implements SectionCard, OnInit {
   private updateDataForTranches(tranches: Tranche[]): void {
     const tranchesData = tranches.filter((tranche: Tranche) => (tranche.trancheId !== 1));
     this.tranchesView = tranchesData.map((tranche: Tranche) => {
-      console.log('data transzy ', tranche.date.format('MM-YYYY'));
       return {
         trancheIndex: tranche.trancheId,
         value: tranche.value,
