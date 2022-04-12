@@ -11,13 +11,13 @@
 
         <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
 
-        <app-input-field *ngIf="selectedCostsType == CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
+        <app-input-field *ngIf="selectedCostsType === CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
             (valueChange)="onInputFieldChange($event)">
         </app-input-field>
-        <app-input-field *ngIf="selectedCostsType == CostsType.BALANCE_RATE"
+        <app-input-field *ngIf="selectedCostsType === CostsType.BALANCE_RATE"
             [configuration]="costsBalanceRateInputField" (valueChange)="onInputFieldChange($event)">
         </app-input-field>
-        <app-input-field *ngIf="selectedCostsType == CostsType.CREDIT_AMOUNT_RATE"
+        <app-input-field *ngIf="selectedCostsType === CostsType.CREDIT_AMOUNT_RATE"
             [configuration]="costsCreditRateInputField" (valueChange)="onInputFieldChange($event)"></app-input-field>
 
     </div>
@@ -25,4 +25,15 @@
         <app-button [configuration]="addCostsButton" (click)="addCost()"></app-button>
     </div>
 
+    <mat-divider *ngIf="areCurrentCosts()"></mat-divider>
+
+    <div *ngFor="let currentCost of currentCosts; index as i">
+        <div class="flex-row-wrapper current-cost">
+            <span class="current-cost-index">{{i+1}}</span>
+            <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
+            <span class="current-cost-type">{{currentCost.type}}</span>
+            <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
+            <app-button class="remove-button" [configuration]="deleteCostButton" (click)="deleteCost(currentCost)"></app-button>
+        </div>
+    </div>
 </section>

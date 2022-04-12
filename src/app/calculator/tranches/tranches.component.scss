@@ -29,12 +29,8 @@
     text-align: right;
 }
 
-.delete-button {
+.remove-button {
     padding-left: 40px;
-}
-
-::ng-deep .delete-button .mat-stroked-button {
-    width: 120px !important;
 }
 
 ::ng-deep .tranche-rate .mat-form-field {

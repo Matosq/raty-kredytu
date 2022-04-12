@@ -21,7 +21,7 @@
             <span class="current-overpayments-index">{{i+1}}</span>
             <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
             <span class="current-overpayments-value">{{overpayment.value | currency:'zł'}}</span>
-            <app-button class="current-overpayments-delete-button" [configuration]="deleteOverpaymentButton" (click)="deleteOverpayment(overpayment)"></app-button>
+            <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (click)="deleteOverpayment(overpayment)"></app-button>
         </div>
     </div>
 </section>

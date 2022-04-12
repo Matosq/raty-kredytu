@@ -1,5 +1,5 @@
 
-import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreditParameterInputField, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 import { fadeSlideInAnimation } from 'src/app/core/animations/fadeSlideIn';
 

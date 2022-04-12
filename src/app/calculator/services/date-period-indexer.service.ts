@@ -21,6 +21,17 @@ export class DatePeriodIndexerService {
     }
   }
 
+  public translateDatePeriodToMonthYearPeriods(dateRange: DateRange): { monthYearPeriod: string, monthYearPeriodShortcut: string } {
+    const startYear = (dateRange.startDate as Moment)?.year();
+    const endYear = (dateRange.endDate as Moment)?.year();
+    const startDatePl = (dateRange.startDate as Moment)?.locale('pl');
+    const endDatePl = (dateRange.endDate as Moment)?.locale('pl');
+    return {
+      monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear}`,
+      monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear}`
+    }
+  }
+
   private getMonthsNumberBetweenFirstDate(startOverpaymentDate: Moment): number {
     const monthsBetween = this.getAbsoluteMonths(startOverpaymentDate) - this.absoluteMonthsOfFirstDate;
     if (monthsBetween < 0) { return 0; }

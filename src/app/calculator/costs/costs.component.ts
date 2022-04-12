@@ -5,7 +5,7 @@ import { Cost, CostsType } from '../models/costs.model';
 import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSelectField, CreditParameterTextField } from '../models/credit-parameter.model';
 import { DateRange } from '../models/date.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { CostsService } from './costs.service';
+import { CostPosition, CostsService } from './costs.service';
 
 @Component({
   selector: 'app-costs',
@@ -20,9 +20,10 @@ export class CostsComponent implements SectionCard, OnInit {
     type: CostsType.FIXED_AMOUNT,
     value: 0
   };
+  public currentCosts: CostPosition[] = [];
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
-  public CostsType = CostsType;
+  public readonly CostsType = CostsType;
   public readonly costsName: CreditParameterTextField = {
     fieldTitle: 'nazwa',
     value: '',
@@ -54,20 +55,25 @@ export class CostsComponent implements SectionCard, OnInit {
   public readonly costsBalanceRateInputField: CreditParameterInputField = {
     fieldTitle: 'oprocentowanie salda kredytu',
     label: '%',
-    value: 1,
+    value: 0,
     stepValue: 0.1
   }
 
   public readonly costsCreditRateInputField: CreditParameterInputField = {
     fieldTitle: 'oprocentowanie kwoty kredytu',
     label: '%',
-    value: 1,
+    value: 0,
     stepValue: 0.1
   }
 
   public readonly addCostsButton: ButtonConfig = {
     text: 'dodaj koszt',
     icon: IconName.ADD
+  }
+
+  public readonly deleteCostButton: ButtonConfig = {
+    text: 'usuń',
+    icon: IconName.DELETE
   }
 
   constructor(private costsService: CostsService) { }
@@ -97,5 +103,27 @@ export class CostsComponent implements SectionCard, OnInit {
 
   public addCost(): void {
     this.costsService.addCost(this.cost);
+    this.clearFieldsValue();
+    this.currentCosts = this.costsService.getCosts();
+  }
+
+  public deleteCost(cost: CostPosition): void {
+    this.costsService.deleteCost(cost);
+    this.currentCosts = this.costsService.getCosts();
+  }
+
+  public areCurrentCosts(): boolean {
+    return this.currentCosts.length > 0;
+  }
+
+  public isCostTypeWithCurrency(costsType: CostsType): boolean {
+    return costsType === CostsType.FIXED_AMOUNT;
+  }
+
+  private clearFieldsValue(): void {
+    this.costsInputField.value = 0;
+    this.costsBalanceRateInputField.value = 0;
+    this.costsCreditRateInputField.value = 0;
+    this.cost.value = 0;
   }
 }

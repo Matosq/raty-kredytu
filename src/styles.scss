@@ -169,3 +169,7 @@ input {
 .mat-divider {
     border-top-color: rgb(251, 235, 220, .12);
 }
+
+.remove-button .mat-stroked-button {
+    width: 120px !important;
+}

@@ -1,29 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Cost } from '../models/costs.model';
+import { MonthYearPeriod } from '../models/date.model';
+import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 
-export type Costposition = Cost & { indexOfCost: number };
+export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number };
 
 @Injectable({
   providedIn: 'root'
 })
 export class CostsService {
-  private costs: Costposition[] = [];
+  private costs: CostPosition[] = [];
   private index = 0;
-  constructor() { }
+  constructor(private datePeriodIndexerService: DatePeriodIndexerService) { }
 
   public addCost(cost: Cost): void {
     this.costs.push({
       ...cost,
+      ...this.datePeriodIndexerService.translateDatePeriodToMonthYearPeriods(cost.period),
       indexOfCost: this.index++
     });
-    console.log(cost);
   }
 
-  public removeCostByIndex(index: number): void {
-    this.costs = this.costs.filter((c: Costposition) => c.indexOfCost !== index);
+  public deleteCost(cost: CostPosition): void {
+    this.costs = this.costs.filter((c: CostPosition) => c.indexOfCost !== cost.indexOfCost);
   }
 
-  public getCosts(): Costposition[] {
+  public getCosts(): CostPosition[] {
     return this.costs;
   }
 }
