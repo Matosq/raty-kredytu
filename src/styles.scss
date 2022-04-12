@@ -69,12 +69,17 @@ $custom-typography: mat-typography-config(
 .card-wrapper {
     // width: 80vw;
     // min-width: 768px;
-    color: var(--swiss-coffe);
+    // color: var(--swiss-coffe);
+    color: var(--antique-white);
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
     backdrop-filter: blur(50px);
     border-radius: 10px;
     opacity: 90%;
     padding: 1rem 2rem;
+}
+
+.card-wrapper h2 {
+    color: var(--swiss-coffe);
 }
 
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
