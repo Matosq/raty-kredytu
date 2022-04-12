@@ -14,6 +14,9 @@ export class CostsService {
   constructor(private datePeriodIndexerService: DatePeriodIndexerService) { }
 
   public addCost(cost: Cost): void {
+    if (!cost.name) {
+      cost.name = `koszt dodatkowy ${this.index+1}`
+    } 
     this.costs.push({
       ...cost,
       ...this.datePeriodIndexerService.translateDatePeriodToMonthYearPeriods(cost.period),

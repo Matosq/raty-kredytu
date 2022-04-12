@@ -24,7 +24,7 @@ export class CostsComponent implements SectionCard, OnInit {
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
   public readonly CostsType = CostsType;
-  public readonly costsName: CreditParameterTextField = {
+  public readonly costsNameTextField: CreditParameterTextField = {
     fieldTitle: 'nazwa',
     value: '',
     placeholder: 'np. ubezpieczenie'
@@ -125,5 +125,7 @@ export class CostsComponent implements SectionCard, OnInit {
     this.costsBalanceRateInputField.value = 0;
     this.costsCreditRateInputField.value = 0;
     this.cost.value = 0;
+    this.cost.name = '';
+    this.costsNameTextField.value = '';
   }
 }

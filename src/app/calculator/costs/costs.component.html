@@ -4,7 +4,7 @@
 
     <div class="flex-row-wrapper">
 
-        <app-text-field [configuration]="costsName" (valueChange)="onCostsNameChange($event)"></app-text-field>
+        <app-text-field [configuration]="costsNameTextField" (valueChange)="onCostsNameChange($event)"></app-text-field>
 
         <app-datepicker-range [configuration]="dateRangepPicker" (valueChange)="onDateRangeChange($event)">
         </app-datepicker-range>
@@ -25,11 +25,11 @@
         <app-button [configuration]="addCostsButton" (click)="addCost()"></app-button>
     </div>
 
-    <mat-divider *ngIf="areCurrentCosts()"></mat-divider>
-
+    <app-divider [isShown]="areCurrentCosts()"></app-divider>
     <div *ngFor="let currentCost of currentCosts; index as i">
         <div class="flex-row-wrapper current-cost">
             <span class="current-cost-index">{{i+1}}</span>
+            <span class="current-cost-name">{{currentCost.name}}</span>
             <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
             <span class="current-cost-type">{{currentCost.type}}</span>
             <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>

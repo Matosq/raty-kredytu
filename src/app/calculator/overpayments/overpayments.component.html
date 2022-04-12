@@ -14,8 +14,7 @@
         <app-button [configuration]="addOverpaymentButton" (click)="addOverpayment()"></app-button>
     </div>
 
-    <mat-divider *ngIf="areCurrentOverpayments()"></mat-divider>
-
+    <app-divider [isShown]="areCurrentOverpayments()"></app-divider>
     <div *ngFor="let overpayment of currentOverpayments; index as i">
         <div class="flex-row-wrapper current-overpayments">
             <span class="current-overpayments-index">{{i+1}}</span>
