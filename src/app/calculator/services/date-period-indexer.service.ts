@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { cloneDeep } from 'lodash';
 import { Moment } from 'moment';
-import { DateRange, MonthsPeriodIndexes } from '../models/date.model';
+import { DateRange, MonthsPeriodIndexes, MonthYearPeriod } from '../models/date.model';
 import { LoanParametersService } from './loan-parameters.service';
 
 @Injectable({
@@ -21,11 +22,30 @@ export class DatePeriodIndexerService {
     }
   }
 
-  public translateDatePeriodToMonthYearPeriods(dateRange: DateRange): { monthYearPeriod: string, monthYearPeriodShortcut: string } {
+  public translateDatePeriodToMonthYearPeriods(dateRange: DateRange): MonthYearPeriod {
     const startYear = (dateRange.startDate as Moment)?.year();
     const endYear = (dateRange.endDate as Moment)?.year();
     const startDatePl = (dateRange.startDate as Moment)?.locale('pl');
     const endDatePl = (dateRange.endDate as Moment)?.locale('pl');
+    return {
+      monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear}`,
+      monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear}`
+    }
+  }
+
+  public translateDateToMonthYearPeriods(date: Moment, numberOfMonths: number): MonthYearPeriod {
+    const startYear = date.year();
+    const startDatePl = date.locale('pl');
+    if (numberOfMonths === 1) {
+      return {
+        monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear}`,
+        monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear}`
+      } 
+    }
+    const endDate = cloneDeep(date);
+    endDate.add(numberOfMonths, 'months');
+    const endYear = endDate.year();
+    const endDatePl = endDate.locale('pl');
     return {
       monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear}`,
       monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear}`

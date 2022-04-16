@@ -3,4 +3,5 @@ export enum IconName {
     ADD = 'add',
     REMOVE = 'remove',
     DELETE = 'delete',
+    PERCENT = 'percent',
 }

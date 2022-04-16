@@ -6,5 +6,6 @@ export enum SectionCardHeader {
     LOAN = 'parametry kredytu',
     TRANCHES = 'transze',
     COSTS = 'koszty dodatkowe',
-    OVERPAYMENTS = 'nadpłaty'
+    OVERPAYMENTS = 'nadpłaty',
+    RATE = 'oprocentowanie'
 }

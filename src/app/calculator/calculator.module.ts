@@ -16,6 +16,7 @@ import { SelectFieldModule } from '../shared/select-field/select-field.module';
 import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-range.module';
 import { OverpaymentsComponent } from './overpayments/overpayments.component';
 import { DividerModule } from '../shared/divider/divider.module';
+import { RateComponent } from './rate/rate.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DividerModule } from '../shared/divider/divider.module';
     CardComponent,
     SimulationComponent,
     CostsComponent,
-    OverpaymentsComponent
+    OverpaymentsComponent,
+    RateComponent
   ],
   imports: [
     CommonModule,
