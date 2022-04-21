@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { DateRange, MonthYearPeriod } from '../models/date.model';
+import { MonthYearPeriod } from '../models/date.model';
 import { Overpayment } from '../models/overpayments.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 
@@ -17,7 +17,7 @@ export class OverpaymentsService {
   public addOverpayment(overpayment: Overpayment): void {
     this.overpayments.push({
       ...overpayment,
-      ...this.getMonthYearPeriodParsedAsString(overpayment.period),
+      ...this.getMonthYearPeriodParsedAsString(overpayment.date as Moment, overpayment.numberOfMonths),
       indexOfOverpayment: this.index++
     });
   }
@@ -30,7 +30,7 @@ export class OverpaymentsService {
     return this.overpayments
   }
 
-  private getMonthYearPeriodParsedAsString(dateRange: DateRange): { monthYearPeriod: string, monthYearPeriodShortcut: string } {
-    return this.datePeriodIndexerService.translateDatePeriodToMonthYearPeriods(dateRange);
+  private getMonthYearPeriodParsedAsString(date: Moment, numberOfMonths: number): MonthYearPeriod {
+    return this.datePeriodIndexerService.translateDateToMonthYearPeriods(date, numberOfMonths);
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import { MonthsPeriodIndexes } from '../models/date.model';
 import { OverpaymentPosition, OverpaymentsService } from '../overpayments/overpayments.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
@@ -33,7 +34,7 @@ export class OverpaymentsDataService {
     this.overpayments.forEach((overpayment: OverpaymentPosition) => {
       this.overpaymentsData.push({
         ...overpayment,
-        ...this.datePeriodIndexerService.translateDatePeriodToIndexOfMonths(overpayment.period)
+        ...this.datePeriodIndexerService.translateDateToIndexOfMonths(overpayment.date as Moment, overpayment.numberOfMonths)
       });
     })
   }
@@ -41,7 +42,6 @@ export class OverpaymentsDataService {
   private sumOfOverpayments(): void {
     const numberOfMonths = this.loanParametersService.getNumberOfMonths();
     this.sumOfOverpaymentsData = [];
-    console.log(this.overpaymentsData);
     for (let i = 1; i <= numberOfMonths; i++) {
       let value = 0;
       this.overpaymentsData.forEach((overpayment: OverpaymentData) => {
@@ -54,6 +54,5 @@ export class OverpaymentsDataService {
         index: i
       });
     }
-    console.log(this.sumOfOverpaymentsData);
   }
 }

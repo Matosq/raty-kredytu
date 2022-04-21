@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Moment } from 'moment';
+import { cloneDeep } from 'lodash';
+import moment, { Moment } from 'moment';
 import { CreditParameterDatepicker, CreditParameterInputField } from 'src/app/calculator/models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/section-card.model';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
-import { DateRange } from '../models/date.model';
 import { Overpayment } from '../models/overpayments.model';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
 
@@ -17,7 +17,8 @@ import { OverpaymentPosition, OverpaymentsService } from './overpayments.service
 export class OverpaymentsComponent implements SectionCard, OnInit {
   private overpayment: Overpayment = {
     value: 0,
-    period: { startDate: null, endDate: null }
+    date: moment(),
+    numberOfMonths: 0
   };
   public currentOverpayments: OverpaymentPosition[] = [];
   public readonly cardHeader = SectionCardHeader.OVERPAYMENTS;
@@ -27,9 +28,15 @@ export class OverpaymentsComponent implements SectionCard, OnInit {
     value: 0,
     stepValue: 100
   }
-  public readonly overpaymentPeriodDateField: CreditParameterDatepicker = {
+  public overpaymentDateField: CreditParameterDatepicker = {
+    fieldTitle: 'data pierwszej nadpłaty',
+    label: 'miesiąc i rok'
+  }
+  public readonly monthsInputField: CreditParameterInputField = {
     fieldTitle: 'okres nadpłacania',
-    label: 'miesiąc/rok - miesiąc/rok'
+    label: 'liczba miesięcy',
+    value: 0,
+    stepValue: 1
   }
   public readonly addOverpaymentButton: ButtonConfig = {
     text: 'dodaj nadpłatę',
@@ -48,14 +55,17 @@ export class OverpaymentsComponent implements SectionCard, OnInit {
     this.overpayment.value = value;
   }
 
-  public onDateChange(dateRange: DateRange): void {
-    this.overpayment.period = dateRange;
+  public onDateChange(date: Moment): void {
+    this.overpayment.date = date;
+  }
+
+  public onNumberOfMonthsChange(value: number): void {
+    this.overpayment.numberOfMonths = value;
   }
 
   public addOverpayment(): void {
     this.overpaymentsService.addOverpayment(this.overpayment);
-    this.overpaymentValueInputField.value = 0;
-    this.overpayment.value = 0;
+    this.clearFields();
     this.currentOverpayments = this.overpaymentsService.getOverpayments();
   }
 
@@ -66,5 +76,15 @@ export class OverpaymentsComponent implements SectionCard, OnInit {
 
   public areCurrentOverpayments(): boolean {
     return this.currentOverpayments.length > 0;
+  }
+
+  private clearFields(): void {
+    this.overpayment.date = moment();
+    this.overpayment.value = 0;
+    this.overpayment.numberOfMonths = 0;
+    this.overpaymentValueInputField.value = 0;
+    this.monthsInputField.value = 0;
+    this.overpaymentDateField.date = this.overpayment.date;
+    this.overpaymentDateField = cloneDeep(this.overpaymentDateField);
   }
 }

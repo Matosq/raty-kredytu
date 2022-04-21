@@ -6,8 +6,11 @@
         <app-input-field [configuration]="overpaymentValueInputField"
         (valueChange)="onValueChange($event)"></app-input-field>
 
-        <app-datepicker-range [configuration]="overpaymentPeriodDateField"
-        (valueChange)="onDateChange($event)"></app-datepicker-range>
+        <app-datepicker [configuration]="overpaymentDateField"
+        (valueChange)="onDateChange($event)"></app-datepicker>
+
+        <app-input-field [configuration]="monthsInputField"
+        (valueChange)="onNumberOfMonthsChange($event)"></app-input-field>
     </div>
 
     <div class="action-button-right">

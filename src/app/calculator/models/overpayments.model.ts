@@ -1,6 +1,7 @@
-import { DateRange } from "./date.model";
+import { Moment } from "moment";
 
 export interface Overpayment {
   value: number;
-  period: DateRange
+  date: Moment | null;
+  numberOfMonths: number;
 }

@@ -17,7 +17,7 @@ import { CostPosition, CostsService } from './costs.service';
 export class CostsComponent implements SectionCard, OnInit {
   private readonly cost: Cost = {
     name: '',
-    date: null,
+    date: moment(),
     numberOfMonths: 0,
     type: CostsType.FIXED_AMOUNT,
     value: 0
@@ -158,7 +158,7 @@ export class CostsComponent implements SectionCard, OnInit {
 
   private clearDate(): void {
     this.cost.date = moment(),
-    this.datePicker.date = undefined;
+    this.datePicker.date = this.cost.date;
     this.datePicker = cloneDeep(this.datePicker);
   }
 }
