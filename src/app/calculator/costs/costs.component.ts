@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { cloneDeep } from 'lodash';
+import moment, { Moment } from 'moment';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Cost, CostsType } from '../models/costs.model';
 import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSelectField, CreditParameterTextField } from '../models/credit-parameter.model';
-import { DateRange } from '../models/date.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CostPosition, CostsService } from './costs.service';
 
@@ -16,7 +17,8 @@ import { CostPosition, CostsService } from './costs.service';
 export class CostsComponent implements SectionCard, OnInit {
   private readonly cost: Cost = {
     name: '',
-    period: { startDate: null, endDate: null },
+    date: null,
+    numberOfMonths: 0,
     type: CostsType.FIXED_AMOUNT,
     value: 0
   };
@@ -40,9 +42,16 @@ export class CostsComponent implements SectionCard, OnInit {
     defaultValue: { value: CostsType.FIXED_AMOUNT },
   }
 
-  public readonly dateRangepPicker: CreditParameterDatepicker = {
-    fieldTitle: 'okres płacenia',
-    label: 'miesiąc/rok - miesiąc/rok'
+  public datePicker: CreditParameterDatepicker = {
+    fieldTitle: 'data pierwszej płatności',
+    label: 'miesiąc i rok'
+  }
+
+  public readonly monthsInputField: CreditParameterInputField = {
+    fieldTitle: 'okres trwania płatności',
+    label: 'liczba miesięcy',
+    value: 0,
+    stepValue: 1
   }
 
   public readonly costsInputField: CreditParameterInputField = {
@@ -87,8 +96,8 @@ export class CostsComponent implements SectionCard, OnInit {
     this.cost.name = name;
   }
 
-  public onDateRangeChange(dateRange: DateRange): void {
-    this.cost.period = dateRange;
+  public onDateChange(date: Moment): void {
+    this.cost.date = date;
   }
 
   public onSelectFieldChange(costsType: CostsType): void {
@@ -98,7 +107,10 @@ export class CostsComponent implements SectionCard, OnInit {
 
   public onInputFieldChange(value: number): void {
     this.cost.value = value;
-    console.log(value);
+  }
+
+  public onMonthsFieldChange(value: number): void {
+    this.cost.numberOfMonths = value;
   }
 
   public addCost(): void {
@@ -121,11 +133,32 @@ export class CostsComponent implements SectionCard, OnInit {
   }
 
   private clearFieldsValue(): void {
+    this.clearNameField();
+    this.clearValueFields();
+    this.clearMonths();
+    this.clearDate();
+  }
+
+  private clearNameField(): void {
+    this.cost.name = '';
+    this.costsNameTextField.value = '';
+  }
+
+  private clearValueFields(): void {
     this.costsInputField.value = 0;
     this.costsBalanceRateInputField.value = 0;
     this.costsCreditRateInputField.value = 0;
     this.cost.value = 0;
-    this.cost.name = '';
-    this.costsNameTextField.value = '';
+  }
+
+  private clearMonths(): void {
+    this.monthsInputField.value = 0;
+    this.cost.numberOfMonths = 0;
+  }
+
+  private clearDate(): void {
+    this.cost.date = moment(),
+    this.datePicker.date = undefined;
+    this.datePicker = cloneDeep(this.datePicker);
   }
 }

@@ -6,8 +6,11 @@
 
         <app-text-field [configuration]="costsNameTextField" (valueChange)="onCostsNameChange($event)"></app-text-field>
 
-        <app-datepicker-range [configuration]="dateRangepPicker" (valueChange)="onDateRangeChange($event)">
-        </app-datepicker-range>
+        <app-datepicker [configuration]="datePicker" (valueChange)="onDateChange($event)">
+        </app-datepicker>
+
+        <app-input-field [configuration]="monthsInputField"
+        (valueChange)="onMonthsFieldChange($event)"></app-input-field>
 
         <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import { Cost } from '../models/costs.model';
 import { MonthYearPeriod } from '../models/date.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
@@ -19,7 +20,7 @@ export class CostsService {
     } 
     this.costs.push({
       ...cost,
-      ...this.datePeriodIndexerService.translateDatePeriodToMonthYearPeriods(cost.period),
+      ...this.datePeriodIndexerService.translateDateToMonthYearPeriods(cost.date as Moment, cost.numberOfMonths),
       indexOfCost: this.index++
     });
   }

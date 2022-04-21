@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import { CostPosition, CostsService } from '../costs/costs.service';
 import { MonthsPeriodIndexes } from '../models/date.model';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
@@ -22,7 +23,7 @@ export class CostsDataService {
     this.costs.forEach((cost: CostPosition) => {
       this.costsData.push({
         ...cost,
-        ...this.datePeriodIndexerService.translateDatePeriodToIndexOfMonths(cost.period),
+        ...this.datePeriodIndexerService.translateDateToIndexOfMonths(cost.date as Moment, cost.numberOfMonths),
       })
     })
     console.log(this.costsData);

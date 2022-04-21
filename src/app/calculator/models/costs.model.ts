@@ -1,4 +1,4 @@
-import { DateRange } from "./date.model";
+import { Moment } from "moment";
 
 export interface CostsOption {
   value: CostsType;
@@ -12,7 +12,8 @@ export enum CostsType {
 
 export interface Cost {
   name: string,
-  period: DateRange,
+  date: Moment | null,
+  numberOfMonths: number,
   type: CostsType,
   value: number
 }

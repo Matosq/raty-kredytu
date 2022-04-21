@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -28,7 +28,7 @@ const moment = _rollupMoment || _moment;
     },
   ]
 })
-export class DatepickerComponent implements ParameterField, OnInit {
+export class DatepickerComponent implements ParameterField, OnInit, OnChanges {
   @Input() configuration!: CreditParameterDatepicker;
   @Output() valueChange = new EventEmitter<Moment>();
   public date!: FormControl;
@@ -37,18 +37,12 @@ export class DatepickerComponent implements ParameterField, OnInit {
 
   ngOnInit(): void {
     this.adapter.setLocale("pl");
-    if (this.configuration.date?.isValid()) {
-      this.date = new FormControl(this.configuration.date);
-    } else {
-      this.date = new FormControl(moment());
-    }
-    this.dateChangesSubscription = this.date.valueChanges.subscribe(
-      (value: Moment) => {
-        if (value.isValid()) {
-          this.valueChange.emit(value);
-        }
-      }
-    );
+    this.setDateFromConfiguration();
+    this.subscribeToDateValueChanges();
+  }
+
+  public ngOnChanges(): void {
+    this.setDateFromConfiguration();
   }
 
   public chosenYearHandler(normalizedYear: Moment) {
@@ -66,5 +60,23 @@ export class DatepickerComponent implements ParameterField, OnInit {
 
   public onDestroy(): void {
     this.dateChangesSubscription.unsubscribe();
+  }
+
+  private setDateFromConfiguration(): void {
+    if (this.configuration.date?.isValid()) {
+      this.date = new FormControl(this.configuration.date);
+      return;
+    }
+    this.date = new FormControl(moment());
+  }
+
+  private subscribeToDateValueChanges(): void {
+    this.dateChangesSubscription = this.date.valueChanges.subscribe(
+      (value: Moment) => {
+        if (value.isValid()) {
+          this.valueChange.emit(value);
+        }
+      }
+    );
   }
 }
