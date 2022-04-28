@@ -4,7 +4,7 @@ import { MonthYearPeriod } from '../models/date.model';
 import { Overpayment } from '../models/overpayments.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 
-export type OverpaymentPosition = Overpayment & { indexOfOverpayment: number } & MonthYearPeriod;
+export type OverpaymentPosition = Overpayment & { indexOfOverpayment: number, isDeleted?: boolean } & MonthYearPeriod;
 
 @Injectable({
   providedIn: 'root'

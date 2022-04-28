@@ -19,8 +19,8 @@
 
     <app-divider [isShown]="areCurrentOverpayments()"></app-divider>
     <div *ngFor="let overpayment of currentOverpayments; index as i">
-        <div class="flex-row-wrapper current-overpayments">
-            <span class="current-overpayments-index">{{i+1}}</span>
+        <div *ngIf="!isOverpaymentDeleted(overpayment)" @fadeSlideInOut class="flex-row-wrapper current-overpayments">
+            <span class="current-overpayments-index">{{getIndex(i)}}</span>
             <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
             <span class="current-overpayments-value">{{overpayment.value | currency:'zł'}}</span>
             <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (click)="deleteOverpayment(overpayment)"></app-button>
