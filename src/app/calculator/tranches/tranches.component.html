@@ -27,12 +27,12 @@
             </div>
 
             <div>
-                <app-button class="remove-button" [configuration]="removeTrancheButton" (click)="removeTranche(tranche.trancheIndex)"></app-button>
+                <app-button class="remove-button" [configuration]="removeTrancheButton" (onClick)="removeTranche(tranche.trancheIndex)"></app-button>
             </div>
         </div>
     </div>
 
     <div class="action-button-right">
-        <app-button [configuration]="addTrancheButton" (click)="addTranche()"></app-button>
+        <app-button [configuration]="addTrancheButton" (onClick)="addTranche()"></app-button>
     </div>
 </section>

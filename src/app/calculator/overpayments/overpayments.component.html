@@ -14,7 +14,7 @@
     </div>
 
     <div class="action-button-right">
-        <app-button [configuration]="addOverpaymentButton" (click)="addOverpayment()"></app-button>
+        <app-button [configuration]="addOverpaymentButton" (onClick)="addOverpayment()"></app-button>
     </div>
 
     <app-divider [isShown]="areCurrentOverpayments()"></app-divider>
@@ -23,7 +23,7 @@
             <span class="current-overpayments-index">{{getIndex(i)}}</span>
             <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
             <span class="current-overpayments-value">{{overpayment.value | currency:'zł'}}</span>
-            <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (click)="deleteOverpayment(overpayment)"></app-button>
+            <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (onClick)="deleteOverpayment(overpayment)"></app-button>
         </div>
     </div>
 </section>

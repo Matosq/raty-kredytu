@@ -25,7 +25,7 @@
 
     </div>
     <div class="action-button-right">
-        <app-button [configuration]="addCostsButton" (click)="addCost()"></app-button>
+        <app-button [configuration]="addCostsButton" (onClick)="addCost()"></app-button>
     </div>
 
     <app-divider [isShown]="areCurrentCosts()"></app-divider>
@@ -36,7 +36,7 @@
             <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
             <span class="current-cost-type">{{currentCost.type}}</span>
             <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
-            <app-button class="remove-button" [configuration]="deleteCostButton" (click)="deleteCost(currentCost)"></app-button>
+            <app-button class="remove-button" [configuration]="deleteCostButton" (onClick)="deleteCost(currentCost)"></app-button>
         </div>
     </div>
 </section>

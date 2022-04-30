@@ -1,6 +1,6 @@
 <app-field-title [title]="configuration.fieldTitle"></app-field-title>
 
-<mat-form-field class="datepicker" appearance="outline" (click)="dp.open()">
+<mat-form-field class="datepicker" appearance="outline" (onClick)="dp.open()">
   <mat-label>{{configuration.label}}</mat-label>
   <input inputmode='none' matInput [matDatepicker]="dp" [formControl]="date" tabindex="-1" readonly>
   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>

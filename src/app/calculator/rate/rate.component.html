@@ -19,7 +19,7 @@
 
 
     <div class="action-button-right">
-        <app-button [configuration]="addRateButton" (click)="addRate()"></app-button>
+        <app-button [configuration]="addRateButton" (onClick)="addRate()"></app-button>
     </div>
 
 
@@ -31,7 +31,7 @@
             <span class="current-rate-index">{{i+1}}</span>
             <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-2'}}</span>
             <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
-            <app-button class="remove-button" [configuration]="deleteRateButton" (click)="deleteRate(rate)"></app-button>
+            <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>
         </div>
 
     </div>
