@@ -1,6 +1,7 @@
 
-<button class="info" (click)="showTooltip()" mat-icon-button
-#tooltip="matTooltip"
-matTooltip="Info about the action">
+<button *ngIf="text" class="info" (click)="tooltip.show()" mat-icon-button
+  #tooltip="matTooltip"
+  matTooltip={{text}}
+  matTooltipPosition="above">
   <app-icon [icon]="icon"></app-icon>
 </button>

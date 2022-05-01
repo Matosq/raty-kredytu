@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FieldTitleComponent implements OnInit {
   @Input() title = '';
+  @Input() tooltipText = '';
   constructor() { }
 
   ngOnInit(): void {

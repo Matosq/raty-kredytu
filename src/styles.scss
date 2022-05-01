@@ -178,3 +178,8 @@ input {
 .remove-button .mat-stroked-button {
     width: 120px !important;
 }
+
+.mat-tooltip {
+    color: var(--antique-white) !important;
+    background-color: var(--scampi) !important;
+}

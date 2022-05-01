@@ -1,6 +1,8 @@
 .info {
   color: var(--swiss-coffe);
+  opacity: 80%;
   &:hover {
     color: var(--antique-white);
+    opacity: 100%;
   } 
 }

@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IconName } from '../models/icon-names.model';
 
 @Component({
   selector: 'app-info-tooltip',
   templateUrl: './info-tooltip.component.html',
-  styleUrls: ['./info-tooltip.component.scss']
+  styleUrls: ['./info-tooltip.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InfoTooltipComponent implements OnInit {
-  public icon = IconName.INFO;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  public showTooltip(): void {
-    console.log('tooltip');
-  }
+export class InfoTooltipComponent {
+  @Input() text = '';
+  public readonly icon = IconName.INFO;
 }
