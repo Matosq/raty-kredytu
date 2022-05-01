@@ -1,6 +1,6 @@
-<button class="info" (click)="showTooltip()"
-mat-icon-button
+
+<button class="info" (click)="showTooltip()" mat-icon-button
 #tooltip="matTooltip"
 matTooltip="Info about the action">
-  <mat-icon>{{icon}}</mat-icon>
+  <app-icon [icon]="icon"></app-icon>
 </button>

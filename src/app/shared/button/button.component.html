@@ -1,2 +1,3 @@
 <button (click)="buttonClick()" mat-stroked-button>
-    <mat-icon>{{configuration?.icon}}</mat-icon>{{configuration?.text}}</button>
+    <app-icon class="button-icon" [icon]="configuration.icon"></app-icon>{{configuration?.text}}
+</button>

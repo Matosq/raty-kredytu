@@ -2,6 +2,7 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreditParameterInputField, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 import { fadeSlideInAnimation } from 'src/app/core/animations/fadeSlideIn';
+import { IconName } from '../models/icon-names.model';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class InputFieldComponent implements ParameterField, OnInit, AfterContent
   @Input() configuration!: CreditParameterInputField;
   @Output() valueChange = new EventEmitter<number>();
   public show = false;
+  public readonly IconNameType = IconName;
   constructor() { }
 
   ngOnInit(): void {

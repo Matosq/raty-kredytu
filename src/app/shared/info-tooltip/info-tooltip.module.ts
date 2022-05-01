@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfoTooltipComponent } from './info-tooltip.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { IconModule } from '../icon/icon.module';
 
 
 @NgModule({
@@ -12,9 +12,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
-    MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    IconModule
   ],
   exports: [
     InfoTooltipComponent
