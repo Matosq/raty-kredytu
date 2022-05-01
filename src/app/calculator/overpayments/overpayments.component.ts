@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import moment, { Moment } from 'moment';
 import { delay, of } from 'rxjs';
-import { CreditParameterDatepicker, CreditParameterInputField } from 'src/app/calculator/models/credit-parameter.model';
+import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterTextField } from 'src/app/calculator/models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/section-card.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';

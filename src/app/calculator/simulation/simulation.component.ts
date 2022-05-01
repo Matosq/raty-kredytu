@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from '../services/simulation-data.service';
@@ -6,7 +6,8 @@ import { SimulationDataService } from '../services/simulation-data.service';
 @Component({
   selector: 'app-simulation',
   templateUrl: './simulation.component.html',
-  styleUrls: ['./simulation.component.scss']
+  styleUrls: ['./simulation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimulationComponent implements OnInit {
   public data: MonthCalculation[] = [];

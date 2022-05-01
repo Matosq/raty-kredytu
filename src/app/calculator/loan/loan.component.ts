@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { Moment } from 'moment';
 import { Installments } from 'src/app/shared/button-toggle/installment.model';
@@ -12,7 +12,8 @@ import { LoanParametersService } from '../services/loan-parameters.service';
 @Component({
   selector: 'app-loan',
   templateUrl: './loan.component.html',
-  styleUrls: ['./loan.component.scss']
+  styleUrls: ['./loan.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoanComponent implements SectionCard, OnInit {
   public readonly cardHeader = SectionCardHeader.LOAN;

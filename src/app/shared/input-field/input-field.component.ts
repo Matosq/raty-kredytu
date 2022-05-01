@@ -1,5 +1,5 @@
 
-import { AfterContentInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreditParameterInputField, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 import { fadeSlideInAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { IconName } from '../models/icon-names.model';
@@ -9,6 +9,7 @@ import { IconName } from '../models/icon-names.model';
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeSlideInAnimation]
 })
 export class InputFieldComponent implements ParameterField, OnInit, AfterContentInit {
