@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FieldTitleComponent } from './field-title.component';
+import { InfoTooltipModule } from '../info-tooltip/info-tooltip.module';
 
 
 
@@ -9,7 +10,8 @@ import { FieldTitleComponent } from './field-title.component';
     FieldTitleComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    InfoTooltipModule
   ],
   exports: [
     FieldTitleComponent

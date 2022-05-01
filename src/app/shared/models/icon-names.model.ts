@@ -1,7 +1,8 @@
 export enum IconName {
     CURRENCY_EXCHANGE = 'currency_exchange',
     ADD = 'add',
-    REMOVE = 'remove',
+    MINUS = 'remove',
     DELETE = 'delete',
     PERCENT = 'percent',
+    INFO = 'info_outline'
 }
