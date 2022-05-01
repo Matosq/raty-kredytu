@@ -6,7 +6,7 @@ import { IconName } from 'src/app/shared/models/icon-names.model';
 import { CreditParameterDatepicker, CreditParameterInputField } from '../models/credit-parameter.model';
 import { Rate, RatePosition } from '../models/rate.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { RateService } from '../rate.service';
+import { RateService } from '../services/rate.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 
 @Component({

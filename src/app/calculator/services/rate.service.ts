@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MonthYearPeriod } from './models/date.model';
-import { Rate, RatePosition } from './models/rate.model';
-import { DatePeriodIndexerService } from './services/date-period-indexer.service';
+import { MonthYearPeriod } from '../models/date.model';
+import { Rate, RatePosition } from '../models/rate.model';
+import { DatePeriodIndexerService } from './date-period-indexer.service';
 
 
 @Injectable({
