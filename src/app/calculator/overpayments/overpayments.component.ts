@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import moment, { Moment } from 'moment';
 import { delay, of } from 'rxjs';
-import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterTextField } from 'src/app/calculator/models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/section-card.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Overpayment } from '../models/overpayments.model';
+import { OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { OverpaymentPosition, OverpaymentsService } from './overpayments.service
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeSlideInOutAnimation]
 })
-export class OverpaymentsComponent implements SectionCard, OnInit {
+export class OverpaymentsComponent extends OverpaymentsParameters implements SectionCard {
   private overpayment: Overpayment = {
     value: 0,
     date: moment(),
@@ -26,22 +26,6 @@ export class OverpaymentsComponent implements SectionCard, OnInit {
   public numberOfdeletedItems = 0;
   public currentOverpayments: OverpaymentPosition[] = [];
   public readonly cardHeader = SectionCardHeader.OVERPAYMENTS;
-  public readonly overpaymentValueInputField: CreditParameterInputField = {
-    fieldTitle: 'miesięczna wartość nadpłaty',
-    label: 'zł',
-    value: 0,
-    stepValue: 100
-  }
-  public overpaymentDateField: CreditParameterDatepicker = {
-    fieldTitle: 'data pierwszej nadpłaty',
-    label: 'miesiąc i rok'
-  }
-  public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: 'okres nadpłacania',
-    label: 'liczba miesięcy',
-    value: 0,
-    stepValue: 1
-  }
   public readonly addOverpaymentButton: ButtonConfig = {
     text: 'dodaj nadpłatę',
     icon: IconName.ADD
@@ -50,9 +34,8 @@ export class OverpaymentsComponent implements SectionCard, OnInit {
     text: 'usuń',
     icon: IconName.DELETE
   }
-  constructor(private overpaymentsService: OverpaymentsService) { }
-
-  ngOnInit(): void {
+  constructor(private overpaymentsService: OverpaymentsService) {
+    super();
   }
 
   public onValueChange(value: number): void {

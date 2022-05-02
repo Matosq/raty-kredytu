@@ -4,8 +4,8 @@ import moment, { Moment } from 'moment';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Cost, CostsType } from '../models/costs.model';
-import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSelectField, CreditParameterTextField } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
+import { CostsParameters } from './costs-parameters';
 import { CostPosition, CostsService } from './costs.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { CostPosition, CostsService } from './costs.service';
   styleUrls: ['./costs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CostsComponent implements SectionCard, OnInit {
+export class CostsComponent extends CostsParameters implements SectionCard {
   private readonly cost: Cost = {
     name: '',
     date: moment(),
@@ -26,55 +26,7 @@ export class CostsComponent implements SectionCard, OnInit {
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
   public readonly CostsType = CostsType;
-  public readonly costsNameTextField: CreditParameterTextField = {
-    fieldTitle: 'nazwa',
-    value: '',
-    placeholder: 'np. ubezpieczenie'
-  }
-
-  public readonly selectField: CreditParameterSelectField = {
-    fieldTitle: 'rodzaj kosztu',
-    options: [
-      { value: CostsType.FIXED_AMOUNT },
-      { value: CostsType.BALANCE_RATE },
-      { value: CostsType.CREDIT_AMOUNT_RATE }
-    ],
-    defaultValue: { value: CostsType.FIXED_AMOUNT },
-  }
-
-  public datePicker: CreditParameterDatepicker = {
-    fieldTitle: 'data pierwszej płatności',
-    label: 'miesiąc i rok'
-  }
-
-  public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: 'okres trwania płatności',
-    label: 'liczba miesięcy',
-    value: 0,
-    stepValue: 1
-  }
-
-  public readonly costsInputField: CreditParameterInputField = {
-    fieldTitle: 'miesięczny koszt',
-    label: 'zł',
-    value: 0,
-    stepValue: 100
-  }
-
-  public readonly costsBalanceRateInputField: CreditParameterInputField = {
-    fieldTitle: 'oprocentowanie salda kredytu',
-    label: '%',
-    value: 0,
-    stepValue: 0.1
-  }
-
-  public readonly costsCreditRateInputField: CreditParameterInputField = {
-    fieldTitle: 'oprocentowanie kwoty kredytu',
-    label: '%',
-    value: 0,
-    stepValue: 0.1
-  }
-
+  
   public readonly addCostsButton: ButtonConfig = {
     text: 'dodaj koszt',
     icon: IconName.ADD
@@ -85,13 +37,8 @@ export class CostsComponent implements SectionCard, OnInit {
     icon: IconName.DELETE
   }
 
-  constructor(
-    private costsService: CostsService
-    ) { }
-
-
-  ngOnInit(): void {
-
+  constructor(private costsService: CostsService) {
+    super();
   }
 
   public onCostsNameChange(name: string): void {
