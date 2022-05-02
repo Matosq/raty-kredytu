@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from '../services/simulation-data.service';
@@ -13,13 +13,15 @@ export class SimulationComponent implements OnInit {
   public data: MonthCalculation[] = [];
   private simulationDataSubsription!: Subscription;
   constructor(
-    private simulationData: SimulationDataService
+    private simulationData: SimulationDataService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.simulationDataSubsription = this.simulationData.getSimulationData$().subscribe(
       (monthsCalculation: MonthCalculation[]) => {
         this.data = monthsCalculation;
+        this.changeDetector.detectChanges();
       }
     );
   }

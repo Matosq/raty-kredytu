@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CreditParameterTextField, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 
 @Component({
   selector: 'app-text-field',
   templateUrl: './text-field.component.html',
-  styleUrls: ['./text-field.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./text-field.component.scss']
 })
 export class TextFieldComponent implements ParameterField {
   @Input() configuration!: CreditParameterTextField;

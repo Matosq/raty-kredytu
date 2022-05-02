@@ -85,7 +85,9 @@ export class CostsComponent implements SectionCard, OnInit {
     icon: IconName.DELETE
   }
 
-  constructor(private costsService: CostsService) { }
+  constructor(
+    private costsService: CostsService
+    ) { }
 
 
   ngOnInit(): void {
