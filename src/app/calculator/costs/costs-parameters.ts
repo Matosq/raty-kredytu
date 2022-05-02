@@ -3,13 +3,13 @@ import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSe
 
 export class CostsParameters {
   public readonly costsNameTextField: CreditParameterTextField = {
-    fieldTitle: 'nazwa',
+    fieldTitle: { title: 'nazwa'},
     value: '',
     placeholder: 'np. ubezpieczenie'
   }
 
   public readonly selectField: CreditParameterSelectField = {
-    fieldTitle: 'rodzaj kosztu',
+    fieldTitle: { title: 'rodzaj kosztu'},
     options: [
       { value: CostsType.FIXED_AMOUNT },
       { value: CostsType.BALANCE_RATE },
@@ -19,33 +19,33 @@ export class CostsParameters {
   }
 
   public datePicker: CreditParameterDatepicker = {
-    fieldTitle: 'data pierwszej płatności',
+    fieldTitle: { title: 'data pierwszej płatności'},
     label: 'miesiąc i rok'
   }
 
   public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: 'okres trwania płatności',
+    fieldTitle: { title: 'okres trwania płatności'},
     label: 'liczba miesięcy',
     value: 0,
     stepValue: 1
   }
 
   public readonly costsInputField: CreditParameterInputField = {
-    fieldTitle: 'miesięczny koszt',
+    fieldTitle: { title: 'miesięczny koszt'},
     label: 'zł',
     value: 0,
     stepValue: 100
   }
 
   public readonly costsBalanceRateInputField: CreditParameterInputField = {
-    fieldTitle: 'oprocentowanie salda kredytu',
+    fieldTitle: { title: 'oprocentowanie salda kredytu'},
     label: '%',
     value: 0,
     stepValue: 0.1
   }
 
   public readonly costsCreditRateInputField: CreditParameterInputField = {
-    fieldTitle: 'oprocentowanie kwoty kredytu',
+    fieldTitle: { title: 'oprocentowanie kwoty kredytu'},
     label: '%',
     value: 0,
     stepValue: 0.1

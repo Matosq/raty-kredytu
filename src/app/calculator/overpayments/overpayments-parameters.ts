@@ -2,17 +2,17 @@ import { CreditParameterDatepicker, CreditParameterInputField } from "../models/
 
 export class OverpaymentsParameters {
   public readonly overpaymentValueInputField: CreditParameterInputField = {
-    fieldTitle: 'miesięczna wartość nadpłaty',
+    fieldTitle: { title: 'miesięczna wartość nadpłaty' },
     label: 'zł',
     value: 0,
     stepValue: 100
   }
   public overpaymentDateField: CreditParameterDatepicker = {
-    fieldTitle: 'data pierwszej nadpłaty',
+    fieldTitle: { title: 'data pierwszej nadpłaty' },
     label: 'miesiąc i rok'
   }
   public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: 'okres nadpłacania',
+    fieldTitle: { title: 'okres nadpłacania' },
     label: 'liczba miesięcy',
     value: 0,
     stepValue: 1

@@ -3,11 +3,11 @@ import moment, { Moment } from 'moment';
 import { Subscription } from 'rxjs';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
-import { CreditParameterDatepicker, CreditParameterInputField } from '../models/credit-parameter.model';
 import { Rate, RatePosition } from '../models/rate.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { RateService } from '../services/rate.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
+import { RateParameters } from './rate-parameters';
 
 @Component({
   selector: 'app-rate',
@@ -15,28 +15,12 @@ import { LoanParametersService } from '../services/loan-parameters.service';
   styleUrls: ['./rate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RateComponent implements SectionCard, OnInit, OnDestroy {
+export class RateComponent extends RateParameters implements SectionCard, OnInit, OnDestroy {
   private currentLoanRateSubscription!: Subscription;
   private currentLoanRate!: number;
   private rate!: Rate;
   public rateChanges: RatePosition[] = [];
   public readonly cardHeader = SectionCardHeader.RATE;
-  public readonly rateInputField: CreditParameterInputField = {
-    fieldTitle: 'nowa wartość oprocentowania',
-    value: 0,
-    stepValue: 0.1,
-    label: '%'
-  }
-  public readonly datePicker: CreditParameterDatepicker = {
-    fieldTitle: 'data zmiany',
-    label: 'miesiąc i rok'
-  }
-  public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: 'okres zmiany oprocentowania',
-    value: 0,
-    stepValue: 1,
-    label: 'liczba miesięcy'
-  }
   public addRateButton: ButtonConfig = {
     text: 'zmień oprocentowanie',
     icon: IconName.PERCENT
@@ -47,7 +31,9 @@ export class RateComponent implements SectionCard, OnInit, OnDestroy {
   }
   constructor(
     private loanParameters: LoanParametersService,
-    private rateService: RateService) { }
+    private rateService: RateService) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.initializeRateValues();
@@ -105,5 +91,4 @@ export class RateComponent implements SectionCard, OnInit, OnDestroy {
     this.monthsInputField.value = 0;
     this.rateInputField.value = this.currentLoanRate;
   }
-
 }

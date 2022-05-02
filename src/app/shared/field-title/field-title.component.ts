@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FieldTitleConfig } from 'src/app/calculator/models/credit-parameter.model';
 
 @Component({
   selector: 'app-field-title',
@@ -6,12 +7,6 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./field-title.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FieldTitleComponent implements OnInit {
-  @Input() title = '';
-  @Input() tooltipText = '';
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FieldTitleComponent {
+  @Input() config!: FieldTitleConfig;
 }

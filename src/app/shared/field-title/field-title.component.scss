@@ -1,6 +1,11 @@
 .title {
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--antique-white);
-    display: inline;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--antique-white);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }

@@ -31,7 +31,7 @@ interface TrancheView {
 export class TranchesComponent implements SectionCard, OnInit {
   public cardHeader = SectionCardHeader.TRANCHES;
   public firstTranchePercentageInput: CreditParameterInputField = {
-    fieldTitle: '',
+    fieldTitle: { title: '' },
     label: '%',
     value: 100,
     stepValue: 5,
@@ -115,13 +115,13 @@ export class TranchesComponent implements SectionCard, OnInit {
         trancheIndex: tranche.trancheId,
         value: tranche.value,
         inputFieldConfig: {
-          fieldTitle: '',
+          fieldTitle: { title: '' },
           label: '%',
           value: tranche.percentage,
           stepValue: 5
         },
         datePickerConfig: {
-          fieldTitle: '',
+          fieldTitle: { title: '' },
           label: 'miesiąc i rok',
           date: tranche.date
         }

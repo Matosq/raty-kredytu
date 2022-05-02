@@ -5,42 +5,42 @@ import { CostsOption } from "./costs.model";
 
 
 export interface ParameterField {
-    configuration: CreditParameterInputField | CreditParameterButtonTogle | CreditParameterDatepicker | CreditParameterTextField | CreditParameterSelectField;
-    valueChange: EventEmitter<any>;
+  configuration: CreditParameterInputField | CreditParameterButtonTogle | CreditParameterDatepicker | CreditParameterTextField | CreditParameterSelectField;
+  valueChange: EventEmitter<any>;
 }
 
-export interface CreditParameterInputField {
-    fieldTitle: string;
-    label: string;
-    value: number | Moment | null;
-    stepValue: number | null;
-    hint?: string;
-    placeholder?: string;
+export interface FieldTitleConfig {
+  title: string,
+  tooltip?: string
 }
 
-export interface CreditParameterButtonTogle {
-    fieldTitle: string;
-    value: Installments;
-    hint?: string;
+export interface CreditParameterField {
+  fieldTitle: FieldTitleConfig;
+  hint?: string;
 }
 
-export interface CreditParameterDatepicker {
-    fieldTitle: string;
-    label: string;
-    date?: Moment;
-    hint?: string;
+export interface CreditParameterInputField extends CreditParameterField {
+  label: string;
+  value: number | Moment | null;
+  stepValue: number | null;
+  placeholder?: string;
 }
 
-export interface CreditParameterTextField {
-    fieldTitle: string;
-    value: string;
-    placeholder: string;
-    hint?: string;
+export interface CreditParameterButtonTogle extends CreditParameterField {
+  value: Installments;
 }
 
-export interface CreditParameterSelectField {
-    fieldTitle: string;
-    options: CostsOption[];
-    defaultValue: CostsOption;
-    hint?: string;
+export interface CreditParameterDatepicker extends CreditParameterField {
+  label: string;
+  date?: Moment;
+}
+
+export interface CreditParameterTextField extends CreditParameterField {
+  value: string;
+  placeholder: string;
+}
+
+export interface CreditParameterSelectField extends CreditParameterField {
+  options: CostsOption[];
+  defaultValue: CostsOption;
 }

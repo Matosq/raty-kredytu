@@ -8,6 +8,6 @@ import { IconName } from '../models/icon-names.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoTooltipComponent {
-  @Input() text = '';
+  @Input() text: string | undefined;
   public readonly icon = IconName.INFO;
 }

@@ -6,38 +6,38 @@ import { CreditParameterButtonTogle, CreditParameterDatepicker, CreditParameterI
 export class LoanParameters {
 
   public readonly amountLoanField: CreditParameterInputField = {
-    fieldTitle: 'kwota kredytu',
+    fieldTitle: { title: 'kwota kredytu', tooltip: 'Całkowita kwota kredytu, to kwota, którą rzeczywiście otrzymamy od banku, na podstawie zawartej wcześniej umowy kredytowej.' },
     label: 'zł',
     value: 300000,
     stepValue: 10000
   }
 
   public readonly monthsOfCredit: CreditParameterInputField = {
-    fieldTitle: 'okres kredytowania',
+    fieldTitle: { title: 'okres kredytowania' },
     label: 'liczba miesięcy',
     value: 300,
     stepValue: 1
   }
 
   public readonly rate: CreditParameterInputField = {
-    fieldTitle: 'oprocentowanie',
+    fieldTitle: { title: 'oprocentowanie' },
     label: '%',
     value: 5.12,
     stepValue: 0.1
   }
 
   public readonly installments: CreditParameterButtonTogle = {
-    fieldTitle: 'raty',
+    fieldTitle: { title: 'raty' },
     value: Installments.EQUAL,
   }
 
   public readonly startDate: CreditParameterDatepicker = {
-    fieldTitle: 'rozpoczęcie kredytu',
+    fieldTitle: { title: 'rozpoczęcie kredytu' },
     label: 'miesiąc i rok',
   }
 
   public readonly firstPaymentDate: CreditParameterDatepicker = {
-    fieldTitle: 'spłata pierwszej raty',
+    fieldTitle: { title: 'spłata pierwszej raty' },
     label: 'miesiąc i rok',
   }
 
@@ -45,5 +45,4 @@ export class LoanParameters {
     text: 'oblicz raty',
     icon: IconName.CURRENCY_EXCHANGE
   }
-
 }
