@@ -1,6 +1,8 @@
 import { CostsType } from "../models/costs.model"
 import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSelectField, CreditParameterTextField } from "../models/credit-parameter.model"
 
+export const defaultCost = 100;
+export const defaultCostPercentage = 0.1;
 export class CostsParameters {
   public readonly costsNameTextField: CreditParameterTextField = {
     fieldTitle: { title: 'nazwa'},
@@ -26,7 +28,7 @@ export class CostsParameters {
   public readonly monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres trwania płatności'},
     label: 'liczba miesięcy',
-    value: 0,
+    value: 1,
     stepValue: 1,
     validation: { min: 0, max: 1200, integerOnly: true }
   }
@@ -34,7 +36,7 @@ export class CostsParameters {
   public readonly costsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'miesięczny koszt'},
     label: 'zł',
-    value: 0,
+    value: defaultCost,
     stepValue: 100,
     validation: { min: 0, max: 100000000000 }
   }
@@ -42,7 +44,7 @@ export class CostsParameters {
   public readonly costsBalanceRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie salda kredytu'},
     label: '%',
-    value: 0,
+    value: defaultCostPercentage,
     stepValue: 0.1,
     validation: { min: 0, max: 100 }
   }
@@ -50,7 +52,7 @@ export class CostsParameters {
   public readonly costsCreditRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie kwoty kredytu'},
     label: '%',
-    value: 0,
+    value: defaultCostPercentage,
     stepValue: 0.1,
     validation: { min: 0, max: 100 }
   }

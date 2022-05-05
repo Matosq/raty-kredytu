@@ -89,7 +89,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
 
   private resetFields(): void {
     this.datePicker.date = moment();
-    this.monthsInputField.value = 0;
+    this.monthsInputField.value = 1;
     this.rateInputField.value = this.currentLoanRate;
   }
 }

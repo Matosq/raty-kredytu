@@ -76,7 +76,7 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
 
   private throttleValueUpdates(): void {
     this.updateValueSubscription = this.updateValueSubject
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(100))
       .subscribe((value: InputFieldValue) => this.valueChange.emit(value));
   }
 

@@ -8,7 +8,7 @@ import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { Overpayment } from '../models/overpayments.model';
-import { OverpaymentsParameters } from './overpayments-parameters';
+import { defaultOverpayment, OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
 
 @Component({
@@ -20,9 +20,9 @@ import { OverpaymentPosition, OverpaymentsService } from './overpayments.service
 })
 export class OverpaymentsComponent extends OverpaymentsParameters implements SectionCard {
   private overpayment: Overpayment = {
-    value: 0,
+    value: defaultOverpayment,
     date: moment(),
-    numberOfMonths: 0
+    numberOfMonths: 1
   };
   public numberOfdeletedItems = 0;
   public currentOverpayments: OverpaymentPosition[] = [];
@@ -85,10 +85,10 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
 
   private clearFields(): void {
     this.overpayment.date = moment();
-    this.overpayment.value = 0;
-    this.overpayment.numberOfMonths = 0;
-    this.overpaymentValueInputField.value = 0;
-    this.monthsInputField.value = 0;
+    this.overpayment.value = defaultOverpayment;
+    this.overpayment.numberOfMonths = 1;
+    this.overpaymentValueInputField.value = defaultOverpayment;
+    this.monthsInputField.value = 1;
     this.overpaymentDateField.date = this.overpayment.date;
     this.overpaymentDateField = cloneDeep(this.overpaymentDateField);
   }

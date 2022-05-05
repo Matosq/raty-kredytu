@@ -14,7 +14,7 @@ export class RateParameters {
   }
   public readonly monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres zmiany oprocentowania' },
-    value: 0,
+    value: 1,
     stepValue: 1,
     label: 'liczba miesięcy',
     validation: { min: 0, max: 1200, integerOnly: true }

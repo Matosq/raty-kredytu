@@ -6,7 +6,7 @@ import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Cost, CostsType } from '../models/costs.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { CostsParameters } from './costs-parameters';
+import { CostsParameters, defaultCost, defaultCostPercentage } from './costs-parameters';
 import { CostPosition, CostsService } from './costs.service';
 
 @Component({
@@ -19,9 +19,9 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   private readonly cost: Cost = {
     name: '',
     date: moment(),
-    numberOfMonths: 0,
+    numberOfMonths: 1,
     type: CostsType.FIXED_AMOUNT,
-    value: 0
+    value: defaultCost
   };
   public currentCosts: CostPosition[] = [];
   public readonly cardHeader = SectionCardHeader.COSTS;
@@ -95,15 +95,15 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   }
 
   private clearValueFields(): void {
-    this.costsInputField.value = 0;
-    this.costsBalanceRateInputField.value = 0;
-    this.costsCreditRateInputField.value = 0;
-    this.cost.value = 0;
+    this.costsInputField.value = defaultCost;
+    this.costsBalanceRateInputField.value = defaultCostPercentage;
+    this.costsCreditRateInputField.value = defaultCostPercentage;
+    this.cost.value = this.cost.type === CostsType.FIXED_AMOUNT ? defaultCost : defaultCostPercentage;
   }
 
   private clearMonths(): void {
-    this.monthsInputField.value = 0;
-    this.cost.numberOfMonths = 0;
+    this.monthsInputField.value = 1;
+    this.cost.numberOfMonths = 1;
   }
 
   private clearDate(): void {

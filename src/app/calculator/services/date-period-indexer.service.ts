@@ -51,12 +51,12 @@ export class DatePeriodIndexerService {
       } 
     }
     const endDate = cloneDeep(date);
-    endDate.add(numberOfMonths, 'months');
+    endDate.add(numberOfMonths - 1, 'months');
     const endYear = endDate.year();
     const endDatePl = endDate.locale('pl');
     return {
-      monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear}`,
-      monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear}`
+      monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear} (${numberOfMonths})`,
+      monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear} (${numberOfMonths})`
     }
   }
 
