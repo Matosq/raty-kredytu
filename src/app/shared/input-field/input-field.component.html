@@ -1,20 +1,23 @@
-<div *ngIf="show" @fadeSlideIn>
-    <app-field-title [config]="configuration.fieldTitle"></app-field-title>
+<app-field-title [config]="configuration.fieldTitle"></app-field-title>
 
-    <div class="input-field-container">
+<div class="input-field-container">
 
-        <button (click)="decrease()" mat-icon-button>
-            <app-icon [icon]="IconNameType.MINUS"></app-icon>
-        </button>
+    <button (click)="decrease()" mat-icon-button>
+        <app-icon [icon]="IconNameType.MINUS"></app-icon>
+    </button>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{configuration?.label}}</mat-label>
-            <input type="number" matInput placeholder={{configuration?.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
-            <mat-hint>{{configuration?.hint}}</mat-hint>
-        </mat-form-field>
+    <mat-form-field appearance="outline" hideRequiredMarker>
 
-        <button (click)="increase()" mat-icon-button>
-            <app-icon [icon]="IconNameType.ADD"></app-icon>
-        </button>
-    </div>
+        <mat-label>{{configuration?.label}}</mat-label>
+        <input type="number" matInput [formControl]="numberFormControl" [(ngModel)]="configuration.value" placeholder={{configuration?.placeholder}}>
+        <mat-hint>{{configuration?.hint}}</mat-hint>
+        <mat-error *ngIf="!!numberFormControl.errors">
+            <app-icon [icon]="IconNameType.ERROR"></app-icon>
+            {{getErrorText()}}
+        </mat-error>
+    </mat-form-field>
+
+    <button (click)="increase()" mat-icon-button>
+        <app-icon [icon]="IconNameType.ADD"></app-icon>
+    </button>
 </div>

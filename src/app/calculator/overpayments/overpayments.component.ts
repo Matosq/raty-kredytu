@@ -6,6 +6,7 @@ import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/sectio
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
+import { InputFieldValue } from '../models/credit-parameter.model';
 import { Overpayment } from '../models/overpayments.model';
 import { OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
@@ -38,16 +39,16 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     super();
   }
 
-  public onValueChange(value: number): void {
-    this.overpayment.value = value;
+  public onValueChange(inputFieldValue: InputFieldValue): void {
+    this.overpayment.value = inputFieldValue.value;
   }
 
   public onDateChange(date: Moment): void {
     this.overpayment.date = date;
   }
 
-  public onNumberOfMonthsChange(value: number): void {
-    this.overpayment.numberOfMonths = value;
+  public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
+    this.overpayment.numberOfMonths = inputFieldValue.value;
   }
 
   public addOverpayment(): void {

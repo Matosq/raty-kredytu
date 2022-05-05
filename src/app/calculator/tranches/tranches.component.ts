@@ -3,7 +3,7 @@ import { Moment } from 'moment';
 import { Subscription } from 'rxjs';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
-import { CreditParameterDatepicker, CreditParameterInputField } from '../models/credit-parameter.model';
+import { CreditParameterDatepicker, CreditParameterInputField, InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { Tranche } from '../models/tranche.model';
 import { TranchesService } from './tranches.service';
@@ -35,6 +35,7 @@ export class TranchesComponent implements SectionCard, OnInit {
     label: '%',
     value: 100,
     stepValue: 5,
+    validation: { min: 0, max: 100 }
   };
   public firstTranche: FirstTrancheView = {
     date: '',
@@ -59,11 +60,11 @@ export class TranchesComponent implements SectionCard, OnInit {
     private changeDetector: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscribeToTranchesData();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.tranchesDataSubscription?.unsubscribe();
   }
 
@@ -75,17 +76,17 @@ export class TranchesComponent implements SectionCard, OnInit {
     this.tranchesService.removeTranche(trancheId);
   }
 
-  public updateFirstTrancheValueOnRateChanges(percentage: number): void {
-    this.firstTranche.percentageValue = percentage;
-    this.firstTranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentage;
-    this.tranchesService.setTrancheValuesByTrancheId(percentage, this.firstTranche.trancheIndex as number);
+  public updateFirstTrancheValueOnRateChanges(percentageInputField: InputFieldValue): void {
+    this.firstTranche.percentageValue = percentageInputField.value;
+    this.firstTranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentageInputField.value;
+    this.tranchesService.setTrancheValuesByTrancheId(percentageInputField.value, this.firstTranche.trancheIndex as number);
   }
 
-  public updateTrancheValueOnRateChangesByTrancheId(percentage: number, id: number): void {
+  public updateTrancheValueOnRateChangesByTrancheId(percentageInputField: InputFieldValue, id: number): void {
     const tranche = this.tranchesView.find((tranche: TrancheView) => tranche.trancheIndex === id);
     if (!tranche) { return; }
-    tranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentage;
-    this.tranchesService.setTrancheValuesByTrancheId(percentage, id);
+    tranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentageInputField.value;
+    this.tranchesService.setTrancheValuesByTrancheId(percentageInputField.value, id);
   }
 
   public updateTranchesDateByTrancheId(date: Moment, id: number): void {
@@ -118,7 +119,8 @@ export class TranchesComponent implements SectionCard, OnInit {
           fieldTitle: { title: '' },
           label: '%',
           value: tranche.percentage,
-          stepValue: 5
+          stepValue: 5,
+          validation: { min: 0, max: 100 }
         },
         datePickerConfig: {
           fieldTitle: { title: '' },

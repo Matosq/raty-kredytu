@@ -36,3 +36,9 @@ input {
     flex-wrap: nowrap;
     align-items: baseline;
 }
+
+.mat-error {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}

@@ -5,7 +5,8 @@ export class RateParameters {
     fieldTitle: { title: 'nowa wartość oprocentowania' },
     value: 0,
     stepValue: 0.1,
-    label: '%'
+    label: '%',
+    validation: { min: 0, max: 100 }
   }
   public readonly datePicker: CreditParameterDatepicker = {
     fieldTitle: { title: 'data zmiany' },
@@ -15,6 +16,7 @@ export class RateParameters {
     fieldTitle: { title: 'okres zmiany oprocentowania' },
     value: 0,
     stepValue: 1,
-    label: 'liczba miesięcy'
+    label: 'liczba miesięcy',
+    validation: { min: 0, max: 1200, integerOnly: true }
   }
 }

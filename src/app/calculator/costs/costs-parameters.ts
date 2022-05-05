@@ -27,27 +27,31 @@ export class CostsParameters {
     fieldTitle: { title: 'okres trwania płatności'},
     label: 'liczba miesięcy',
     value: 0,
-    stepValue: 1
+    stepValue: 1,
+    validation: { min: 0, max: 1200, integerOnly: true }
   }
 
   public readonly costsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'miesięczny koszt'},
     label: 'zł',
     value: 0,
-    stepValue: 100
+    stepValue: 100,
+    validation: { min: 0, max: 100000000000 }
   }
 
   public readonly costsBalanceRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie salda kredytu'},
     label: '%',
     value: 0,
-    stepValue: 0.1
+    stepValue: 0.1,
+    validation: { min: 0, max: 100 }
   }
 
   public readonly costsCreditRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie kwoty kredytu'},
     label: '%',
     value: 0,
-    stepValue: 0.1
+    stepValue: 0.1,
+    validation: { min: 0, max: 100 }
   }
 }

@@ -3,6 +3,6 @@
 
 <mat-form-field appearance="outline">
     <!-- <mat-label>Favorite food</mat-label> -->
-    <input type="text" matInput placeholder={{configuration.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
+    <input type="text" matInput maxlength="50" placeholder={{configuration.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
 </mat-form-field>
   

@@ -5,16 +5,18 @@ export class OverpaymentsParameters {
     fieldTitle: { title: 'miesięczna wartość nadpłaty' },
     label: 'zł',
     value: 0,
-    stepValue: 100
+    stepValue: 100,
+    validation: { min: 0, max: 100000000000 }
   }
   public overpaymentDateField: CreditParameterDatepicker = {
     fieldTitle: { title: 'data pierwszej nadpłaty' },
-    label: 'miesiąc i rok'
+    label: 'miesiąc i rok',
   }
   public readonly monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres nadpłacania' },
     label: 'liczba miesięcy',
     value: 0,
-    stepValue: 1
+    stepValue: 1,
+    validation: { min: 0, max: 1200, integerOnly: true }
   }
 }

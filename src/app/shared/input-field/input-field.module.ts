@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FieldTitleModule } from '../field-title/field-title.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconModule } from '../icon/icon.module';
 
 
@@ -20,7 +20,8 @@ import { IconModule } from '../icon/icon.module';
     MatButtonModule,
     IconModule,
     FieldTitleModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     InputFieldComponent

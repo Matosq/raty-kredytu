@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Moment } from 'moment';
 import { Installments } from 'src/app/shared/button-toggle/installment.model';
+import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CalculatorService } from '../services/calculator.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
@@ -28,16 +29,16 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
     this.loanParametersService.setRate(this.rate.value as number);
   }
 
-  public onAmountLoan(value: number): void {
-    this.loanParametersService.setAmountLoan(value);
+  public onAmountLoan(inputFieldValue: InputFieldValue): void {
+    this.loanParametersService.setAmountLoan(inputFieldValue.value);
   }
 
-  public onMonthsOfCredit(value: number): void {
-    this.loanParametersService.setNumberOfMonths(value);
+  public onMonthsOfCredit(inputFieldValue: InputFieldValue): void {
+    this.loanParametersService.setNumberOfMonths(inputFieldValue.value);
   }
 
-  public onRate(value: number): void {
-    this.loanParametersService.setRate(value);
+  public onRate(inputFieldValue: InputFieldValue): void {
+    this.loanParametersService.setRate(inputFieldValue.value);
   }
 
   public onInstallmentsButtonToggle(value: Installments): void {

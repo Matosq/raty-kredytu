@@ -8,6 +8,7 @@ import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { RateService } from '../services/rate.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 import { RateParameters } from './rate-parameters';
+import { InputFieldValue } from '../models/credit-parameter.model';
 
 @Component({
   selector: 'app-rate',
@@ -44,16 +45,16 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.currentLoanRateSubscription.unsubscribe();
   }
 
-  public onRateChange(value: number): void {
-    this.rate.value = value;
+  public onRateChange(inputFieldValue: InputFieldValue): void {
+    this.rate.value = inputFieldValue.value;
   }
 
   public onDateChange(date: Moment): void {
     this.rate.date = date;
   }
 
-  public onNumberOfMonthsChange(nbMonths: number): void {
-    this.rate.numberOfMonths = nbMonths;
+  public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
+    this.rate.numberOfMonths = inputFieldValue.value;
   }
 
   public areRateChanges(): boolean {

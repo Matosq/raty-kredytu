@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import moment, { Moment } from 'moment';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Cost, CostsType } from '../models/costs.model';
+import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CostsParameters } from './costs-parameters';
 import { CostPosition, CostsService } from './costs.service';
@@ -54,12 +55,12 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     this.selectedCostsType = costsType;
   }
 
-  public onInputFieldChange(value: number): void {
-    this.cost.value = value;
+  public onInputFieldChange(inputFieldValue: InputFieldValue): void {
+    this.cost.value = inputFieldValue.value;
   }
 
-  public onMonthsFieldChange(value: number): void {
-    this.cost.numberOfMonths = value;
+  public onMonthsFieldChange(inputFieldValue: InputFieldValue): void {
+    this.cost.numberOfMonths = inputFieldValue.value;
   }
 
   public addCost(): void {
