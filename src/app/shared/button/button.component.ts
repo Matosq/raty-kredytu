@@ -10,6 +10,7 @@ import { ButtonConfig } from '../models/button-config.model';
 })
 export class ButtonComponent implements OnInit, OnDestroy {
   @Input() configuration!: ButtonConfig;
+  @Input() isDisabled = false;
   @Output() onClick =  new EventEmitter();
   private buttonClickSubject = new Subject<boolean>();
   private buttonClickSubscription!: Subscription;

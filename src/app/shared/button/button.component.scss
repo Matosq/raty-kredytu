@@ -1,14 +1,29 @@
+.wrapper { 
+    display: flex;
+    color: white;
+}
 
 .mat-stroked-button {
-    color: var(--antique-white);
-    background-color: var(--kimberly);
+    background-color: var(--bronze-metallic);
     border-radius: 6px;
-    height: 42px;
-    font-size: 18px;
+    height: 56px;
+    font-size: 16pt;
+    padding-left: 32px;
+    padding-right: 32px;
     border-color: var(--antique-white);
-    &:hover {
+    &:hover:not(.mat-button-disabled) {
+        outline: 3px solid var(--antique-white);
+        background-color: transparent;
+        color: var(--antique-white);
+    }
+    &:focus:not(.mat-button-disabled) {
         outline: 3px solid var(--antique-white);
     }
+}
+
+.mat-stroked-button.mat-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
 }
 
 .button-icon {

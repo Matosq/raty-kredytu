@@ -8,10 +8,8 @@
     --kimberly: #7573A9;
     --swiss-coffe: #DED2D3;
     --medium-devices-width: 768px;
+    --bronze-metallic: #a08e5f;
 }
-
-// background-color: rgb(232, 189, 1, 0.61);
-
 
 // /* Extra small devices (phones, 600px and down) */
 // @media only screen and (max-width: 600px) {...}
@@ -179,7 +177,10 @@ input {
 }
 
 .remove-button .mat-stroked-button {
-    width: 120px !important;
+    background-color: var(--kimberly) !important;
+    &:hover {
+        background-color: transparent !important;
+    }
 }
 
 .mat-tooltip {

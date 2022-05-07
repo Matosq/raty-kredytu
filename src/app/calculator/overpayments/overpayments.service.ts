@@ -15,7 +15,7 @@ export class OverpaymentsService {
   constructor(private datePeriodIndexerService: DatePeriodIndexerService) { }
 
   public addOverpayment(overpayment: Overpayment): void {
-    this.overpayments.push({
+    this.overpayments.unshift({
       ...overpayment,
       ...this.getMonthYearPeriodParsedAsString(overpayment.date as Moment, overpayment.numberOfMonths),
       indexOfOverpayment: this.index++

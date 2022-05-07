@@ -1,3 +1,5 @@
-<button (click)="buttonClick()" mat-stroked-button>
-    <app-icon class="button-icon" [icon]="configuration.icon"></app-icon>{{configuration?.text}}
+<button (click)="buttonClick()" mat-stroked-button [disabled]="isDisabled">
+    <div class="wrapper">
+        <app-icon class="button-icon" [icon]="configuration.icon"></app-icon>{{configuration?.text}}
+    </div>
 </button>

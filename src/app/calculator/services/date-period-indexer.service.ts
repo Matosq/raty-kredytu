@@ -46,8 +46,8 @@ export class DatePeriodIndexerService {
     const startDatePl = date.locale('pl');
     if (numberOfMonths === 1) {
       return {
-        monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear}`,
-        monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear}`
+        monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} (1)`,
+        monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} (1)`
       } 
     }
     const endDate = cloneDeep(date);
