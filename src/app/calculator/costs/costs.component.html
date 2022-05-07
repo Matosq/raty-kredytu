@@ -25,7 +25,7 @@
 
     </div>
     <div class="action-button-right">
-        <app-button [configuration]="addCostsButton" (onClick)="addCost()"></app-button>
+        <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (onClick)="addCost()"></app-button>
     </div>
 
     <app-divider [isShown]="areCurrentCosts()"></app-divider>

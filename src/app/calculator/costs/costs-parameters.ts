@@ -1,9 +1,10 @@
 import { CostsType } from "../models/costs.model"
 import { CreditParameterDatepicker, CreditParameterInputField, CreditParameterSelectField, CreditParameterTextField } from "../models/credit-parameter.model"
+import { Section } from "../section/section";
 
 export const defaultCost = 100;
 export const defaultCostPercentage = 0.1;
-export class CostsParameters {
+export class CostsParameters extends Section {
   public readonly costsNameTextField: CreditParameterTextField = {
     fieldTitle: { title: 'nazwa'},
     value: '',

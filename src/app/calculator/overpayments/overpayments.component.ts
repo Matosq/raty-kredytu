@@ -24,6 +24,8 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     date: moment(),
     numberOfMonths: 1
   };
+  private isValueFieldValid = true;
+  private isNumberOfMonthsValid = true;
   public numberOfdeletedItems = 0;
   public currentOverpayments: OverpaymentPosition[] = [];
   public readonly cardHeader = SectionCardHeader.OVERPAYMENTS;
@@ -41,6 +43,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
 
   public onValueChange(inputFieldValue: InputFieldValue): void {
     this.overpayment.value = inputFieldValue.value;
+    this.isValueFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onDateChange(date: Moment): void {
@@ -49,6 +52,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
 
   public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
     this.overpayment.numberOfMonths = inputFieldValue.value;
+    this.isNumberOfMonthsValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public addOverpayment(): void {
@@ -81,6 +85,10 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
 
   public areCurrentOverpayments(): boolean {
     return this.overpaymentsService.getOverpayments().length > 0;
+  }
+
+  public areFieldsValid(): boolean {
+    return this.isValueFieldValid && this.isNumberOfMonthsValid;
   }
 
   private clearFields(): void {

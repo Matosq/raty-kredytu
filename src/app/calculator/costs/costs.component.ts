@@ -23,6 +23,8 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     type: CostsType.FIXED_AMOUNT,
     value: defaultCost
   };
+  private isValueFieldValid = true;
+  private isMonthsFieldValid = true;
   public currentCosts: CostPosition[] = [];
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
@@ -57,10 +59,12 @@ export class CostsComponent extends CostsParameters implements SectionCard {
 
   public onInputFieldChange(inputFieldValue: InputFieldValue): void {
     this.cost.value = inputFieldValue.value;
+    this.isValueFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onMonthsFieldChange(inputFieldValue: InputFieldValue): void {
     this.cost.numberOfMonths = inputFieldValue.value;
+    this.isMonthsFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public addCost(): void {
@@ -80,6 +84,10 @@ export class CostsComponent extends CostsParameters implements SectionCard {
 
   public isCostTypeWithCurrency(costsType: CostsType): boolean {
     return costsType === CostsType.FIXED_AMOUNT;
+  }
+
+  public areFieldsValuesValid(): boolean {
+    return this.isValueFieldValid && this.isMonthsFieldValid;
   }
 
   private clearFieldsValue(): void {

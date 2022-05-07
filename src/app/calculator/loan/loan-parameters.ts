@@ -2,9 +2,9 @@ import { Installments } from "src/app/shared/button-toggle/installment.model";
 import { ButtonConfig } from "src/app/shared/models/button-config.model";
 import { IconName } from "src/app/shared/models/icon-names.model";
 import { CreditParameterButtonTogle, CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model";
+import { Section } from "../section/section";
 
-export class LoanParameters {
-
+export class LoanParameters extends Section {
   public readonly amountLoanField: CreditParameterInputField = {
     fieldTitle: { title: 'kwota kredytu', tooltip: 'Całkowita kwota kredytu, to kwota, którą rzeczywiście otrzymamy od banku, na podstawie zawartej wcześniej umowy kredytowej.' },
     label: 'zł',
@@ -48,5 +48,9 @@ export class LoanParameters {
   public readonly calculateButton: ButtonConfig = {
     text: 'oblicz raty',
     icon: IconName.CURRENCY_EXCHANGE
+  }
+
+  constructor(){
+    super();
   }
 }

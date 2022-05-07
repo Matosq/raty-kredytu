@@ -52,17 +52,17 @@ $custom-typography: mat-typography-config(
 @include mat-form-field-typography($custom-typography);
 @include mat-input-typography($custom-typography);
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .card-wrapper {
         // przyjrzec sie szerokosci kart dla malych ekranow
-        min-width: 90vw;
+        // min-width: 90vw;
         // max-width: 100%
     }
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
     .card-wrapper {
-        width: 80vw;
+        // width: 90vw;
     }
 }
 
@@ -71,6 +71,7 @@ $custom-typography: mat-typography-config(
     // width: 80vw;
     // min-width: 768px;
     // color: var(--swiss-coffe);
+    max-width: 903px;
     color: var(--antique-white);
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
     backdrop-filter: blur(50px);
@@ -91,10 +92,24 @@ $custom-typography: mat-typography-config(
     border-bottom: solid 52px !important;
 }
 
+
+@media only screen and (max-width: 658px) {
+    .action-button-right {
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 658px) {
+    .action-button-right {
+        justify-content: flex-end;
+    }
+}
+
+
+
 .action-button-right {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     padding-top: 20px;
 }
 
@@ -160,16 +175,27 @@ input {
     color: var(--swiss-coffe);
 }
 
+@media only screen and (max-width: 658px) {
+    .flex-row-wrapper {
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 658px) {
+    .flex-row-wrapper {
+        justify-content: flex-start;
+    }
+}
+
 
 .flex-row-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: flex-start;
     align-content: center;
-    row-gap: 20px;
-    column-gap: 20px;
+    row-gap: 30px;
+    column-gap: 30px;
 }
 
 .mat-divider {

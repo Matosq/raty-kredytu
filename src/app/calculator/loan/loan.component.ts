@@ -15,6 +15,9 @@ import { LoanParameters } from './loan-parameters';
 })
 export class LoanComponent extends LoanParameters implements SectionCard, OnInit {
   public readonly cardHeader = SectionCardHeader.LOAN;
+  private isAmounLoanFieldValid = true;
+  private isMonthsOfCreditFieldValid = true;
+  private isRateFieldValid = true;
 
   constructor(
     private loanParametersService: LoanParametersService,
@@ -31,14 +34,17 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
 
   public onAmountLoan(inputFieldValue: InputFieldValue): void {
     this.loanParametersService.setAmountLoan(inputFieldValue.value);
+    this.isAmounLoanFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onMonthsOfCredit(inputFieldValue: InputFieldValue): void {
     this.loanParametersService.setNumberOfMonths(inputFieldValue.value);
+    this.isMonthsOfCreditFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onRate(inputFieldValue: InputFieldValue): void {
     this.loanParametersService.setRate(inputFieldValue.value);
+    this.isRateFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onInstallmentsButtonToggle(value: Installments): void {
@@ -55,5 +61,9 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
 
   public calculateLoan: () => void  = () => {
    this.calculatorService.calculateLoan();
+  }
+
+  public areParametersFieldsValid(): boolean {
+    return this.isAmounLoanFieldValid && this.isMonthsOfCreditFieldValid && this.isRateFieldValid;
   }
 }

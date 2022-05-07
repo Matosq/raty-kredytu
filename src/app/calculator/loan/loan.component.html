@@ -25,7 +25,7 @@
     </div>
 
     <div class="action-button-right">
-        <app-button [configuration]="calculateButton"
+        <app-button [configuration]="calculateButton" [isDisabled]="!areParametersFieldsValid()"
         (onClick)="calculateLoan()"
         ></app-button>
     </div>

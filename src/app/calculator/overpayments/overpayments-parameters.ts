@@ -1,7 +1,8 @@
 import { CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model"
+import { Section } from "../section/section";
 
 export const defaultOverpayment = 100;
-export class OverpaymentsParameters {
+export class OverpaymentsParameters extends Section {
   public readonly overpaymentValueInputField: CreditParameterInputField = {
     fieldTitle: { title: 'miesięczna wartość nadpłaty' },
     label: 'zł',

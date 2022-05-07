@@ -20,6 +20,8 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   private currentLoanRateSubscription!: Subscription;
   private currentLoanRate!: number;
   private rate!: Rate;
+  private isRateFieldValid = true;
+  private isNumberOfMonthsValid = true;
   public rateChanges: RatePosition[] = [];
   public readonly cardHeader = SectionCardHeader.RATE;
   public addRateButton: ButtonConfig = {
@@ -47,6 +49,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
 
   public onRateChange(inputFieldValue: InputFieldValue): void {
     this.rate.value = inputFieldValue.value;
+    this.isRateFieldValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public onDateChange(date: Moment): void {
@@ -55,6 +58,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
 
   public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
     this.rate.numberOfMonths = inputFieldValue.value;
+    this.isNumberOfMonthsValid = this.isFieldValid(inputFieldValue.status);
   }
 
   public areRateChanges(): boolean {
@@ -72,12 +76,16 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.rateChanges = this.rateService.getRates();
   }
 
+  public areFieldsValid(): boolean {
+    return this.isNumberOfMonthsValid && this.isRateFieldValid;
+  }
+
   private initializeRateValues(): void {
     this.rateInputField.value = this.loanParameters.getRate();
     this.rate = {
       value: this.rateInputField.value,
       date: moment(),
-      numberOfMonths: 0
+      numberOfMonths: this.monthsInputField.value as number
     }
   }
 

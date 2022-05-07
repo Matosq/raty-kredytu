@@ -13,15 +13,12 @@
         <app-input-field [configuration]="monthsInputField" (valueChange)="onNumberOfMonthsChange($event)">
         </app-input-field>
 
-
         <app-divider [isShown]="areRateChanges()"></app-divider>
     </div>
 
-
     <div class="action-button-right">
-        <app-button [configuration]="addRateButton" (onClick)="addRate()"></app-button>
+        <app-button [configuration]="addRateButton" [isDisabled]="!areFieldsValid()" (onClick)="addRate()"></app-button>
     </div>
-
 
     <app-divider [isShown]="areRateChanges()"></app-divider>
 

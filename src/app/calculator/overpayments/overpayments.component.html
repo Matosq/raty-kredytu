@@ -14,7 +14,7 @@
     </div>
 
     <div class="action-button-right">
-        <app-button [configuration]="addOverpaymentButton" (onClick)="addOverpayment()"></app-button>
+        <app-button [configuration]="addOverpaymentButton" [isDisabled]="!areFieldsValid()" (onClick)="addOverpayment()"></app-button>
     </div>
 
     <app-divider [isShown]="areCurrentOverpayments()"></app-divider>

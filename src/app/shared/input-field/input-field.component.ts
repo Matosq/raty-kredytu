@@ -61,7 +61,7 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
       ...(this.configuration?.validation?.integerOnly as boolean ? [Validators.pattern("^[0-9]*$")] : [])
     ]
     );
-    this.numberFormControl.setValue(this.configuration.value);
+    this.setValueAndMarkAsTouched(this.configuration.value as number);
   }
 
   private subscribeToFormControlChanges(): void {

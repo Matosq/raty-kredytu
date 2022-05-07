@@ -1,6 +1,7 @@
 import { CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model"
+import { Section } from "../section/section"
 
-export class RateParameters {
+export class RateParameters extends Section {
   public readonly rateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'nowa wartość oprocentowania' },
     value: 0,
