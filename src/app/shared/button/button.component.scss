@@ -1,4 +1,16 @@
-.wrapper { 
+@media only screen and (max-width: 992px) {
+    .small-button .wrapper {
+        display: inline !important;
+    }
+    .small-button .button-text {
+        display: none !important;
+    }
+    .small-button .button-icon {
+        margin-right: 0px !important;
+    }
+}
+
+.wrapper {
     display: flex;
     color: white;
 }

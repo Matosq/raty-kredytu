@@ -29,13 +29,17 @@
     </div>
 
     <app-divider [isShown]="areCurrentCosts()"></app-divider>
-    <div *ngFor="let currentCost of currentCosts; index as i">
-        <div class="flex-row-wrapper current-cost">
-            <span class="current-cost-index">{{i+1}}</span>
-            <span class="current-cost-name">{{currentCost.name}}</span>
-            <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
-            <span class="current-cost-type">{{currentCost.type}}</span>
-            <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
+    <div *ngFor="let currentCost of currentCosts">
+        <div *ngIf="!isCostDeleted(currentCost)" @fadeSlideInOut class="flex-wrapper current-cost">
+            <div class="flex-item">
+                <span class="current-cost-name">{{currentCost.name}}</span>
+                <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
+                <span class="current-cost-months-period-shortcut">{{currentCost.monthYearPeriodShortcut}}</span>
+            </div>
+            <div class="flex-item">
+                <span class="current-cost-type">{{currentCost.type}}</span>
+                <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
+            </div>
             <app-button class="remove-button" [configuration]="deleteCostButton" (onClick)="deleteCost(currentCost)"></app-button>
         </div>
     </div>

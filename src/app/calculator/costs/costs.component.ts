@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import moment, { Moment } from 'moment';
-import { ButtonConfig } from 'src/app/shared/models/button-config.model';
+import { delay, of } from 'rxjs';
+import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
+import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Cost, CostsType } from '../models/costs.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
@@ -13,7 +15,8 @@ import { CostPosition, CostsService } from './costs.service';
   selector: 'app-costs',
   templateUrl: './costs.component.html',
   styleUrls: ['./costs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeSlideInOutAnimation]
 })
 export class CostsComponent extends CostsParameters implements SectionCard {
   private readonly cost: Cost = {
@@ -37,7 +40,8 @@ export class CostsComponent extends CostsParameters implements SectionCard {
 
   public readonly deleteCostButton: ButtonConfig = {
     text: 'usuń',
-    icon: IconName.DELETE
+    icon: IconName.DELETE,
+    type: ButtonType.SMALL
   }
 
   constructor(private costsService: CostsService) {
@@ -74,12 +78,15 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   }
 
   public deleteCost(cost: CostPosition): void {
+    cost.isDeleted = true;
     this.costsService.deleteCost(cost);
-    this.currentCosts = this.costsService.getCosts();
+    of(null).pipe(delay(0)).subscribe(() => {
+      this.currentCosts = this.costsService.getCosts();
+    });
   }
 
   public areCurrentCosts(): boolean {
-    return this.currentCosts.length > 0;
+    return this.currentCosts.filter(c => !this.isCostDeleted(c)).length > 0;
   }
 
   public isCostTypeWithCurrency(costsType: CostsType): boolean {
@@ -88,6 +95,10 @@ export class CostsComponent extends CostsParameters implements SectionCard {
 
   public areFieldsValuesValid(): boolean {
     return this.isValueFieldValid && this.isMonthsFieldValid;
+  }
+
+  public isCostDeleted(cost: CostPosition): boolean {
+    return !!cost?.isDeleted;
   }
 
   private clearFieldsValue(): void {

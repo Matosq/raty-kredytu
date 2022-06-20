@@ -4,7 +4,7 @@ import { Cost } from '../models/costs.model';
 import { MonthYearPeriod } from '../models/date.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 
-export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number };
+export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number, isDeleted?: boolean  };
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class CostsService {
     if (!cost.name) {
       cost.name = `koszt dodatkowy ${this.index+1}`
     } 
-    this.costs.push({
+    this.costs.unshift({
       ...cost,
       ...this.datePeriodIndexerService.translateDateToMonthYearPeriods(cost.date as Moment, cost.numberOfMonths),
       indexOfCost: this.index++
@@ -33,5 +33,3 @@ export class CostsService {
     return this.costs;
   }
 }
-
-

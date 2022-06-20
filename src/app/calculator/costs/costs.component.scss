@@ -1,27 +1,54 @@
+
+@media only screen and (max-width: 992px) {
+    .flex-wrapper {
+        align-items: center;
+    }
+    .small-button .flex-wrapper {
+        align-items: center;
+        row-gap: 30px;
+    }
+
+    .small-button .flex-item {
+        flex-direction: column;
+    }
+
+    .current-cost-months-period {
+        display: none;
+    }    
+}
+
+@media only screen and (min-width: 992px) {
+    .flex-wrapper {
+        align-items: baseline;
+        column-gap: 25px;
+    }
+    .small-button .flex-wrapper {
+        align-items: baseline;
+    }
+
+    .small-button .flex-item {
+        flex-direction: row;
+    }
+
+    .current-cost-months-period-shortcut {
+        display: none;
+    }   
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 30px;
+}
+
 .current-cost {
-    padding-top: 20px; 
-}
-.current-cost-index {
-
-}
-
-.current-cost-name {
-    
-}
-.current-cost-months-period {
-    width: 230px;
-    margin-left: 20px;
-    padding-left: 10.5px;
-    padding-right: 10.5px;
-}
-
-.current-cost-type {
-
-}
-.current-cost-value {
-
-}
-
-.remove-button {
-    padding-left: 40px;
+    padding-top: 16px; 
 }

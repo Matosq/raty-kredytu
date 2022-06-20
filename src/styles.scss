@@ -8,6 +8,7 @@
     --kimberly: #7573A9;
     --swiss-coffe: #DED2D3;
     --medium-devices-width: 768px;
+    --large-devices-width: 992px;
     --bronze-metallic: #a08e5f;
 }
 
@@ -57,12 +58,19 @@ $custom-typography: mat-typography-config(
         // przyjrzec sie szerokosci kart dla malych ekranow
         // min-width: 90vw;
         // max-width: 100%
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding: 1rem 2rem;
+    }
+    .card-wrapper h2, h3 {
+        padding-left: 15px;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .card-wrapper {
         // width: 90vw;
+        padding: 1rem 2rem;
     }
 }
 
@@ -71,13 +79,16 @@ $custom-typography: mat-typography-config(
     // width: 80vw;
     // min-width: 768px;
     // color: var(--swiss-coffe);
+
+
+
     max-width: 903px;
+    // max-width: 100%;
     color: var(--antique-white);
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
     backdrop-filter: blur(50px);
     border-radius: 10px;
     opacity: 90%;
-    padding: 1rem 2rem;
 }
 
 .card-wrapper h2 {
@@ -200,6 +211,23 @@ input {
 
 .mat-divider {
     border-top-color: rgb(251, 235, 220, .12);
+}
+
+@media only screen and (max-width: 992px) {
+    .remove-button {
+        display: flex;
+        align-items: center;
+    }
+    .remove-button .mat-stroked-button {
+        margin: 0 0 0 0 !important;
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+        padding: 0 0 !important;
+    }
+    // .remove-button .mat-stroked-button .button-icon {
+    //     margin-right: 0px !important;
+    // }
 }
 
 .remove-button .mat-stroked-button {
