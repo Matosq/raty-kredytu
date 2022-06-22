@@ -1,9 +1,18 @@
-.current-overpayments {
-    padding-top: 20px;
+
+@media only screen and (max-width: 992px) {
+    .current-overpayments-months-period {
+        display: none;
+    }
 }
 
-.current-overpayments-index {
+@media only screen and (min-width: 992px) {
+    .current-overpayments-months-period-shortcut {
+        display: none;
+    }
+}
 
+.current-overpayments {
+    padding-top: 20px;
 }
 
 .current-overpayments-months-period {
@@ -13,10 +22,9 @@
     padding-right: 10.5px;
 }
 
-.current-overpayments-value {
-
-}
-
-.remove-button {
-    padding-left: 40px;
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
 }

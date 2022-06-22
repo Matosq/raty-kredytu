@@ -4,7 +4,7 @@ import moment, { Moment } from 'moment';
 import { delay, of } from 'rxjs';
 import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/section-card.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
-import { ButtonConfig } from 'src/app/shared/models/button-config.model';
+import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { Overpayment } from '../models/overpayments.model';
@@ -19,14 +19,6 @@ import { OverpaymentPosition, OverpaymentsService } from './overpayments.service
   animations: [fadeSlideInOutAnimation]
 })
 export class OverpaymentsComponent extends OverpaymentsParameters implements SectionCard {
-  private overpayment: Overpayment = {
-    value: defaultOverpayment,
-    date: moment(),
-    numberOfMonths: 1
-  };
-  private isValueFieldValid = true;
-  private isNumberOfMonthsValid = true;
-  public numberOfdeletedItems = 0;
   public currentOverpayments: OverpaymentPosition[] = [];
   public readonly cardHeader = SectionCardHeader.OVERPAYMENTS;
   public readonly addOverpaymentButton: ButtonConfig = {
@@ -35,8 +27,16 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   }
   public readonly deleteOverpaymentButton: ButtonConfig = {
     text: 'usuń',
-    icon: IconName.DELETE
+    icon: IconName.DELETE,
+    type: ButtonType.SMALL
   }
+  private overpayment: Overpayment = {
+    value: defaultOverpayment,
+    date: moment(),
+    numberOfMonths: 1
+  };
+  private isValueFieldValid = true;
+  private isNumberOfMonthsValid = true;
   constructor(private overpaymentsService: OverpaymentsService) {
     super();
   }
@@ -59,7 +59,6 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpaymentsService.addOverpayment(this.overpayment);
     this.clearFields();
     this.currentOverpayments = this.overpaymentsService.getOverpayments();
-    this.numberOfdeletedItems = 0;
   }
 
   public deleteOverpayment(overpayment: OverpaymentPosition): void {
@@ -67,20 +66,11 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpaymentsService.deleteOverpayment(overpayment);
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentOverpayments = this.overpaymentsService.getOverpayments();
-      this.numberOfdeletedItems = 0;
     })
   }
 
-  public getIndex(index: number): number {
-    return index + 1 - this.numberOfdeletedItems;
-  }
-
   public isOverpaymentDeleted(overpayment: OverpaymentPosition): boolean {
-    const isDeleted = !!overpayment.isDeleted;
-    if (isDeleted) {
-      this.numberOfdeletedItems++;
-    }
-    return isDeleted;
+    return !!overpayment.isDeleted;
   }
 
   public areCurrentOverpayments(): boolean {
