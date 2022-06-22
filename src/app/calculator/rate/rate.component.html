@@ -7,13 +7,12 @@
         <app-input-field [configuration]="rateInputField" (valueChange)="onRateChange($event)">
         </app-input-field>
 
-        <app-datepicker [configuration]="datePicker" (valueChange)="onDateChange($event)">
+        <app-datepicker [configuration]="datePickerField" (valueChange)="onDateChange($event)">
         </app-datepicker>
 
         <app-input-field [configuration]="monthsInputField" (valueChange)="onNumberOfMonthsChange($event)">
         </app-input-field>
 
-        <app-divider [isShown]="areRateChanges()"></app-divider>
     </div>
 
     <div class="action-button-right">
@@ -22,12 +21,12 @@
 
     <app-divider [isShown]="areRateChanges()"></app-divider>
 
-    <div *ngFor="let rate of rateChanges; index as i">
+    <div *ngFor="let rate of rateChanges">
 
-        <div class="flex-row-wrapper current-rate">
-            <span class="current-rate-index">{{i+1}}</span>
+        <div *ngIf="!isRateDeleted(rate)" @fadeSlideInOut class="flex-wrapper current-rate">
             <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-2'}}</span>
             <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
+            <span class="current-rate-months-period-shortcut">{{rate.monthYearPeriodShortcut}}</span>
             <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>
         </div>
 

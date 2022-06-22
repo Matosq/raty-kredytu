@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import moment, { Moment } from 'moment';
-import { Subscription } from 'rxjs';
-import { ButtonConfig } from 'src/app/shared/models/button-config.model';
+import { delay, of, Subscription } from 'rxjs';
+import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Rate, RatePosition } from '../models/rate.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
@@ -9,12 +9,14 @@ import { RateService } from '../services/rate.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 import { RateParameters } from './rate-parameters';
 import { InputFieldValue } from '../models/credit-parameter.model';
+import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 
 @Component({
   selector: 'app-rate',
   templateUrl: './rate.component.html',
   styleUrls: ['./rate.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeSlideInOutAnimation]
 })
 export class RateComponent extends RateParameters implements SectionCard, OnInit, OnDestroy {
   private currentLoanRateSubscription!: Subscription;
@@ -30,7 +32,8 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
   public deleteRateButton: ButtonConfig = {
     text: 'usuń',
-    icon: IconName.DELETE
+    icon: IconName.DELETE,
+    type: ButtonType.SMALL
   }
   constructor(
     private loanParameters: LoanParametersService,
@@ -62,7 +65,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
 
   public areRateChanges(): boolean {
-    return this.rateChanges.length > 0;
+    return this.rateService.getRates().length > 0;
   }
 
   public addRate(): void {
@@ -72,12 +75,19 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
 
   public deleteRate(rate: RatePosition): void {
+    rate.isDeleted = true;
     this.rateService.deleteRate(rate);
-    this.rateChanges = this.rateService.getRates();
+    of(null).pipe(delay(0)).subscribe(() => {
+      this.rateChanges = this.rateService.getRates();
+    });
   }
 
   public areFieldsValid(): boolean {
     return this.isNumberOfMonthsValid && this.isRateFieldValid;
+  }
+
+  public isRateDeleted(rate: RatePosition): boolean {
+    return !!rate.isDeleted;
   }
 
   private initializeRateValues(): void {
@@ -96,7 +106,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
 
   private resetFields(): void {
-    this.datePicker.date = moment();
+    this.datePickerField.date = moment();
     this.monthsInputField.value = 1;
     this.rateInputField.value = this.currentLoanRate;
   }

@@ -86,7 +86,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   }
 
   public areCurrentCosts(): boolean {
-    return this.currentCosts.filter(c => !this.isCostDeleted(c)).length > 0;
+    return this.costsService.getCosts().length > 0;
   }
 
   public isCostTypeWithCurrency(costsType: CostsType): boolean {

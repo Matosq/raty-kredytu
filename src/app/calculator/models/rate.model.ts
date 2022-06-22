@@ -7,4 +7,4 @@ export interface Rate {
   numberOfMonths: number
 };
 
-export type RatePosition = Rate & MonthYearPeriod & { indexOfRate: number };
+export type RatePosition = Rate & MonthYearPeriod & { indexOfRate: number, isDeleted?: boolean };

@@ -66,7 +66,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpaymentsService.deleteOverpayment(overpayment);
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentOverpayments = this.overpaymentsService.getOverpayments();
-    })
+    });
   }
 
   public isOverpaymentDeleted(overpayment: OverpaymentPosition): boolean {

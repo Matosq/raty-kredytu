@@ -18,7 +18,7 @@
     </div>
 
     <app-divider [isShown]="areCurrentOverpayments()"></app-divider>
-    <div *ngFor="let overpayment of currentOverpayments; index as i">
+    <div *ngFor="let overpayment of currentOverpayments">
         <div *ngIf="!isOverpaymentDeleted(overpayment)" @fadeSlideInOut class="flex-wrapper current-overpayments">
             <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
             <span class="current-overpayments-months-period-shortcut">{{overpayment.monthYearPeriodShortcut}}</span>

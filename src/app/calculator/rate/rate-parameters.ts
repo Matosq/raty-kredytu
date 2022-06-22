@@ -9,7 +9,7 @@ export class RateParameters extends Section {
     label: '%',
     validation: { min: 0, max: 100 }
   }
-  public readonly datePicker: CreditParameterDatepicker = {
+  public readonly datePickerField: CreditParameterDatepicker = {
     fieldTitle: { title: 'data zmiany' },
     label: 'miesiąc i rok'
   }

@@ -15,13 +15,11 @@ export class RateService {
   ) { }
 
   public addRate(rate: Rate): void {
-    this.rates.push({
+    this.rates.unshift({
       ...rate,
       ...this.getMonthsYearPeriodAsString(rate),
       indexOfRate: this.index++
     });
-    console.log(rate);
-    console.log(this.rates);
   }
 
   public deleteRate(rate: RatePosition): void {

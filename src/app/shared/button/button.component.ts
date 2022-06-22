@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, Subscription, throttleTime } from 'rxjs';
-import { ButtonConfig } from '../models/button-config.model';
+import { ButtonConfig, ButtonType } from '../models/button-config.model';
 
 @Component({
   selector: 'app-button',
@@ -28,5 +28,9 @@ export class ButtonComponent implements OnInit, OnDestroy {
 
   public buttonClick(): void {
     this.buttonClickSubject.next(true);
+  }
+
+  public getButtonCssClass(type?: ButtonType): string {
+    return type === ButtonType.SMALL ? 'small-button' : 'action-button';
   }
 }

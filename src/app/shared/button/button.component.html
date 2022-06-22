@@ -1,4 +1,4 @@
-<button [ngClass]="{'small-button': configuration.type === 1}" (click)="buttonClick()" mat-stroked-button [disabled]="isDisabled">
+<button [ngClass]="getButtonCssClass(configuration.type)" (click)="buttonClick()" mat-stroked-button [disabled]="isDisabled">
     <div class="wrapper">
         <app-icon class="button-icon" [icon]="configuration.icon"></app-icon>
         <span class="button-text">{{configuration?.text}}</span>
