@@ -25,6 +25,14 @@ export class DatePeriodIndexerService {
     }
   }
 
+  public translateDateToIndexOfStartMonth(date: Moment): MonthsPeriodIndexes {
+    const indexOfStartMonth = this.getMonthsNumberBetweenFirstDate(date);
+    return {
+      startMonth: indexOfStartMonth === null ? null : indexOfStartMonth + 1,
+      endMonth: null,
+    }
+  }
+
   public translateDatePeriodToMonthYearPeriods(dateRange: DateRange): MonthYearPeriod {
     const startYear = (dateRange.startDate as Moment)?.year();
     const endYear = (dateRange.endDate as Moment)?.year();

@@ -9,6 +9,7 @@ import { OverpaymentsDataService } from './overpayments-data.service';
 import { CostsDataService } from './costs-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { RatesDataService } from './rates-data.service';
+import { TranchesDataService } from './tranches-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class CalculatorService {
     private overpaymentsDataService: OverpaymentsDataService,
     private costsDataService: CostsDataService,
     private ratesDataService: RatesDataService,
+    private tranchesDataService: TranchesDataService,
     private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
 
