@@ -6,8 +6,8 @@ export interface DateRange {
 }
 
 export interface MonthsPeriodIndexes {
-  startMonth: number,
-  endMonth: number
+  startMonth: number | null,
+  endMonth: number | null
 }
 
 export interface MonthYearPeriod {

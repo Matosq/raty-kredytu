@@ -12,21 +12,16 @@ export class DatePeriodIndexerService {
   constructor(private loanParametersService: LoanParametersService) { }
 
   public updateAbsoluteMonthsOfFirstDate(): void {
-    this.absoluteMonthsOfFirstDate = this.getAbsoluteMonths(this.loanParametersService.getFirstPaymentDate());
-  }
-
-  public translateDatePeriodToIndexOfMonths(dateRange: DateRange): MonthsPeriodIndexes {
-    return {
-      startMonth: 1 + this.getMonthsNumberBetweenFirstDate(dateRange.startDate as Moment),
-      endMonth: 1 + this.getMonthsNumberBetweenFirstDate(dateRange.endDate as Moment),
-    }
+    this.absoluteMonthsOfFirstDate = this.getAbsoluteMonths(this.loanParametersService.getLoanStartDate());
   }
 
   public translateDateToIndexOfMonths(date: Moment, numberOfMonths: number): MonthsPeriodIndexes {
     const endDate = cloneDeep(date);
+    const indexOfStartMonth = this.getMonthsNumberBetweenFirstDate(date);
+    const indexOfEndMonth = this.getMonthsNumberBetweenFirstDate(endDate.add(numberOfMonths, 'months'));
     return {
-      startMonth: 1 + this.getMonthsNumberBetweenFirstDate(date),
-      endMonth: 1 + this.getMonthsNumberBetweenFirstDate(endDate.add(numberOfMonths, 'months')),
+      startMonth: indexOfStartMonth === null ? null : indexOfStartMonth + 1,
+      endMonth: indexOfEndMonth === null ? null : indexOfEndMonth,
     }
   }
 
@@ -69,9 +64,9 @@ export class DatePeriodIndexerService {
     }
   }
 
-  private getMonthsNumberBetweenFirstDate(startOverpaymentDate: Moment): number {
-    const monthsBetween = this.getAbsoluteMonths(startOverpaymentDate) - this.absoluteMonthsOfFirstDate;
-    if (monthsBetween < 0) { return 0; }
+  private getMonthsNumberBetweenFirstDate(date: Moment): number | null {
+    const monthsBetween = this.getAbsoluteMonths(date) - this.absoluteMonthsOfFirstDate;
+    if (monthsBetween < 0) { return null; }
     return monthsBetween;
   }
 

@@ -7,7 +7,7 @@ import { Installments } from 'src/app/shared/button-toggle/installment.model';
 
 export interface CreditPeriod {
   startDate: Moment;
-  endDate: Moment;
+  endDate?: Moment;
 }
 
 @Injectable({
@@ -40,7 +40,6 @@ export class LoanParametersService {
 
   public setNumberOfMonths(value: number): void {
     this.numberOfMonths = value;
-    this.creditPeriod.endDate.add(this.numberOfMonths, 'months');
     this.numberOfMonthsSubject.next(value);
     this.creditPeriodSubject.next(this.creditPeriod);
   }
@@ -57,9 +56,6 @@ export class LoanParametersService {
 
   public setStartDate(value: Moment): void {
     this.creditPeriod.startDate = value;
-    this.creditPeriod.endDate = cloneDeep(value);
-    this.creditPeriod.endDate.add(this.numberOfMonths, 'months');
-    this.creditPeriodSubject.next(this.creditPeriod);
   }
 
   public setFirstPaymentDate(value: Moment): void {
@@ -69,6 +65,10 @@ export class LoanParametersService {
 
   public getAmountLoan(): number {
     return this.amountLoan;
+  }
+
+  public getLoanStartDate(): Moment {
+    return this.creditPeriod.startDate;
   }
 
   public getNumberOfMonths(): number {
@@ -105,13 +105,5 @@ export class LoanParametersService {
 
   public getInstallments$(): Observable<Installments> {
     return this.installmentsSubject.asObservable();
-  }
-
-  public getCreditPeriod$(): Observable<CreditPeriod> {
-    return this.creditPeriodSubject.asObservable();
-  }
-
-  public getFirstPaymentDate$(): Observable<Moment> {
-    return this.firstPaymentDateSubject.asObservable();
   }
 }

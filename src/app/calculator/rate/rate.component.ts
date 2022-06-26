@@ -5,7 +5,7 @@ import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.mo
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { Rate, RatePosition } from '../models/rate.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { RateService } from '../services/rate.service';
+import { RateService } from './rate.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 import { RateParameters } from './rate-parameters';
 import { InputFieldValue } from '../models/credit-parameter.model';

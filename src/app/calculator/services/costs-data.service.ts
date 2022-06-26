@@ -20,12 +20,12 @@ export class CostsDataService {
 
   public calculateCosts(): void {
     this.costs = this.costsService.getCosts();
+    this.costsData = [];
     this.costs.forEach((cost: CostPosition) => {
       this.costsData.push({
         ...cost,
         ...this.datePeriodIndexerService.translateDateToIndexOfMonths(cost.date as Moment, cost.numberOfMonths),
       })
     });
-    console.log(this.costsData);
   }
 }

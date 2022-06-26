@@ -8,6 +8,7 @@ import { SimulationDataService } from './simulation-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';
 import { CostsDataService } from './costs-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
+import { RatesDataService } from './rates-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,12 @@ export class CalculatorService {
     private simulationData: SimulationDataService,
     private overpaymentsDataService: OverpaymentsDataService,
     private costsDataService: CostsDataService,
+    private ratesDataService: RatesDataService,
     private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
 
   public calculateLoan(): void {
+    this.datePeriodIndexerService.updateAbsoluteMonthsOfFirstDate();
     this.costsDataService.calculateCosts();
     // this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
     // if (this.loanParams.getInstallments() === Installments.EQUAL) {

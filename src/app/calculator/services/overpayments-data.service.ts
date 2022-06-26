@@ -26,8 +26,8 @@ export class OverpaymentsDataService {
 
   public calculateOverpayments(): void {
     this.overpayments = this.overpaymentsService.getOverpayments();
+    this.overpaymentsData = [];
     this.calculateMonthsForOverpayments();
-    this.sumOfOverpayments();
   }
 
   private calculateMonthsForOverpayments(): void {
@@ -36,23 +36,6 @@ export class OverpaymentsDataService {
         ...overpayment,
         ...this.datePeriodIndexerService.translateDateToIndexOfMonths(overpayment.date as Moment, overpayment.numberOfMonths)
       });
-    })
-  }
-
-  private sumOfOverpayments(): void {
-    const numberOfMonths = this.loanParametersService.getNumberOfMonths();
-    this.sumOfOverpaymentsData = [];
-    for (let i = 1; i <= numberOfMonths; i++) {
-      let value = 0;
-      this.overpaymentsData.forEach((overpayment: OverpaymentData) => {
-        if (i >= overpayment.startMonth && i <= overpayment.endMonth) {
-          value += overpayment.value;
-        }
-      });
-      this.sumOfOverpaymentsData.push({
-        value: value,
-        index: i
-      });
-    }
+    });
   }
 }
