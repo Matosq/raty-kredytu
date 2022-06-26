@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import { Moment } from 'moment';
-import { DateRange, MonthsPeriodIndexes, MonthYearPeriod } from '../models/date.model';
+import { DateRange, MonthsPeriodIndexes, MonthYear, MonthYearPeriod } from '../models/date.model';
 import { LoanParametersService } from './loan-parameters.service';
 
 @Injectable({
@@ -57,6 +57,15 @@ export class DatePeriodIndexerService {
     return {
       monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} - ${endDatePl.format('MMMM')} ${endYear} (${numberOfMonths})`,
       monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} - ${endDatePl.format('MMM')} ${endYear} (${numberOfMonths})`
+    }
+  }
+
+  public translateDateToMonthYearText(date: Moment): MonthYear {
+    const year = (date as Moment)?.year();
+    const datePl = (date as Moment)?.locale('pl');
+    return {
+      monthYear: `${datePl.format('MMMM')} ${year}`,
+      monthYearShortcut: `${datePl.format('MMM')} ${year}`
     }
   }
 

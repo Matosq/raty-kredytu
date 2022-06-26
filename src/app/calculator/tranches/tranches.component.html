@@ -2,37 +2,32 @@
 
     <app-card-header [header]="cardHeader"></app-card-header>
 
-    <div class="flexbox-wrapper">
-        <span class="tranche-index">1</span>
-        <span class="tranche-date">{{firstTranche.date}}</span>
+    <div class="flex-row-wrapper new-tranche">
+        <app-datepicker [configuration]="datePickerField" (valueChange)="updateNewTrancheDate($event)"></app-datepicker>
 
-        <div class="tranche-value-flex-wrapper">
-            <app-input-field class="tranche-rate" [configuration]="firstTranchePercentageInput"
-            (valueChange)="updateFirstTrancheValueOnRateChanges($event)"></app-input-field>
-            <span class="tranche-value">{{firstTranche.value | currency:'zł'}}</span>
-        </div>
-    </div>
+        <app-input-field [configuration]="newTranchePercentageInput" (valueChange)="updateNewTrancheValue($event)">
+        </app-input-field>
 
-
-    <div *ngFor="let tranche of tranchesView; index as i">
-        <div class="flexbox-wrapper">
-            <span class="tranche-index">{{i + 2}}</span>
-            <app-datepicker [configuration]="tranche.datePickerConfig"
-            (valueChange)="updateTranchesDateByTrancheId($event, tranche.trancheIndex)"></app-datepicker>
-
-            <div class="tranche-value-flex-wrapper">
-                <app-input-field class="tranche-rate" [configuration]="tranche.inputFieldConfig"
-                (valueChange)="updateTrancheValueOnRateChangesByTrancheId($event, tranche.trancheIndex)"></app-input-field>
-                <span class="tranche-value">{{tranche.value | currency:'zł'}}</span>
-            </div>
-
-            <div>
-                <app-button class="remove-button" [configuration]="removeTrancheButton" (onClick)="removeTranche(tranche.trancheIndex)"></app-button>
-            </div>
-        </div>
+        <div class="empty-space"></div>
     </div>
 
     <div class="action-button-right">
-        <app-button [configuration]="addTrancheButton" (onClick)="addTranche()"></app-button>
+        <app-button [configuration]="addTrancheButton" [isDisabled]="!isTrancheFieldValid()" (onClick)="addTranche()">
+        </app-button>
     </div>
+
+    <app-divider [isShown]="areTranches()"></app-divider>
+    <div *ngFor="let tranche of tranches">
+        <div *ngIf="!isTrancheDeleted(tranche)" @fadeSlideInOut class="tranches">
+
+            <span class="tranche-date">{{tranche.monthYear}}</span>
+            <span class="tranche-date-shortcut">{{tranche.monthYearShortcut}}</span>
+            <span class="tranche-percentage">{{tranche.percentage / 100 | percent: '1.0-2'}}</span>
+            <span class="tranche-value">{{tranche.value | currency:'zł'}}</span>
+
+            <app-button class="remove-button" [configuration]="deleteTrancheButton" (onClick)="deleteTranche(tranche)">
+            </app-button>
+        </div>
+    </div>
+
 </section>

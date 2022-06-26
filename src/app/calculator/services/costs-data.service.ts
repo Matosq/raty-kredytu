@@ -12,20 +12,20 @@ export type CostsData = CostPosition & MonthsPeriodIndexes;
 export class CostsDataService {
   private costs: CostPosition[] = [];
   private costsData: CostsData[] = [];
-  constructor(private costsService: CostsService,
+  constructor(
+    private costsService: CostsService,
     private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
 
 
   public calculateCosts(): void {
     this.costs = this.costsService.getCosts();
-    console.log(this.costs);
     this.costs.forEach((cost: CostPosition) => {
       this.costsData.push({
         ...cost,
         ...this.datePeriodIndexerService.translateDateToIndexOfMonths(cost.date as Moment, cost.numberOfMonths),
       })
-    })
+    });
     console.log(this.costsData);
   }
 }

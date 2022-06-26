@@ -38,7 +38,6 @@ body {
     background-size: cover;
     background-position: center;
     height: 100vh;
-    // overflow: scroll;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -69,19 +68,15 @@ $custom-typography: mat-typography-config(
 
 @media only screen and (min-width: 768px) {
     .card-wrapper {
-        // width: 90vw;
         padding: 1rem 2rem;
     }
 }
 
+.empty-space {
+    width: 281px;
+}
 
 .card-wrapper {
-    // width: 80vw;
-    // min-width: 768px;
-    // color: var(--swiss-coffe);
-
-
-
     max-width: 903px;
     color: var(--antique-white);
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
@@ -115,12 +110,9 @@ $custom-typography: mat-typography-config(
     }
 }
 
-
-
 .action-button-right {
     display: flex;
     flex-direction: row;
-    padding-top: 20px;
 }
 
 .mat-input-element {
@@ -161,18 +153,6 @@ input[type=number] {
     color: var(--swiss-coffe);
 }
 
-// .example-month-picker .mat-calendar-period-button {
-//     pointer-events: none;
-// }
-
-// .example-month-picker .mat-calendar-arrow {
-//     display: none;
-// }
-
-// .mat-form-field-wrapper {
-//     border: solid 1px var(--antique-white);
-// }
-
 input {
     cursor: pointer;
 }
@@ -196,7 +176,6 @@ input {
         justify-content: flex-start;
     }
 }
-
 
 .flex-row-wrapper {
     display: flex;
@@ -224,9 +203,6 @@ input {
         height: 42px !important;
         padding: 0 0 !important;
     }
-    // .remove-button .mat-stroked-button .button-icon {
-    //     margin-right: 0px !important;
-    // }
 }
 
 .remove-button .mat-stroked-button {

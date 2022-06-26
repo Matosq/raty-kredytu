@@ -87,7 +87,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpayment.numberOfMonths = 1;
     this.overpaymentValueInputField.value = defaultOverpayment;
     this.monthsInputField.value = 1;
-    this.overpaymentDateField.date = this.overpayment.date;
     this.overpaymentDateField = cloneDeep(this.overpaymentDateField);
+    this.overpaymentDateField.date = this.overpayment.date;
   }
 }

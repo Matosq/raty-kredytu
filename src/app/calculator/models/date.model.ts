@@ -15,6 +15,11 @@ export interface MonthYearPeriod {
   monthYearPeriodShortcut: string
 }
 
+export interface MonthYear {
+  monthYear: string,
+  monthYearShortcut: string
+}
+
 export const DatepickerFormat = {
   parse: {
     dateInput: 'MMMM YYYY',

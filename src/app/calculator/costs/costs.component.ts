@@ -127,7 +127,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
 
   private clearDate(): void {
     this.cost.date = moment(),
-    this.datePicker.date = this.cost.date;
     this.datePicker = cloneDeep(this.datePicker);
+    this.datePicker.date = this.cost.date;
   }
 }

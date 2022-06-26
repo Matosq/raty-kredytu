@@ -23,16 +23,17 @@ export class CalculatorService {
   ) { }
 
   public calculateLoan(): void {
-    this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
-    if (this.loanParams.getInstallments() === Installments.EQUAL) {
-      this.calculateEqualInstallments();
-      return;
-    }
-    if (this.loanParams.getInstallments() === Installments.DEACRISING) {
-      this.calculateDeacrisingInstallments();
-      return;
-    }
-    console.warn('Rodzaj rat niewybrany');
+    this.costsDataService.calculateCosts();
+    // this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
+    // if (this.loanParams.getInstallments() === Installments.EQUAL) {
+    //   this.calculateEqualInstallments();
+    //   return;
+    // }
+    // if (this.loanParams.getInstallments() === Installments.DEACRISING) {
+    //   this.calculateDeacrisingInstallments();
+    //   return;
+    // }
+    // console.warn('Rodzaj rat niewybrany');
   }
 
 

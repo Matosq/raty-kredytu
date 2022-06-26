@@ -3,10 +3,6 @@ input {
     color: var(--antique-white);
 }
 
-// .mat-form-field.mat-focused .mat-form-field-label {
-//     color: coral !important;
-// }
-
 ::ng-deep {
     .mat-form-field-appearance-outline .mat-form-field-outline {
         color: var(--antique-white);
@@ -41,4 +37,8 @@ input {
     display: flex;
     align-items: center;
     gap: 10px
+}
+
+.hint {
+    color: var(--swiss-coffe);
 }

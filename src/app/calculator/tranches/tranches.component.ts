@@ -1,133 +1,111 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';;
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'; import { cloneDeep } from 'lodash';
+import moment from 'moment';
+;
 import { Moment } from 'moment';
-import { Subscription } from 'rxjs';
-import { ButtonConfig } from 'src/app/shared/models/button-config.model';
+import { delay, of, Subscription } from 'rxjs';
+import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
+import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
-import { CreditParameterDatepicker, CreditParameterInputField, InputFieldValue } from '../models/credit-parameter.model';
+import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { Tranche } from '../models/tranche.model';
-import { TranchesService } from './tranches.service';
-
-interface FirstTrancheView {
-  date: string,
-  percentageValue?: number,
-  value?: number
-  trancheIndex: number
-}
-
-interface TrancheView {
-  inputFieldConfig: CreditParameterInputField;
-  datePickerConfig: CreditParameterDatepicker;
-  trancheIndex: number,
-  value: number
-}
+import { TranchesParameters } from './tranches-parameters';
+import { TranchePosition, TranchesService } from './tranches.service';
 
 @Component({
   selector: 'app-tranches',
   templateUrl: './tranches.component.html',
   styleUrls: ['./tranches.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeSlideInOutAnimation]
 })
-export class TranchesComponent implements SectionCard, OnInit {
+export class TranchesComponent extends TranchesParameters implements SectionCard, OnInit, OnDestroy {
   public cardHeader = SectionCardHeader.TRANCHES;
-  public firstTranchePercentageInput: CreditParameterInputField = {
-    fieldTitle: { title: '' },
-    label: '%',
-    value: 100,
-    stepValue: 5,
-    validation: { min: 0, max: 100 }
-  };
-  public firstTranche: FirstTrancheView = {
-    date: '',
-    percentageValue: 100,
-    value: 0,
-    trancheIndex: 1
-  };
-
-  public tranchesView: TrancheView[] = [];
+  public tranches: TranchePosition[] = [];
   public readonly addTrancheButton: ButtonConfig = {
     text: 'dodaj transzę',
     icon: IconName.ADD
   }
-  public readonly removeTrancheButton: ButtonConfig = {
+  public readonly deleteTrancheButton: ButtonConfig = {
     text: 'usuń',
-    icon: IconName.DELETE
+    icon: IconName.DELETE,
+    type: ButtonType.SMALL
   }
-  private tranchesDataSubscription!: Subscription;
+  public newTranche: Tranche = {
+    date: moment(),
+    percentage: 10,
+    value: 0
+  };
 
+  private trancheLoanAmountSubscripton!: Subscription;
+  private isTrancheValueFieldValid = true;
   constructor(
     private tranchesService: TranchesService,
-    private changeDetector: ChangeDetectorRef
-  ) { }
+    private changeDetectorRef: ChangeDetectorRef
+  ) { super() }
 
   public ngOnInit(): void {
-    this.subscribeToTranchesData();
+    this.trancheLoanAmountSubscripton = this.tranchesService.getTranchesValue$().subscribe(
+      () => this.onLoanAmountChanges());
   }
 
   public ngOnDestroy(): void {
-    this.tranchesDataSubscription?.unsubscribe();
+    this.trancheLoanAmountSubscripton.unsubscribe();
+  }
+
+  public updateNewTrancheDate(date: Moment): void {
+    this.newTranche.date = date;
+  }
+
+  public updateNewTrancheValue(percentageInputField: InputFieldValue): void {
+    this.newTranche.percentage = percentageInputField.value;
+    this.isTrancheValueFieldValid = this.isFieldValid(percentageInputField.status);
+    this.newTranche.value = this.calculatePercentageValue(percentageInputField.value);
+    this.newTranchePercentageInput.hint = this.newTranche.value;
+  }
+
+  public isTrancheFieldValid(): boolean {
+    return !!this.isTrancheValueFieldValid;
+  }
+
+  public areTranches(): boolean {
+    return this.tranchesService.getTranches().length > 0;
   }
 
   public addTranche(): void {
-    this.tranchesService.addTranche();
+    this.tranchesService.addTranche(this.newTranche);
+    this.clearFieldsValue();
+    this.tranches = this.tranchesService.getTranches();
   }
 
-  public removeTranche(trancheId: number): void {
-    this.tranchesService.removeTranche(trancheId);
-  }
-
-  public updateFirstTrancheValueOnRateChanges(percentageInputField: InputFieldValue): void {
-    this.firstTranche.percentageValue = percentageInputField.value;
-    this.firstTranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentageInputField.value;
-    this.tranchesService.setTrancheValuesByTrancheId(percentageInputField.value, this.firstTranche.trancheIndex as number);
-  }
-
-  public updateTrancheValueOnRateChangesByTrancheId(percentageInputField: InputFieldValue, id: number): void {
-    const tranche = this.tranchesView.find((tranche: TrancheView) => tranche.trancheIndex === id);
-    if (!tranche) { return; }
-    tranche.value = this.tranchesService.getAmountLoan() * 0.01 * percentageInputField.value;
-    this.tranchesService.setTrancheValuesByTrancheId(percentageInputField.value, id);
-  }
-
-  public updateTranchesDateByTrancheId(date: Moment, id: number): void {
-    this.tranchesService.setTrancheDateByTrancheId(date, id);
-  }
-
-  private subscribeToTranchesData(): void {
-    this.tranchesDataSubscription = this.tranchesService.getTranches$().subscribe(
-      (tranches: Tranche[]) => {
-        this.updateDataForFirstTranche(tranches);
-        this.updateDataForTranches(tranches);
-        this.changeDetector.detectChanges();
-      });
-  }
-
-  private updateDataForFirstTranche(tranches: Tranche[]): void {
-    const firstTranche = tranches.find((tranche: Tranche) => (tranche.trancheId === 1)) as Tranche;
-    this.firstTranche.date = firstTranche.date.locale('pl').format('MMMM') + ' ' + firstTranche.date.year();
-    this.firstTranche.value = firstTranche.value;
-    this.firstTranchePercentageInput.value = firstTranche.percentage;
-  }
-
-  private updateDataForTranches(tranches: Tranche[]): void {
-    const tranchesData = tranches.filter((tranche: Tranche) => (tranche.trancheId !== 1));
-    this.tranchesView = tranchesData.map((tranche: Tranche) => {
-      return {
-        trancheIndex: tranche.trancheId,
-        value: tranche.value,
-        inputFieldConfig: {
-          fieldTitle: { title: '' },
-          label: '%',
-          value: tranche.percentage,
-          stepValue: 5,
-          validation: { min: 0, max: 100 }
-        },
-        datePickerConfig: {
-          fieldTitle: { title: '' },
-          label: 'miesiąc i rok',
-          date: tranche.date
-        }
-      }
+  public deleteTranche(tranche: TranchePosition): void {
+    tranche.isDeleted = true;
+    this.tranchesService.deleteTranche(tranche);
+    of(null).pipe(delay(0)).subscribe(() => {
+      this.tranches = this.tranchesService.getTranches();
     });
+  }
+
+  public isTrancheDeleted(tranche: TranchePosition): boolean {
+    return !!tranche?.isDeleted;
+  }
+
+  private onLoanAmountChanges(): void {
+    this.newTranche.value = this.calculatePercentageValue(this.newTranche.percentage);
+    this.newTranchePercentageInput.hint = this.newTranche.value;
+    this.changeDetectorRef.detectChanges();
+  }
+
+  private calculatePercentageValue(value: number): number {
+    return this.tranchesService.getAmountLoan() * 0.01 * value;
+  }
+
+  private clearFieldsValue(): void {
+    this.newTranche.percentage = 10;
+    this.newTranchePercentageInput.value = this.newTranche.percentage;
+    this.newTranche.value = this.newTranche.percentage * 0.01 * this.tranchesService.getAmountLoan();
+    this.newTranche.date = moment();
+    this.datePickerField = cloneDeep(this.datePickerField);
+    this.datePickerField.date = this.newTranche.date;
   }
 }

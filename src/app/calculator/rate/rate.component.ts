@@ -10,6 +10,7 @@ import { LoanParametersService } from '../services/loan-parameters.service';
 import { RateParameters } from './rate-parameters';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-rate',
@@ -106,8 +107,11 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
 
   private resetFields(): void {
-    this.datePickerField.date = moment();
+    this.rate.date = moment();
+    this.datePickerField = cloneDeep(this.datePickerField);
+    this.datePickerField.date = this.rate.date;
     this.monthsInputField.value = 1;
+    this.rate.numberOfMonths = this.monthsInputField.value;
     this.rateInputField.value = this.currentLoanRate;
   }
 }

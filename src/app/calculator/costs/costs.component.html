@@ -23,6 +23,7 @@
         <app-input-field *ngIf="selectedCostsType === CostsType.CREDIT_AMOUNT_RATE"
             [configuration]="costsCreditRateInputField" (valueChange)="onInputFieldChange($event)"></app-input-field>
 
+        <div class="empty-space"></div>
     </div>
     <div class="action-button-right">
         <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (onClick)="addCost()"></app-button>
