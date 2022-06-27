@@ -57,18 +57,13 @@ $custom-typography: mat-typography-config(
         // przyjrzec sie szerokosci kart dla malych ekranow
         // min-width: 90vw;
         // max-width: 100%
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding: 1rem 2rem;
-    }
-    .card-wrapper h2, h3 {
-        padding-left: 15px;
+        // padding: 1rem 2rem;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .card-wrapper {
-        padding: 1rem 2rem;
+        // padding: 1rem 2rem;
     }
 }
 
@@ -77,11 +72,11 @@ $custom-typography: mat-typography-config(
 }
 
 .card-wrapper {
-    max-width: 903px;
+    max-width: 951px;
     color: var(--antique-white);
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
     backdrop-filter: blur(50px);
-    border-radius: 10px;
+    border-radius: 4px;
     opacity: 90%;
 }
 
@@ -215,4 +210,12 @@ input {
 .mat-tooltip {
     color: var(--antique-white) !important;
     background-color: var(--scampi) !important;
+}
+
+.mat-expansion-indicator:after {
+    color: var(--swiss-coffe);
+}
+
+.mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
+    background: none !important;
 }

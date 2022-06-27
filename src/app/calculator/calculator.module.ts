@@ -17,7 +17,7 @@ import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-ran
 import { OverpaymentsComponent } from './overpayments/overpayments.component';
 import { DividerModule } from '../shared/divider/divider.module';
 import { RateComponent } from './rate/rate.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { RateComponent } from './rate/rate.component';
     TextFieldModule,
     SelectFieldModule,
     DatepickerRangeModule,
-    DividerModule
+    DividerModule,
+    MatExpansionModule
   ],
   exports: [
     CalculatorComponent

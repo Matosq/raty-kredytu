@@ -1,47 +1,50 @@
-<section class="card-wrapper">
+<section>
+    <mat-expansion-panel class="card-wrapper">
+        <mat-expansion-panel-header>
+            <app-card-header [header]="cardHeader"></app-card-header>
+        </mat-expansion-panel-header>
 
-    <app-card-header [header]="cardHeader"></app-card-header>
+        <div class="flex-row-wrapper">
 
-    <div class="flex-row-wrapper">
+            <app-text-field [configuration]="costsNameTextField" (valueChange)="onCostsNameChange($event)"></app-text-field>
 
-        <app-text-field [configuration]="costsNameTextField" (valueChange)="onCostsNameChange($event)"></app-text-field>
+            <app-datepicker [configuration]="datePicker" (valueChange)="onDateChange($event)">
+            </app-datepicker>
 
-        <app-datepicker [configuration]="datePicker" (valueChange)="onDateChange($event)">
-        </app-datepicker>
+            <app-input-field [configuration]="monthsInputField"
+            (valueChange)="onMonthsFieldChange($event)"></app-input-field>
 
-        <app-input-field [configuration]="monthsInputField"
-        (valueChange)="onMonthsFieldChange($event)"></app-input-field>
+            <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
 
-        <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
+            <app-input-field *ngIf="selectedCostsType === CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
+                (valueChange)="onInputFieldChange($event)">
+            </app-input-field>
+            <app-input-field *ngIf="selectedCostsType === CostsType.BALANCE_RATE"
+                [configuration]="costsBalanceRateInputField" (valueChange)="onInputFieldChange($event)">
+            </app-input-field>
+            <app-input-field *ngIf="selectedCostsType === CostsType.CREDIT_AMOUNT_RATE"
+                [configuration]="costsCreditRateInputField" (valueChange)="onInputFieldChange($event)"></app-input-field>
 
-        <app-input-field *ngIf="selectedCostsType === CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
-            (valueChange)="onInputFieldChange($event)">
-        </app-input-field>
-        <app-input-field *ngIf="selectedCostsType === CostsType.BALANCE_RATE"
-            [configuration]="costsBalanceRateInputField" (valueChange)="onInputFieldChange($event)">
-        </app-input-field>
-        <app-input-field *ngIf="selectedCostsType === CostsType.CREDIT_AMOUNT_RATE"
-            [configuration]="costsCreditRateInputField" (valueChange)="onInputFieldChange($event)"></app-input-field>
-
-        <div class="empty-space"></div>
-    </div>
-    <div class="action-button-right">
-        <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (onClick)="addCost()"></app-button>
-    </div>
-
-    <app-divider [isShown]="areCurrentCosts()"></app-divider>
-    <div *ngFor="let currentCost of currentCosts">
-        <div *ngIf="!isCostDeleted(currentCost)" @fadeSlideInOut class="flex-wrapper current-cost">
-            <div class="flex-item">
-                <span class="current-cost-name">{{currentCost.name}}</span>
-                <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
-                <span class="current-cost-months-period-shortcut">{{currentCost.monthYearPeriodShortcut}}</span>
-            </div>
-            <div class="flex-item">
-                <span class="current-cost-type">{{currentCost.type}}</span>
-                <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
-            </div>
-            <app-button class="remove-button" [configuration]="deleteCostButton" (onClick)="deleteCost(currentCost)"></app-button>
+            <div class="empty-space"></div>
         </div>
-    </div>
+        <div class="action-button-right">
+            <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (onClick)="addCost()"></app-button>
+        </div>
+
+        <app-divider [isShown]="areCurrentCosts()"></app-divider>
+        <div *ngFor="let currentCost of currentCosts">
+            <div *ngIf="!isCostDeleted(currentCost)" @fadeSlideInOut class="flex-wrapper current-cost">
+                <div class="flex-item">
+                    <span class="current-cost-name">{{currentCost.name}}</span>
+                    <span class="current-cost-months-period">{{currentCost.monthYearPeriod}}</span>
+                    <span class="current-cost-months-period-shortcut">{{currentCost.monthYearPeriodShortcut}}</span>
+                </div>
+                <div class="flex-item">
+                    <span class="current-cost-type">{{currentCost.type}}</span>
+                    <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-2')}}</span>
+                </div>
+                <app-button class="remove-button" [configuration]="deleteCostButton" (onClick)="deleteCost(currentCost)"></app-button>
+            </div>
+        </div>
+    </mat-expansion-panel>
 </section>

@@ -1,34 +1,36 @@
 <section class="card-wrapper">
 
-    <app-card-header [header]="cardHeader"></app-card-header>
+    <div class="loan-panel">
+        <app-card-header [header]="cardHeader"></app-card-header>
 
-    <div class="flex-row-wrapper">
-        <app-input-field [configuration]="amountLoanField"
-        (valueChange)="onAmountLoan($event)"></app-input-field>
+        <div class="flex-row-wrapper">
+            <app-input-field [configuration]="amountLoanField"
+            (valueChange)="onAmountLoan($event)"></app-input-field>
 
-        <app-input-field [configuration]="monthsOfCredit"
-        (valueChange)="onMonthsOfCredit($event)"></app-input-field>
+            <app-input-field [configuration]="monthsOfCredit"
+            (valueChange)="onMonthsOfCredit($event)"></app-input-field>
 
-        <app-input-field [configuration]="rate"
-        (valueChange)="onRate($event)"></app-input-field>
+            <app-input-field [configuration]="rate"
+            (valueChange)="onRate($event)"></app-input-field>
 
-        <app-button-toggle [configuration]="installments"
-        (valueChange)="onInstallmentsButtonToggle($event)">
-        </app-button-toggle>
+            <app-button-toggle [configuration]="installments"
+            (valueChange)="onInstallmentsButtonToggle($event)">
+            </app-button-toggle>
 
-        <app-datepicker [configuration]="startDate"
-        (valueChange)="onStartDate($event)"></app-datepicker>
+            <app-datepicker [configuration]="startDate"
+            (valueChange)="onStartDate($event)"></app-datepicker>
 
-        <app-datepicker [configuration]="firstPaymentDate"
-        (valueChange)="onFirstPayment($event)"></app-datepicker>
+            <app-datepicker [configuration]="firstPaymentDate"
+            (valueChange)="onFirstPayment($event)"></app-datepicker>
 
-        <div class="empty-space"></div>
+            <div class="empty-space"></div>
 
-    </div>
+        </div>
 
-    <div class="action-button-right">
-        <app-button [configuration]="calculateButton" [isDisabled]="!areParametersFieldsValid()"
-        (onClick)="calculateLoan()"
-        ></app-button>
+        <div class="action-button-right">
+            <app-button [configuration]="calculateButton" [isDisabled]="!areParametersFieldsValid()"
+            (onClick)="calculateLoan()"
+            ></app-button>
+        </div>
     </div>
 </section>

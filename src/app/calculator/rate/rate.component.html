@@ -1,36 +1,38 @@
-<section class="card-wrapper">
+<section>
+    <mat-expansion-panel class="card-wrapper">
+        <mat-expansion-panel-header>
+            <app-card-header [header]="cardHeader"></app-card-header>
+        </mat-expansion-panel-header>
+        <div class="flex-row-wrapper">
 
-    <app-card-header [header]="cardHeader"></app-card-header>
+            <app-input-field [configuration]="rateInputField" (valueChange)="onRateChange($event)">
+            </app-input-field>
 
-    <div class="flex-row-wrapper">
+            <app-datepicker [configuration]="datePickerField" (valueChange)="onDateChange($event)">
+            </app-datepicker>
 
-        <app-input-field [configuration]="rateInputField" (valueChange)="onRateChange($event)">
-        </app-input-field>
+            <app-input-field [configuration]="monthsInputField" (valueChange)="onNumberOfMonthsChange($event)">
+            </app-input-field>
 
-        <app-datepicker [configuration]="datePickerField" (valueChange)="onDateChange($event)">
-        </app-datepicker>
+            <div class="empty-space"></div>
 
-        <app-input-field [configuration]="monthsInputField" (valueChange)="onNumberOfMonthsChange($event)">
-        </app-input-field>
-
-        <div class="empty-space"></div>
-
-    </div>
-
-    <div class="action-button-right">
-        <app-button [configuration]="addRateButton" [isDisabled]="!areFieldsValid()" (onClick)="addRate()"></app-button>
-    </div>
-
-    <app-divider [isShown]="areRateChanges()"></app-divider>
-
-    <div *ngFor="let rate of rateChanges">
-
-        <div *ngIf="!isRateDeleted(rate)" @fadeSlideInOut class="flex-wrapper current-rate">
-            <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-2'}}</span>
-            <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
-            <span class="current-rate-months-period-shortcut">{{rate.monthYearPeriodShortcut}}</span>
-            <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>
         </div>
 
-    </div>
+        <div class="action-button-right">
+            <app-button [configuration]="addRateButton" [isDisabled]="!areFieldsValid()" (onClick)="addRate()"></app-button>
+        </div>
+
+        <app-divider [isShown]="areRateChanges()"></app-divider>
+
+        <div *ngFor="let rate of rateChanges">
+
+            <div *ngIf="!isRateDeleted(rate)" @fadeSlideInOut class="flex-wrapper current-rate">
+                <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-2'}}</span>
+                <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
+                <span class="current-rate-months-period-shortcut">{{rate.monthYearPeriodShortcut}}</span>
+                <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>
+            </div>
+
+        </div>
+    </mat-expansion-panel>
 </section>
