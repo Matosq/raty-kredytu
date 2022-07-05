@@ -10,7 +10,7 @@ export type RateData = RatePosition & MonthsPeriodIndexes;
 })
 export class RatesDataService {
   private rates: RatePosition[] = [];
-  private ratesData: RateData[] = [];
+  private ratesToMonthsMap: Map<number, number> = new Map();
   constructor(
     private rateService: RateService,
     private datePeriodIndexerService: DatePeriodIndexerService
@@ -18,12 +18,18 @@ export class RatesDataService {
 
   public calculateRates(): void {
     this.rates = this.rateService.getRates();
-    this.ratesData = [];
-    this.rates.forEach((rate: RatePosition) =>{
-      this.ratesData.push({
-        ...rate,
-        ...this.datePeriodIndexerService.translateDateToIndexOfMonths(rate.date, rate.numberOfMonths)
-      });
+    this.ratesToMonthsMap.clear();
+    this.rates.forEach((rate: RatePosition) => {
+      const { startMonth, endMonth } = this.datePeriodIndexerService.translateDateToIndexOfMonths(rate.date, rate.numberOfMonths)
+      if (!!startMonth && !!endMonth) {
+        for (let i = startMonth; i <= endMonth; i++) {
+          this.ratesToMonthsMap.set(i, rate.value / 100);
+        }
+      }
     });
+  }
+
+  public getRateValueByMonthIndex(monthsIndex: number): number | undefined {
+    return this.ratesToMonthsMap.get(monthsIndex);
   }
 }

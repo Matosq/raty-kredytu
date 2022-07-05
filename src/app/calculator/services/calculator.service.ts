@@ -9,13 +9,14 @@ import { OverpaymentsDataService } from './overpayments-data.service';
 import { CostsDataService } from './costs-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { RatesDataService } from './rates-data.service';
-import { TranchesDataService } from './tranches-data.service';
+import { TrancheData, TranchesDataService } from './tranches-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculatorService {
   private monthCalculationDate!: Moment;
+  private calculation: MonthCalculation[] = [];
   constructor(
     private loanParams: LoanParametersService,
     private simulationData: SimulationDataService,
@@ -28,62 +29,89 @@ export class CalculatorService {
 
   public calculateLoan(): void {
     this.datePeriodIndexerService.updateAbsoluteMonthsOfFirstDate();
-    this.costsDataService.calculateCosts();
-    // this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
-    // if (this.loanParams.getInstallments() === Installments.EQUAL) {
-    //   this.calculateEqualInstallments();
-    //   return;
-    // }
-    // if (this.loanParams.getInstallments() === Installments.DEACRISING) {
-    //   this.calculateDeacrisingInstallments();
-    //   return;
-    // }
-    // console.warn('Rodzaj rat niewybrany');
+    this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
+    this.calculation = [];
+    this.calculateParametersData();
+
+    if (this.loanParams.getInstallments() === Installments.EQUAL) {
+      this.calculateEqualInstallments();
+      return;
+    }
+    if (this.loanParams.getInstallments() === Installments.DEACRISING) {
+      this.calculateDeacrisingInstallments();
+      return;
+    }
+    console.warn('Rodzaj rat niewybrany');
   }
 
+  private calculateParametersData(): void {
+    this.tranchesDataService.calculateTranches();
+    this.costsDataService.calculateCosts();
+    this.overpaymentsDataService.calculateOverpayments();
+    this.ratesDataService.calculateRates();
+  }
 
   private calculateEqualInstallments(): void {
-
-    const rataStalaLicznik = this.loanParams.getAmountLoan() * this.loanParams.getRate();
+    const deacrisingInstallmentNumerator = this.loanParams.getAmountLoan() * this.loanParams.getRate();
     // const rataStalaMianownik = 12 * ( 1.0 - (12 / (12 + )))
     this.calculateDeacrisingInstallments();
   }
 
   private calculateDeacrisingInstallments(): void {
+    let currentSaldo = this.getPrimarySaldo();
+    const basicRate = this.loanParams.getRate() * 0.01;
 
-    this.datePeriodIndexerService.updateAbsoluteMonthsOfFirstDate();
-    this.overpaymentsDataService.calculateOverpayments();
-    this.costsDataService.calculateCosts();
 
-    const calculation: MonthCalculation[]  = [];
-    let currentSaldo = this.loanParams.getAmountLoan();
-    let amountPrincipal = this.loanParams.getAmountLoan() / this.loanParams.getNumberOfMonths();
-    let amountInterest = this.loanParams.getAmountLoan() * ((this.loanParams.getRate() * 0.01) / 12);
-
-    let payment = amountPrincipal + amountInterest;
     const numberOfMonths = this.loanParams.getNumberOfMonths();
-
+    let principal = this.loanParams.getAmountLoan() / numberOfMonths;
     
     for (let i = 1; i <= numberOfMonths; i++) {
-      currentSaldo = currentSaldo - amountPrincipal
+      const tranches = this.getTranchesByMonthsIndex(i);
+      const tranchesValue = this.sumTranchesValue(tranches);
+      const currentOverpayment = this.overpaymentsDataService.getOverpaymentValueByMonthsIndex(i);
+      currentSaldo = currentSaldo + tranchesValue - currentOverpayment;
 
+      const currentRate = this.ratesDataService.getRateValueByMonthIndex(i) || basicRate;
+      const interests = currentSaldo * (currentRate / 12);
+
+      const costs = this.costsDataService.getCostsByMonthsIndex(i, currentSaldo, this.loanParams.getAmountLoan());
+
+      currentSaldo = currentSaldo - principal;
+      const sumCosts = costs.reduce((a, c) => a + c.costValue, 0);
+     
       const month: MonthCalculation = {
         index: i,
         date: this.getFormatedDate(),
-        rate: this.loanParams.getRate() / 100,
-        interest: amountInterest,
-        principal: amountPrincipal,
-        installment: amountPrincipal + amountInterest,
-        extraCosts: 0,
-        overpayments: 0,
-        payment: amountPrincipal + amountInterest,
+        rate: currentRate,
+        interest: interests,
+        principal: principal,
+        installment: principal + interests + sumCosts + currentOverpayment,
+        extraCosts: costs,
+        sumExtraCosts: sumCosts,
+        overpayments: currentOverpayment,
+        payment: principal + interests,
+        tranche: tranchesValue,
         saldo: currentSaldo,
-      }
-      calculation.push(month);
+      };
+      this.calculation.push(month);
     }
 
-    console.log(calculation);
-    this.simulationData.setSimulationData(cloneDeep(calculation));
+    console.log(this.calculation);
+  
+    this.simulationData.setSimulationData(cloneDeep(this.calculation));
+  }
+
+  private getPrimarySaldo(): number {
+    const saldo = this.sumTranchesValue(this.getTranchesByMonthsIndex(1));
+    return saldo ? saldo : this.loanParams.getAmountLoan();
+  }
+
+  private sumTranchesValue(tranches: TrancheData[]): number {
+    return tranches.reduce((acc, tranche) => acc + tranche.value, 0)
+  }
+
+  private getTranchesByMonthsIndex(monthsIndex: number): TrancheData[] {
+    return this.tranchesDataService.getTranchesByMonthsIndex(monthsIndex);
   }
 
   private getFormatedDate(): string {

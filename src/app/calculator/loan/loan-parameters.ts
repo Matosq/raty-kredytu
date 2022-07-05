@@ -9,7 +9,7 @@ export class LoanParameters extends Section {
     fieldTitle: { title: 'kwota kredytu', tooltip: 'Całkowita kwota kredytu, to kwota, którą rzeczywiście otrzymamy od banku, na podstawie zawartej wcześniej umowy kredytowej.' },
     label: 'zł',
     placeholder: 'wpisz kwotę kredytu',
-    value: 3000000,
+    value: 300000,
     stepValue: 10000,
     validation: { min: 0, max: 100000000000 }
   }

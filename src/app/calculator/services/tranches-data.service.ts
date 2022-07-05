@@ -25,4 +25,13 @@ export class TranchesDataService {
       });
     });
   }
+
+  public getTranchesValueByMonthsIndex(monthsIndex: number): number {
+    const tranches = this.getTranchesByMonthsIndex(monthsIndex);
+    return tranches.reduce((acc, tranche) => acc + tranche.value, 0)
+  }
+
+  public getTranchesByMonthsIndex(monthsIndex: number): TrancheData[] {
+    return this.tranchesData.filter((tranche: TrancheData) => tranche.startMonth === monthsIndex);
+  }
 }

@@ -28,7 +28,11 @@
         </div>
 
         <div class="extra-costs">
-            {{data.extraCosts ? (data.extraCosts | number:'1.0-2') : '-'}}
+            {{data.sumExtraCosts ? (data.sumExtraCosts | number:'1.0-2') : '-'}}
+        </div>
+
+        <div *ngFor="let costs of data.extraCosts">
+            {{ costs.name }}{{ costs.costValue | number:'1.0-2'}}
         </div>
 
         <div class="overpayments">

@@ -27,7 +27,7 @@
         <div *ngFor="let rate of rateChanges">
 
             <div *ngIf="!isRateDeleted(rate)" @fadeSlideInOut class="flex-wrapper current-rate">
-                <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-2'}}</span>
+                <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-6'}}</span>
                 <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
                 <span class="current-rate-months-period-shortcut">{{rate.monthYearPeriodShortcut}}</span>
                 <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>

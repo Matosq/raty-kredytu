@@ -24,7 +24,7 @@
 
                 <span class="tranche-date">{{tranche.monthYear}}</span>
                 <span class="tranche-date-shortcut">{{tranche.monthYearShortcut}}</span>
-                <span class="tranche-percentage">{{tranche.percentage / 100 | percent: '1.0-2'}}</span>
+                <span class="tranche-percentage">{{tranche.percentage / 100 | percent: '1.0-6'}}</span>
                 <span class="tranche-value">{{tranche.value | currency:'zł'}}</span>
 
                 <app-button class="remove-button" [configuration]="deleteTrancheButton" (onClick)="deleteTranche(tranche)">

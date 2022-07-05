@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { CostPosition, CostsService } from '../costs/costs.service';
-import { MonthsPeriodIndexes } from '../models/date.model';
+import { CostsType } from '../models/costs.model';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 
+export interface CostData {
+  value: number,
+  type: CostsType,
+  name: string
+}
 
-export type CostsData = CostPosition & MonthsPeriodIndexes;
+export interface Cost {
+  costValue: number,
+  type: CostsType,
+  name: string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class CostsDataService {
   private costs: CostPosition[] = [];
-  private costsData: CostsData[] = [];
+  private costsToMonthsIndexMap: Map<number, CostData[]> = new Map();
   constructor(
     private costsService: CostsService,
     private datePeriodIndexerService: DatePeriodIndexerService
@@ -20,12 +29,47 @@ export class CostsDataService {
 
   public calculateCosts(): void {
     this.costs = this.costsService.getCosts();
-    this.costsData = [];
+    this.costsToMonthsIndexMap.clear();
     this.costs.forEach((cost: CostPosition) => {
-      this.costsData.push({
-        ...cost,
-        ...this.datePeriodIndexerService.translateDateToIndexOfMonths(cost.date as Moment, cost.numberOfMonths),
-      })
+      const { startMonth, endMonth } = this.datePeriodIndexerService.translateDateToIndexOfMonths(cost.date as Moment, cost.numberOfMonths)
+      if (!!startMonth && !!endMonth) {
+        for (let i = startMonth; i <= endMonth; i++) {
+          const allCostsForMonth = this.costsToMonthsIndexMap.get(i);
+          if (!!allCostsForMonth) {
+            allCostsForMonth.push(cost);
+          } else {
+            this.costsToMonthsIndexMap.set(i, [cost])
+          }
+        }
+      }
+    });
+  }
+
+  public getCostsByMonthsIndex(monthsIndex: number, saldo: number, amountOfLoan: number): Cost[] {
+
+    const costs = this.costsToMonthsIndexMap.get(monthsIndex);
+    if (!costs) { return []; }
+
+    return costs.map((cost: CostData) => {
+      let value = 0;
+      switch (cost.type) {
+        case CostsType.FIXED_AMOUNT:
+          value = cost.value;
+          break;
+        case CostsType.CREDIT_AMOUNT_RATE:
+          value = Math.round((cost.value * 100000) * amountOfLoan) / 100000;
+          break;
+        case CostsType.BALANCE_RATE:
+          value = Math.round((cost.value * 100000) * saldo) / 100000;
+          break
+        default:
+          console.warn('Niepoprawny typ kosztu dodatkowego.');
+      }
+      return {
+        costValue: value,
+        type: cost.type,
+        name: cost.name
+      }
     });
   }
 }
