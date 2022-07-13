@@ -1,0 +1,9 @@
+
+<div class="chart-wrapper">
+  <div class="chart" *ngFor="let bar of bars; first as isFirst; last as isLast"
+    [@widthResize]="{value: triggerResize, params: { size: bar.width }}"
+    [ngStyle]="{'background-color': bar.color}"
+    [ngClass]="{'first-bar': isFirst, 'last-bar': isLast}"
+    >
+  </div>
+</div>

@@ -1,0 +1,21 @@
+
+.chart-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 0 0.8rem;
+}
+
+.chart {
+  height: 0.8rem;
+}
+
+.first-bar {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.last-bar {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}
