@@ -1,8 +1,7 @@
-<ul>
-    <div class="card-wrapper simulation-card header">
-        napis
+<div class="card-wrapper">
+    <div class="simulation-card">
+        <app-slider (valueChange)="onSliderChanges($event)"></app-slider>
+
+        <app-card *ngIf="!!chosenMonth" [data]="chosenMonth"></app-card>
     </div>
-    <li *ngFor="let monthData of data">
-        <app-card [data]="monthData"></app-card>
-    </li>
-</ul>
+</div>

@@ -1,101 +1,77 @@
-
-@media screen and (max-width: 768px) {
-    .simulation-card {
-        background: coral;
-        padding: 1rem 0.6rem;
-    }
-}
-
-.simulation-card {
-    background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(117, 115, 169, 0.8) 0%, rgba(31, 23, 46, 0.56) 42.26%);
-    // font-size: 18px;
-}
-
-
-@media screen and (max-width: 768px) {
-    .flex-wrapper {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: baseline;
-    }
-
-    .month-year {
-        flex-grow: 1;
-        display: none;
-    }
-    
-    .interest-rate {
-        flex-grow: 1;
-        display: none;
-    }
-
-    .installment {
-        color: white;
-        font-weight: bold;
-        flex-grow: 2;
-        display: none;
-    }
-}
-
 .flex-wrapper {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    align-items: stretch;
+    column-gap: 2.5rem;
+    width: 903px;
+}
+
+.payment-wrapper, .saldo-wrapper, .bar-wrapper {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: baseline;
 }
 
-.month-index {
-    flex-grow: 1;
+.payment-wrapper {
+    flex-basis: 10%;
 }
 
-.month-year {
-    flex-grow: 1;
-    // display: none;
+.saldo-wrapper {
+    flex-basis: 10%;
 }
 
-.interest-rate {
-    flex-grow: 1;
-    // display: none;
+.bar-wrapper {
+    flex-basis: 80%;
 }
 
-.principal {
-    color: white;
-    flex-grow: 2;
+.payment-date {
+    font-size: 1rem;
+    color: var(--swiss-coffe);
 }
 
-.interest {
-    color: white;
-    flex-grow: 2;
+.payment-text {
+    font-size: 2rem;
+    padding: 0.4rem 0;
 }
 
-.installment {
-    color: white;
-    font-weight: bold;
-    flex-grow: 2;
-    // display: none;
-}
-
-.extra-costs {
-    color: white;
-    flex-grow: 2;
-}
-
-.overpayments {
-    color: white;
-    flex-grow: 2;
-}
-
-.payment {
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    flex-grow: 2;
+.payment-description, .saldo-description, .rate-description {
+    color: var(--swiss-coffe);
+    font-size: 0.8rem;
 }
 
 .saldo {
-    color: white;
-    font-weight: bold;
+    padding-bottom: 0.6rem;
+}
+
+.saldo-text, .rate-text {
+    font-size: 1rem;
+}
+
+.legend-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-right: 0.8rem;
+    padding-left: 0.3rem;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.legend-name {
+    color: var(--swiss-coffe);
+}
+
+.legend-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    margin: 0.5rem 0.5rem;
+}
+
+.legend-value {
+    margin-left: 0.5rem
 }

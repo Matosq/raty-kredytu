@@ -8,20 +8,28 @@ li {
 }
 
 
-@media screen and (max-width: 768px) {
+.simulation-card {
+    
+    // font-size: 18px;
+    
+}
+
+@media only screen and (max-width: 951px) {
     .simulation-card {
-        background: coral;
-        padding: 1rem 0.6rem;
+        // przyjrzec sie szerokosci kart dla malych ekranow
+        // min-width: 90vw;
+        // max-width: 100%
+        // padding: 1rem 2rem;
     }
 }
 
-.simulation-card {
-    background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(117, 115, 169, 0.8) 0%, rgba(31, 23, 46, 0.56) 42.26%);
-    // font-size: 18px;
-}
+// @media only screen and (min-width: 951px) {
+//     .simulation-card {
+//        max-width: 951px;
+//        min-width: 951px;
+//     }
+// }
 
-.header {
-    position: sticky;
-    top:0;
-    z-index: 100;
+.simulation-card {
+    padding: 1rem 1.5rem 1rem 1.5rem;
 }

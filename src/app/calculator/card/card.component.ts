@@ -1,6 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Bar } from 'src/app/shared/bar-chart/bar-chart.component';
 import { MonthCalculation } from '../models/month-calculation.model';
 
+export enum BarId {
+  COST = 'cost',
+  PRINCIPAL = ' principal',
+  INTEREST = 'interest',
+  OVERPAYMENTS = 'overpayments'
+}
+
+export type BarData = Bar & { id: BarId, name: string, value?: number };
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -9,18 +18,58 @@ import { MonthCalculation } from '../models/month-calculation.model';
 })
 export class CardComponent implements OnInit {
   @Input() data!: MonthCalculation;
-  // public monthIndex = 1;
-  // public data = 'styczeń 2022';
-  // public interestRate = 0.051234;
-  // public principal = 1094.34;
-  // public interest = 786.15;
-  // public extraCosts = 56.27;
-  // public overpayments = 0.00;
-  // public payment = 11880.49;
-  // public saldo = 375110.2312432221;
-
+  public bars: BarData[] = [
+    {
+      id: BarId.PRINCIPAL,
+      name: 'kapitał',
+      color: '#1F172E',
+      width: 0
+    },
+    {
+      id: BarId.INTEREST,
+      name: 'odsetki',
+      color: '#FBEBDC',
+      width: 0
+    },
+    {
+      id: BarId.COST,
+      name: 'koszty dodatkowe',
+      color: '#FF9914',
+      width: 0
+    },
+    {
+      id: BarId.OVERPAYMENTS,
+      name: 'nadpłaty',
+      color: '#6C9E71',
+      width: 0
+    }
+  ];
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public calcBars(): BarData[] {
+    const principal = this.bars.find(b => b.id === BarId.PRINCIPAL)!;
+    principal.width = this.calcPercentage(this.data.principal);
+    principal.value = this.data.principal;
+
+    const interest = this.bars.find(b => b.id === BarId.INTEREST)!;
+    interest.width = this.calcPercentage(this.data.interest);
+    interest.value = this.data.interest;
+
+    const sumExtraCosts = this.bars.find(b => b.id === BarId.COST)!;
+    sumExtraCosts.width = this.calcPercentage(this.data.sumExtraCosts);
+    sumExtraCosts.value = this.data.sumExtraCosts;
+
+    const overpayments = this.bars.find(b => b.id === BarId.OVERPAYMENTS)!;
+    overpayments.width = this.calcPercentage(this.data.overpayments);
+    overpayments.value = this.data.overpayments;
+    return this.bars.filter(b => b.width > 0);
+  }
+
+
+  private calcPercentage(value: number): number {
+    return (value / this.data.payment) * 100;
   }
 }

@@ -1,53 +1,39 @@
-<div class="card-wrapper simulation-card">
+<div class="flex-wrapper">
 
+    <div class="payment-wrapper">
 
-    <div class="flex-wrapper">
-        
-        <div class="month-index">
-            {{data.index}}
-        </div>
+        <div class="payment-date">{{data.date}}</div>
+        <div class="payment-text">{{data.payment | currency: 'zł'}}</div>
+        <div class="payment-description">kwota do zapłaty</div>
 
-        <div class="month-year">
-            {{data.date}}
-        </div>
+    </div>
 
-        <div class="interest-rate">
-            {{data.rate | percent: '1.0-2'}}
-        </div>
-
-        <div class="principal">
-            {{data.principal | number:'1.0-2'}}
-        </div>
-
-        <div class="interest">
-            {{data.interest | number:'1.0-2'}}
-        </div>
-
-        <div class="installment">
-            {{data.installment| number:'1.0-2'}}
-        </div>
-
-        <div class="extra-costs">
-            {{data.sumExtraCosts ? (data.sumExtraCosts | number:'1.0-2') : '-'}}
-        </div>
-
-        <div *ngFor="let costs of data.extraCosts">
-            {{ costs.name }}{{ costs.costValue | number:'1.0-2'}}
-        </div>
-
-        <div class="overpayments">
-            {{data.overpayments ? (data.overpayments | number:'1.0-2') : '-'}}
-        </div>
-
-        <div class="payment">
-            {{data.payment | number:'1.0-2'}}
-        </div>
-
+    <div class="saldo-wrapper">
         <div class="saldo">
-            {{data.saldo | number:'1.0-2' }}
+            <div class="saldo-text">{{data.saldo | currency: 'zł'}}</div>
+            <div class="saldo-description">saldo kredytu</div>
+        </div>
+
+        <div class="rate">
+            <div class="rate-text">{{data.rate | percent: '1.0-6'}}</div>
+            <div class="rate-description">oprocentowanie</div>
         </div>
 
     </div>
 
+    <div class="bar-wrapper">
+        <app-bar-chart [bars]="calcBars()"></app-bar-chart>
 
+
+        <div class="legend-wrapper">
+            <div *ngFor="let bar of bars">
+                <div class="legend">
+                    <div class="legend-icon" [ngStyle]="{'background-color': bar.color}"></div>
+                    <div class="legend-name">{{bar.name}}</div>
+                </div>
+                <div class="legend-value">{{bar.value | currency: 'zł'}}</div>
+            </div>
+        </div>
+
+    </div>
 </div>

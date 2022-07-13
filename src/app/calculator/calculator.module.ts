@@ -18,6 +18,8 @@ import { OverpaymentsComponent } from './overpayments/overpayments.component';
 import { DividerModule } from '../shared/divider/divider.module';
 import { RateComponent } from './rate/rate.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BarChartModule } from '../shared/bar-chart/bar-chart.module';
+import { SliderModule } from '../shared/slider/slider.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     SelectFieldModule,
     DatepickerRangeModule,
     DividerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    BarChartModule,
+    SliderModule
   ],
   exports: [
     CalculatorComponent
