@@ -77,7 +77,7 @@ $custom-typography: mat-typography-config(
     background: radial-gradient(534.03% 696.81% at 76.12% -126.39%, rgba(31, 23, 46, 0.8) 0%, rgba(103, 104, 171, 0.8) 42.26%);
     backdrop-filter: blur(50px);
     border-radius: 4px;
-    opacity: 90%;
+    opacity: 92%;
 }
 
 .card-wrapper h2 {
@@ -218,4 +218,12 @@ input {
 
 .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
     background: none !important;
+}
+
+.mat-slider-thumb-label-text {
+    color: #1F172E !important;
+}
+
+.mat-slider-thumb, .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
+    background-color: #FF9914 !important;
 }
