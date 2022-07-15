@@ -51,4 +51,9 @@ export class SimulationComponent implements OnInit {
     this.chosenMonth = this.monthsCalculation[value - 1];
     this.changeDetector.detectChanges();
   }
+
+  public getSimulationCardTitle(): string {
+    console.log(this.chosenMonth.index);
+    return this.chosenMonth?.index ? String(this.chosenMonth.index) : "Wybierz ratę";
+  }
 }
