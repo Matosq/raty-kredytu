@@ -1,27 +1,90 @@
+@media only screen and (max-width: 951px) {
+    .flex-wrapper {
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    .payment-wrapper {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .bar-wrapper {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .saldo-wrapper {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .legend-wrapper {
+        flex-direction: column;
+        row-gap: 0.5rem;
+    }
+
+    .legend__mobile {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-right: 0.8rem;
+        padding-left: 0.3rem;
+    }
+
+    .bar {
+        margin-bottom: 0.5rem;
+    }
+
+    .payment-date {
+        margin-bottom: 0.6rem;
+    }
+    
+}
+
+@media only screen and (min-width: 951px) {
+    .flex-wrapper {
+        width: 903px;
+        flex-direction: row;
+        column-gap: 2.5rem;
+        align-items: stretch;
+    }
+
+    .payment-wrapper, .saldo-wrapper, .bar-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .payment-wrapper {
+        flex-basis: 10%;
+    }
+
+    .saldo-wrapper {
+        flex-basis: 10%;
+    }
+
+    .bar-wrapper {
+        flex-basis: 80%;
+    }
+
+    .legend-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-right: 0.8rem;
+        padding-left: 0.3rem;
+    }
+}
+
 .flex-wrapper {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    column-gap: 2.5rem;
-    width: 903px;
 }
 
 .payment-wrapper, .saldo-wrapper, .bar-wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.payment-wrapper {
-    flex-basis: 10%;
-}
-
-.saldo-wrapper {
-    flex-basis: 10%;
-}
-
-.bar-wrapper {
-    flex-basis: 80%;
 }
 
 .payment-date {
@@ -47,18 +110,14 @@
     font-size: 1rem;
 }
 
-.legend-wrapper {
+.legend-wrapper, .legend__desktop  {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    padding-right: 0.8rem;
-    padding-left: 0.3rem;
 }
 
-.legend {
-    display: flex;
-    flex-wrap: nowrap;
+.legend__desktop {
     align-items: center;
+    flex-direction: row;
 }
 
 .legend-name {
@@ -74,4 +133,8 @@
 
 .legend-value {
     margin-left: 0.5rem
+}
+
+.bar {
+    padding: 0 0.8rem;
 }

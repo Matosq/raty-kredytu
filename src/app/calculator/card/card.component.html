@@ -22,12 +22,12 @@
     </div>
 
     <div class="bar-wrapper">
-        <app-bar-chart [bars]="calcBars()"></app-bar-chart>
+        <app-bar-chart class="bar" [bars]="calcBars()"></app-bar-chart>
 
 
         <div class="legend-wrapper">
-            <div *ngFor="let bar of bars">
-                <div class="legend">
+            <div class="legend__mobile" *ngFor="let bar of bars">
+                <div class="legend__desktop">
                     <div class="legend-icon" [ngStyle]="{'background-color': bar.color}"></div>
                     <div class="legend-name">{{bar.name}}</div>
                 </div>

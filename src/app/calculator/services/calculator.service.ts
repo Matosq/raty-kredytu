@@ -89,7 +89,7 @@ export class CalculatorService {
         extraCosts: costs,
         sumExtraCosts: sumCosts,
         overpayments: currentOverpayment,
-        payment: principal + interests,
+        payment: principal + interests + sumCosts + currentOverpayment,
         tranche: tranchesValue,
         saldo: currentSaldo,
       };
