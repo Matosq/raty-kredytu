@@ -7,14 +7,10 @@ import { DatePeriodIndexerService } from './date-period-indexer.service';
 export interface CostData {
   value: number,
   type: CostsType,
-  name: string
+  name: string,
+  indexOfCost: number
 }
 
-export interface Cost {
-  costValue: number,
-  type: CostsType,
-  name: string
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -45,8 +41,7 @@ export class CostsDataService {
     });
   }
 
-  public getCostsByMonthsIndex(monthsIndex: number, saldo: number, amountOfLoan: number): Cost[] {
-
+  public getCostsByMonthsIndex(monthsIndex: number, saldo: number, amountOfLoan: number): CostData[] {
     const costs = this.costsToMonthsIndexMap.get(monthsIndex);
     if (!costs) { return []; }
 
@@ -66,9 +61,10 @@ export class CostsDataService {
           console.warn('Niepoprawny typ kosztu dodatkowego.');
       }
       return {
-        costValue: value,
+        value: value,
         type: cost.type,
-        name: cost.name
+        name: cost.name,
+        indexOfCost: cost.indexOfCost
       }
     });
   }

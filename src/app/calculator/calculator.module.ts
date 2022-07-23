@@ -20,6 +20,8 @@ import { RateComponent } from './rate/rate.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BarChartModule } from '../shared/bar-chart/bar-chart.module';
 import { SliderModule } from '../shared/slider/slider.module';
+import { DonutChartModule } from '../shared/donut-chart/donut-chart.module';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { SliderModule } from '../shared/slider/slider.module';
     SimulationComponent,
     CostsComponent,
     OverpaymentsComponent,
-    RateComponent
+    RateComponent,
+    SummaryComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,8 @@ import { SliderModule } from '../shared/slider/slider.module';
     DividerModule,
     MatExpansionModule,
     BarChartModule,
-    SliderModule
+    SliderModule,
+    DonutChartModule
   ],
   exports: [
     CalculatorComponent

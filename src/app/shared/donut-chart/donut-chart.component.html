@@ -3,13 +3,12 @@
     <div class="donut-chart">
 
       <div class="portion-block" *ngFor="let bar of bars"
-      [ngStyle]="{'transform': 'rotate('+bar.rotate+'deg)'}"
-      >
+        [ngStyle]="{'transform': 'rotate('+bar.rotate+'deg)'}">
+       
         <div class="circle"
-        [ngStyle]="{'background-color': bar.color, 'transform': 'rotate('+bar.width+'deg)'}"
-        ></div>
+          [ngStyle]="{'background-color': bar.color, 'transform': 'rotate('+bar.width+'deg)'}">
+        </div>
       </div>
-
       <p class="center"></p>
     </div>
   </div>

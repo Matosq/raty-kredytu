@@ -6,10 +6,11 @@ import { cloneDeep } from 'lodash';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from './simulation-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';
-import { CostsDataService } from './costs-data.service';
+import { CostData, CostsDataService } from './costs-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { RatesDataService } from './rates-data.service';
 import { TrancheData, TranchesDataService } from './tranches-data.service';
+import { SummaryCalculation, SummaryDataService } from './summary-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,13 @@ import { TrancheData, TranchesDataService } from './tranches-data.service';
 export class CalculatorService {
   private monthCalculationDate!: Moment;
   private calculation: MonthCalculation[] = [];
+  private summary: SummaryCalculation = {
+    principals: 0, interests: 0, sumCosts: 0, overpayments: 0, costs: new Map<number, number>()
+  };
   constructor(
     private loanParams: LoanParametersService,
     private simulationData: SimulationDataService,
+    private summaryDataService: SummaryDataService,
     private overpaymentsDataService: OverpaymentsDataService,
     private costsDataService: CostsDataService,
     private ratesDataService: RatesDataService,
@@ -28,6 +33,7 @@ export class CalculatorService {
   ) { }
 
   public calculateLoan(): void {
+    this.cleanSummary();
     this.datePeriodIndexerService.updateAbsoluteMonthsOfFirstDate();
     this.monthCalculationDate = cloneDeep(this.loanParams.getCreditPeriod().startDate);
     this.calculation = [];
@@ -64,7 +70,7 @@ export class CalculatorService {
 
     const numberOfMonths = this.loanParams.getNumberOfMonths();
     let principal = this.loanParams.getAmountLoan() / numberOfMonths;
-    
+
     for (let i = 1; i <= numberOfMonths; i++) {
       const tranches = this.getTranchesByMonthsIndex(i);
       const tranchesValue = this.sumTranchesValue(tranches);
@@ -77,8 +83,8 @@ export class CalculatorService {
       const costs = this.costsDataService.getCostsByMonthsIndex(i, currentSaldo, this.loanParams.getAmountLoan());
 
       currentSaldo = currentSaldo - principal;
-      const sumCosts = costs.reduce((a, c) => a + c.costValue, 0);
-     
+      const sumCosts = costs.reduce((a, c) => a + c.value, 0);
+
       const month: MonthCalculation = {
         index: i,
         date: this.getFormatedDate(),
@@ -94,10 +100,11 @@ export class CalculatorService {
         saldo: currentSaldo,
       };
       this.calculation.push(month);
+      this.updateSummary(month);
     }
 
     console.log(this.calculation);
-  
+    this.summaryDataService.setSummaryData(cloneDeep(this.summary));
     this.simulationData.setSimulationData(cloneDeep(this.calculation));
   }
 
@@ -120,5 +127,23 @@ export class CalculatorService {
     return date;
   }
 
+  private cleanSummary(): void {
+    this.summary.sumCosts = 0;
+    this.summary.principals = 0;
+    this.summary.interests = 0;
+    this.summary.overpayments = 0;
+    this.summary.costs.clear();
+  }
+
+  private updateSummary(monthCalc: MonthCalculation): void {
+    this.summary.sumCosts += monthCalc.sumExtraCosts;
+    this.summary.principals += monthCalc.principal;
+    this.summary.interests += monthCalc.interest;
+    this.summary.overpayments += monthCalc.overpayments;
+    monthCalc.extraCosts.forEach((cost: CostData) => {
+      const calcCost = this.summary.costs.has(cost.indexOfCost) ? Number(this.summary.costs.get(cost.indexOfCost)) + cost.value : cost.value;
+      this.summary.costs.set(cost.indexOfCost, calcCost);
+    });
+  }
 }
 

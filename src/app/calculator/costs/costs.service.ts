@@ -11,7 +11,7 @@ export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number, isDel
 })
 export class CostsService {
   private costs: CostPosition[] = [];
-  private index = 0;
+  private index = 1;
   constructor(private datePeriodIndexerService: DatePeriodIndexerService) { }
 
   public addCost(cost: Cost): void {

@@ -1,4 +1,4 @@
-import { Cost } from "../services/costs-data.service";
+import { CostData } from "../services/costs-data.service";
 
 export interface MonthCalculation {
     index: number,
@@ -7,7 +7,7 @@ export interface MonthCalculation {
     principal: number,
     interest: number,
     installment: number,
-    extraCosts: Cost[],
+    extraCosts: CostData[],
     sumExtraCosts: number,
     overpayments: number,
     payment: number,
