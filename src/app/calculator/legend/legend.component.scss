@@ -1,0 +1,38 @@
+@media only screen and (max-width: 951px) {
+  .legend__mobile {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-right: 0.8rem;
+      padding-left: 0.3rem;
+  }
+}
+
+
+
+.legend__desktop  {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.legend__desktop {
+  align-items: center;
+  flex-direction: row;
+}
+
+.legend-name {
+  color: var(--swiss-coffe);
+}
+
+.legend-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  margin: 0.5rem 0.5rem;
+}
+
+.legend-value {
+  margin-left: 0.5rem
+}
