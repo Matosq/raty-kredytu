@@ -1,3 +1,38 @@
 <div class="card-wrapper">
-  <app-donut-chart [bars]="chartBars"></app-donut-chart>
+
+  <div class="summary-panel">
+
+    <div class="summary-header">
+      <app-card-header [header]="cardHeader"></app-card-header>
+    </div>
+
+    <div class="summary-wrapper">
+      <div class="total-cost-wrapper">
+        <div class="total-cost-text">{{totalCost | currency: 'zł'}}</div>
+        <div class="total-cost-description">całkowity koszt kredytu</div>
+      </div>
+
+      <div class="installments-wrapper">
+        <div>
+          <div class="installments-text">{{installments}}</div>
+          <div class="installments-description">rodzaj rat</div>
+        </div>
+
+        <div>
+          <div class="installments-period">{{loanPeriod}}</div>
+          <div class="installments-period-description">okres kredytowania</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <app-donut-chart class="chart" [bars]="chartBars"></app-donut-chart>
+
+      <div class="legend-wrapper">
+        <app-legend class="legend-item" *ngFor="let legend of legends" [data]="legend"></app-legend>
+      </div>
+    </div>
+
+  </div>
+
 </div>

@@ -24,15 +24,8 @@
     <div class="bar-wrapper">
         <app-bar-chart class="bar" [bars]="calcBars()"></app-bar-chart>
 
-
         <div class="legend-wrapper">
-            <div class="legend__mobile" *ngFor="let bar of bars">
-                <div class="legend__desktop">
-                    <div class="legend-icon" [ngStyle]="{'background-color': bar.color}"></div>
-                    <div class="legend-name">{{bar.name}}</div>
-                </div>
-                <div class="legend-value">{{bar.value | currency: 'zł'}}</div>
-            </div>
+            <app-legend *ngFor="let bar of bars" [data]="bar"></app-legend>
         </div>
 
     </div>

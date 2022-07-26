@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Bar } from 'src/app/shared/bar-chart/bar-chart.component';
+import { LegendColor } from '../models/legend.model';
 import { MonthCalculation } from '../models/month-calculation.model';
 
 export enum BarId {
@@ -9,7 +10,7 @@ export enum BarId {
   OVERPAYMENTS = 'overpayments'
 }
 
-export type BarData = Bar & { id: BarId, name: string, value?: number };
+export type BarData = Bar & { id: BarId, name: string, value: number };
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -22,26 +23,30 @@ export class CardComponent implements OnInit {
     {
       id: BarId.PRINCIPAL,
       name: 'kapitał',
-      color: '#1F172E',
-      width: 0
+      color: LegendColor.PRINCIPALS,
+      width: 0,
+      value: 0
     },
     {
       id: BarId.INTEREST,
       name: 'odsetki',
-      color: '#FBEBDC',
-      width: 0
+      color: LegendColor.INTERESTS,
+      width: 0,
+      value: 0
     },
     {
       id: BarId.COST,
       name: 'koszty dodatkowe',
-      color: '#FF9914',
-      width: 0
+      color: LegendColor.COSTS,
+      width: 0,
+      value: 0
     },
     {
       id: BarId.OVERPAYMENTS,
       name: 'nadpłaty',
-      color: '#6C9E71',
-      width: 0
+      color: LegendColor.OVERPAYMENTS,
+      width: 0,
+      value: 0
     }
   ];
   constructor() { }
@@ -67,7 +72,6 @@ export class CardComponent implements OnInit {
     overpayments.value = this.data.overpayments;
     return this.bars.filter(b => b.width > 0);
   }
-
 
   private calcPercentage(value: number): number {
     return (value / this.data.payment) * 100;

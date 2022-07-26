@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DonutChartData } from 'src/app/shared/donut-chart/donut-chart.component';
+import { Legend, LegendColor } from '../models/legend.model';
 
 export interface SummaryCalculation {
   principals: number,
   interests: number,
   sumCosts: number,
   costs: Map<number, number>,
-  overpayments: number
+  overpayments: number,
+  numberOfMonths: number
 }
 
 export interface Summary {
-  chart: DonutChartData[]
-  summary: SummaryCalculation
+  chart: DonutChartData[],
+  summary: SummaryCalculation,
+  legends: Legend[];
 }
 @Injectable({
   providedIn: 'root'
@@ -30,12 +33,18 @@ export class SummaryDataService {
   public setSummaryData(data: SummaryCalculation): void {
     this.donutChart = [];
     this.sum = data.sumCosts + data.interests + data.principals + data.overpayments;
-    this.calculateDonutChart('#1F172E', data.principals);
-    this.calculateDonutChart('#FBEBDC', data.interests);
-    this.calculateDonutChart('#FF9914', data.sumCosts);
-    this.calculateDonutChart('#6C9E71', data.overpayments);
+    this.calculateDonutChart(LegendColor.PRINCIPALS, data.principals);
+    this.calculateDonutChart(LegendColor.INTERESTS, data.interests);
+    this.calculateDonutChart(LegendColor.COSTS, data.sumCosts);
+    this.calculateDonutChart(LegendColor.OVERPAYMENTS, data.overpayments);
 
-    this.summarySubject.next({summary: data, chart: this.donutChart});
+    const legends: Legend[] = [
+      { value: data.principals, name: 'kapitał', color: LegendColor.PRINCIPALS },
+      { value: data.interests, name: 'odsetki', color: LegendColor.INTERESTS },
+      { value: data.sumCosts, name: 'koszty dodatkowe', color: LegendColor.COSTS },
+      { value: data.overpayments, name: 'nadpłaty', color: LegendColor.OVERPAYMENTS },
+    ]
+    this.summarySubject.next({ summary: data, chart: this.donutChart, legends: legends });
   }
 
   private calculateDonutChart(color: string, value: number): void {

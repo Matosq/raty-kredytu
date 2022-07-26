@@ -22,6 +22,7 @@ import { BarChartModule } from '../shared/bar-chart/bar-chart.module';
 import { SliderModule } from '../shared/slider/slider.module';
 import { DonutChartModule } from '../shared/donut-chart/donut-chart.module';
 import { SummaryComponent } from './summary/summary.component';
+import { LegendComponent } from './legend/legend.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SummaryComponent } from './summary/summary.component';
     CostsComponent,
     OverpaymentsComponent,
     RateComponent,
-    SummaryComponent
+    SummaryComponent,
+    LegendComponent
   ],
   imports: [
     CommonModule,

@@ -19,7 +19,7 @@ export class CalculatorService {
   private monthCalculationDate!: Moment;
   private calculation: MonthCalculation[] = [];
   private summary: SummaryCalculation = {
-    principals: 0, interests: 0, sumCosts: 0, overpayments: 0, costs: new Map<number, number>()
+    numberOfMonths: 0, principals: 0, interests: 0, sumCosts: 0, overpayments: 0, costs: new Map<number, number>()
   };
   constructor(
     private loanParams: LoanParametersService,
@@ -101,9 +101,11 @@ export class CalculatorService {
       };
       this.calculation.push(month);
       this.updateSummary(month);
+      if (currentSaldo <= 0) { break; }
     }
-
     console.log(this.calculation);
+
+    this.updateNumberOfMonthsInSummary();
     this.summaryDataService.setSummaryData(cloneDeep(this.summary));
     this.simulationData.setSimulationData(cloneDeep(this.calculation));
   }
@@ -144,6 +146,10 @@ export class CalculatorService {
       const calcCost = this.summary.costs.has(cost.indexOfCost) ? Number(this.summary.costs.get(cost.indexOfCost)) + cost.value : cost.value;
       this.summary.costs.set(cost.indexOfCost, calcCost);
     });
+  }
+
+  private updateNumberOfMonthsInSummary(): void {
+    this.summary.numberOfMonths = this.calculation.length;
   }
 }
 

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from '../services/simulation-data.service';
@@ -12,6 +13,8 @@ import { SimulationDataService } from '../services/simulation-data.service';
 export class SimulationComponent implements OnInit {
   public monthsCalculation: MonthCalculation[] = [];
   public chosenMonth!: MonthCalculation;
+  public sliderMaxValue = 0;
+  public sliderValue = 1;
   private simulationDataSubsription!: Subscription;
   constructor(
     private simulationData: SimulationDataService,
@@ -22,38 +25,28 @@ export class SimulationComponent implements OnInit {
     this.simulationDataSubsription = this.simulationData.getSimulationData$().subscribe(
       (calculation: MonthCalculation[]) => {
         this.monthsCalculation = calculation;
+        this.sliderMaxValue = calculation.length;
         this.changeDetector.detectChanges();
+        this.onSliderChanges(1);
       }
     );
-    this.monthsCalculation = [{
-      date: 'kwi 2031',
-      extraCosts: [],
-      index: 106,
-      installment: 1832,
-      interest: 832,
-      overpayments: 0,
-      payment: 1932,
-      principal: 1000,
-      rate: 0.0512,
-      saldo: 194000,
-      sumExtraCosts: 100,
-      tranche: 0,
-    }];
-    this.chosenMonth = this.monthsCalculation[0];
-    this.changeDetector.detectChanges();
   }
 
   public ngOnDestroy(): void {
     this.simulationDataSubsription.unsubscribe();
   }
-  
+
+  public getMaxValueOfSlider(): number {
+    return this.sliderMaxValue;
+  }
+
   public onSliderChanges(value: number): void {
-    this.chosenMonth = this.monthsCalculation[value - 1];
+    this.sliderValue = value;
+    this.chosenMonth = this.monthsCalculation[this.sliderValue - 1];
     this.changeDetector.detectChanges();
   }
 
   public getSimulationCardTitle(): string {
-    console.log(this.chosenMonth.index);
     return this.chosenMonth?.index ? String(this.chosenMonth.index) : "Wybierz ratę";
   }
 }

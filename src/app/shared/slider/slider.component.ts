@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { IconName } from '../models/icon-names.model';
 
 @Component({
@@ -9,12 +9,13 @@ import { IconName } from '../models/icon-names.model';
 })
 export class SliderComponent implements OnInit {
   @Input() maxValue!: number;
+  @Input() value = 1;
   @Output() valueChange = new EventEmitter<number>();
   public readonly IconNameType = IconName;
-  public value = 1;
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   public increase(): void {
@@ -30,6 +31,7 @@ export class SliderComponent implements OnInit {
   }
 
   public onChanges(value: any): void {
+    this.value = value;
     this.valueChange.emit(value);
   }
 }
