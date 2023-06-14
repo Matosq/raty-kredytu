@@ -7,7 +7,7 @@ import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
-import { Overpayment } from '../models/overpayments.model';
+import { Overpayment, OverpaymentsType } from '../models/overpayments.model';
 import { defaultOverpayment, OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
 
@@ -39,6 +39,10 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   private isNumberOfMonthsValid = true;
   constructor(private overpaymentsService: OverpaymentsService) {
     super();
+  }
+
+  public onOverpaymentsButtonToggle(value: OverpaymentsType): void {
+    this.overpaymentsService.setOverpaymentsType(value);
   }
 
   public onValueChange(inputFieldValue: InputFieldValue): void {

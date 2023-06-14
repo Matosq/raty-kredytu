@@ -3,6 +3,7 @@ import { FormControlStatus } from "@angular/forms";
 import { Moment } from "moment";
 import { Installments } from "src/app/shared/button-toggle/installment.model";
 import { CostsOption } from "./costs.model";
+import { OverpaymentsType } from "./overpayments.model";
 
 export interface InputFieldValue {
   value: number,
@@ -36,7 +37,7 @@ export interface CreditParameterInputField extends CreditParameterField {
 }
 
 export interface CreditParameterButtonTogle extends CreditParameterField {
-  value: Installments;
+  value: Installments | OverpaymentsType;
 }
 
 export interface CreditParameterDatepicker extends CreditParameterField {

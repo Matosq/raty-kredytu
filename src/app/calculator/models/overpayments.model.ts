@@ -5,3 +5,8 @@ export interface Overpayment {
   date: Moment | null;
   numberOfMonths: number;
 }
+
+export enum OverpaymentsType {
+  LOAN_PERIOD_REDUCTION = 'skraca okres kredytowania',
+  INSTALLMENT_REDUCTION = 'zmniejsza wysokosć raty'
+}
