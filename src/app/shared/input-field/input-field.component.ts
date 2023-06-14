@@ -1,6 +1,6 @@
 
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormControlStatus, Validators } from '@angular/forms';
+import { UntypedFormControl, FormControlStatus, Validators } from '@angular/forms';
 import { combineLatest, debounceTime, Subject, Subscription } from 'rxjs';
 import { CreditParameterInputField, InputFieldValue, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 import { IconName } from '../models/icon-names.model';
@@ -15,7 +15,7 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
   private updateValueSubject = new Subject<InputFieldValue>();
   private updateValueSubscription!: Subscription;
   public readonly IconNameType = IconName;
-  public numberFormControl!: FormControl;
+  public numberFormControl!: UntypedFormControl;
   constructor() { }
 
   public ngOnInit(): void {
@@ -53,7 +53,7 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
   }
 
   private initFormControl(): void {
-    this.numberFormControl = new FormControl('',
+    this.numberFormControl = new UntypedFormControl('',
     [
       Validators.required,
       Validators.min(this.configuration?.validation?.min as number + 0.000000001),

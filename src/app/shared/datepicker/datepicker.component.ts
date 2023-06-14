@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -32,7 +32,7 @@ const moment = _rollupMoment || _moment;
 export class DatepickerComponent implements ParameterField, OnInit, OnChanges {
   @Input() configuration!: CreditParameterDatepicker;
   @Output() valueChange = new EventEmitter<Moment>();
-  public date!: FormControl;
+  public date!: UntypedFormControl;
   private dateChangesSubscription!: Subscription;
   constructor(private adapter: DateAdapter<Date>) { }
 
@@ -65,10 +65,10 @@ export class DatepickerComponent implements ParameterField, OnInit, OnChanges {
 
   private setDateFromConfiguration(): void {
     if (this.configuration.date?.isValid()) {
-      this.date = new FormControl(this.configuration.date);
+      this.date = new UntypedFormControl(this.configuration.date);
       return;
     }
-    this.date = new FormControl(moment());
+    this.date = new UntypedFormControl(moment());
   }
 
   private subscribeToDateValueChanges(): void {
