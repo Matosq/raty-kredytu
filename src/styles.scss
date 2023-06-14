@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap');
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 :root 
 {
     --antique-white: #FBEBDC;
@@ -47,10 +48,10 @@ $custom-typography: mat-typography-config(
   $font-family: 'Archivo',
 );
 @include mat-base-typography($custom-typography);
-@include mat-button-typography($custom-typography);
+@include mat.button-typography($custom-typography);
 @include mat-button-toggle-typography($custom-typography);
-@include mat-form-field-typography($custom-typography);
-@include mat-input-typography($custom-typography);
+@include mat.form-field-typography($custom-typography);
+@include mat.input-typography($custom-typography);
 
 @media only screen and (max-width: 768px) {
     .card-wrapper {
