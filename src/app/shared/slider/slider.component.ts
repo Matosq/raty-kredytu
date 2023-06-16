@@ -19,8 +19,10 @@ export class SliderComponent implements OnInit {
   }
 
   public increase(): void {
+    console.warn('increase');
     if (this.value >= this.maxValue) { return; }
     this.value++;
+    console.warn('increase 2');
     this.valueChange.emit(this.value);
   }
 

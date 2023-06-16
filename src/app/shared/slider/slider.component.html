@@ -4,12 +4,8 @@
     <app-icon [icon]="IconNameType.MINUS"></app-icon>
   </button>
 
-  <mat-slider class="slider"
-  thumbLabel min="1" max={{maxValue}}
-  [(ngModel)]="value"
-  (ngModelChange)="onChanges($event)"
-  ></mat-slider>
-
+  <mat-slider class="slider" min="1" max={{maxValue}} discrete><input matSliderThumb (ngModelChange)="onChanges($event)"
+      [(ngModel)]="value"></mat-slider>
 
   <button (click)="increase()" mat-icon-button>
     <app-icon [icon]="IconNameType.ADD"></app-icon>

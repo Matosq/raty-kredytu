@@ -4,7 +4,7 @@ import { DatepickerRangeComponent } from './datepicker-range.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FieldTitleModule } from '../field-title/field-title.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 

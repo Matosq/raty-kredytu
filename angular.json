@@ -109,6 +109,7 @@
       }
     }
   },
+  "defaultProject": "raty-kredytu",
   "cli": {
     "analytics": false
   }

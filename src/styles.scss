@@ -2,8 +2,8 @@
 @use '@angular/material' as mat;
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap');
 @import '@angular/material/theming';
-:root 
-{
+
+:root {
     --antique-white: #FBEBDC;
     --scampi: #6768AB;
     --kimberly: #7573A9;
@@ -28,7 +28,8 @@
 // /* Extra large devices (large laptops and desktops, 1200px and up) */
 // @media only screen and (min-width: 1200px) {...}
 
-html, body {
+html,
+body {
     font-weight: bold;
     font-family: 'Archivo', sans-serif;
 }
@@ -44,9 +45,8 @@ body {
     overflow-x: hidden;
 }
 
-$custom-typography: mat-typography-config(
-  $font-family: 'Archivo',
-);
+$custom-typography: mat-typography-config($font-family: 'Archivo',
+    );
 @include mat-base-typography($custom-typography);
 @include mat.button-typography($custom-typography);
 @include mat-button-toggle-typography($custom-typography);
@@ -97,7 +97,6 @@ $custom-typography: mat-typography-config(
     border-bottom: solid 52px !important;
 }
 
-
 @media only screen and (max-width: 658px) {
     .action-button-right {
         justify-content: center;
@@ -115,46 +114,40 @@ $custom-typography: mat-typography-config(
     flex-direction: row;
 }
 
-.mat-input-element {
-    caret-color: white;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-.mat-select-arrow {
+.mat-mdc-select-arrow {
     color: var(--antique-white);
 }
 
-.mat-select-value {
+.mat-mdc-select-value {
     color: var(--antique-white);
 }
 
-.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-    color: var(--swiss-coffe);
+.mdc-text-field__input {
+    caret-color: white !important;
+    color: var(--antique-white) !important;
 }
 
-.mat-select-panel {
+.mat-mdc-floating-label {
+    color: var(--antique-white) !important;
+}
+
+.mat-mdc-select-panel {
     background: var(--scampi);
 }
 
-.mat-option {
-    color: var(--antique-white);
-}
-
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: var(--swiss-coffe);
-}
-
-input {
-    cursor: pointer;
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-primary .mat-mdc-option .mdc-list-item__primary-text {
+    color: var(--swiss-coffe) !important;
 }
 
 .mat-datepicker-toggle {
@@ -196,7 +189,8 @@ input {
         display: flex;
         align-items: center;
     }
-    .remove-button .mat-stroked-button {
+
+    .remove-button .mat-mdc-outlined-button {
         margin: 0 0 0 0 !important;
         width: 42px !important;
         min-width: 42px !important;
@@ -205,30 +199,60 @@ input {
     }
 }
 
-.remove-button .mat-stroked-button {
+.remove-button .mat-mdc-outlined-button {
     background-color: var(--kimberly) !important;
+
     &:hover {
         background-color: transparent !important;
     }
 }
 
-.mat-tooltip {
-    color: var(--antique-white) !important;
-    background-color: var(--scampi) !important;
+.mat-expansion-panel-header:focus,
+.mat-expansion-panel-header:hover {
+    background: none !important;
+    backdrop-filter: blur(100px);
 }
 
 .mat-expansion-indicator:after {
     color: var(--swiss-coffe);
 }
 
-.mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
-    background: none !important;
+
+.mat-mdc-slider {
+    --mdc-slider-handle-color: #FF9914 !important;
+    --mdc-slider-focus-handle-color: #FF9914 !important;
+    --mdc-slider-hover-handle-color: #FF9914 !important;
+    --mdc-slider-active-track-color: #FF9914 !important;
+    --mdc-slider-inactive-track-color: #1F172E !important;
+    --mdc-slider-with-tick-marks-inactive-container-color: #FF9914 !important;
+    --mat-mdc-slider-ripple-color: #FF9914 !important;
+    --mat-mdc-slider-hover-ripple-color: rgba(255, 153, 20, 0.05) !important;
+    --mat-mdc-slider-focus-ripple-color: rgba(255, 153, 20, 0.05) !important;
+
+    --mdc-slider-label-container-color: #FF9914 !important;
+    --mdc-slider-label-label-text-color: #1F172E !important;
 }
 
-.mat-slider-thumb-label-text {
-    color: #1F172E !important;
+.datepicker .mat-mdc-text-field-wrapper {
+    cursor: pointer;
+    left: 40px;
 }
 
-.mat-slider-thumb, .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
-    background-color: #FF9914 !important;
+.datepicker input {
+    cursor: pointer;
+}
+
+.select-field {
+    cursor: pointer;
+}
+
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+    border-color: var(--antique-white) !important;
+}
+
+.mdc-tooltip__surface {
+    color: var(--antique-white) !important;
+    background-color: var(--scampi) !important;
 }

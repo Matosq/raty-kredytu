@@ -25,7 +25,7 @@
     color: white;
 }
 
-.mat-stroked-button {
+.mat-mdc-outlined-button {
     margin: 1rem 1rem 1rem 1rem;
     background-color: var(--bronze-metallic);
     border-radius: 6px;
@@ -33,18 +33,18 @@
     font-size: 1.4rem;
     padding-left: 1.4rem;
     padding-right: 1.4rem;
-    border-color: var(--antique-white);
-    &:hover:not(.mat-button-disabled) {
+    border-color: var(--antique-white) !important;
+    &:hover {
         outline: 3px solid var(--antique-white);
         background-color: transparent;
         color: var(--antique-white);
     }
-    &:focus:not(.mat-button-disabled) {
+    &:focus {
         outline: 3px solid var(--antique-white);
     }
 }
 
-.mat-stroked-button.mat-button-disabled {
+.mat-mdc-outlined-button:disabled {
     opacity: 0.5;
     cursor: not-allowed !important;
 }
