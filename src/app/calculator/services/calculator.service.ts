@@ -44,10 +44,11 @@ export class CalculatorService {
       return;
     }
     if (this.loanParams.getInstallments() === Installments.DEACRISING) {
-      this.calculateDeacrisingInstallments();
+      this.calculateEqualInstallments();
+      // this.calculateDeacrisingInstallments();
       return;
     }
-    console.warn('Rodzaj rat niewybrany');
+    console.error('Rodzaj rat niewybrany');
   }
 
   private calculateParametersData(): void {
@@ -57,41 +58,43 @@ export class CalculatorService {
     this.ratesDataService.calculateRates();
   }
 
-  private calculateEqualInstallments(): void {
-    const deacrisingInstallmentNumerator = this.loanParams.getAmountLoan() * this.loanParams.getRate();
-    // const rataStalaMianownik = 12 * ( 1.0 - (12 / (12 + )))
-    this.calculateDeacrisingInstallments();
-  }
+  // private calculateEqualInstallments(): void {
+  //   const deacrisingInstallmentNumerator = this.loanParams.getAmountLoan() * this.loanParams.getRate();
+  //   // const rataStalaMianownik = 12 * ( 1.0 - (12 / (12 + )))
+  //   // this.calculateDeacrisingInstallments();
+  // }
 
-  private calculateDeacrisingInstallments(): void {
+  // private calculateDeacrisingInstallments(): void {
+
+private calculateEqualInstallments(): void {
     let currentSaldo = this.getPrimarySaldo();
-    const basicRate = this.loanParams.getRate() * 0.01;
-
 
     const numberOfMonths = this.loanParams.getNumberOfMonths();
+
     let principal = this.loanParams.getAmountLoan() / numberOfMonths;
 
-    for (let i = 1; i <= numberOfMonths; i++) {
-      const tranches = this.getTranchesByMonthsIndex(i);
-      const tranchesValue = this.sumTranchesValue(tranches);
-      const currentOverpayment = this.overpaymentsDataService.getOverpaymentValueByMonthsIndex(i);
+    for (let monthIndex = 1; monthIndex <= numberOfMonths; monthIndex++) {
+      const tranchesValue = this.sumTranchesValue(monthIndex);
+      const currentOverpayment = this.overpaymentsDataService.getOverpaymentValueByMonthsIndex(monthIndex);
+
       currentSaldo = currentSaldo + tranchesValue - currentOverpayment;
 
-      const currentRate = this.ratesDataService.getRateValueByMonthIndex(i) || basicRate;
-      const interests = currentSaldo * (currentRate / 12);
+      const currentRate = this.ratesDataService.getRateValueByMonthIndex(monthIndex);
+      const interests = this.calculateInterests(currentSaldo, currentRate);
 
-      const costs = this.costsDataService.getCostsByMonthsIndex(i, currentSaldo, this.loanParams.getAmountLoan());
+
+      const costs = this.costsDataService.getCostsByMonthsIndex(monthIndex, currentSaldo, this.loanParams.getAmountLoan());
 
       currentSaldo = currentSaldo - principal;
       const sumCosts = costs.reduce((a, c) => a + c.value, 0);
 
       const month: MonthCalculation = {
-        index: i,
+        index: monthIndex,
         date: this.getFormatedDate(),
         rate: currentRate,
         interest: interests,
         principal: principal,
-        installment: principal + interests + sumCosts + currentOverpayment,
+        installment: principal + interests,
         extraCosts: costs,
         sumExtraCosts: sumCosts,
         overpayments: currentOverpayment,
@@ -111,12 +114,18 @@ export class CalculatorService {
   }
 
   private getPrimarySaldo(): number {
-    const saldo = this.sumTranchesValue(this.getTranchesByMonthsIndex(1));
+    const saldo = this.sumTranchesValue(1);
     return saldo ? saldo : this.loanParams.getAmountLoan();
   }
 
-  private sumTranchesValue(tranches: TrancheData[]): number {
+  private sumTranchesValue(monthsIndex: number): number {
+    const tranches = this.getTranchesByMonthsIndex(monthsIndex);
     return tranches.reduce((acc, tranche) => acc + tranche.value, 0)
+  }
+
+  private calculateInterests(saldo: number, rate: number): number {
+    const daysInYear = this.monthCalculationDate.isLeapYear() ? 366 : 365;
+    return saldo * rate * (this.monthCalculationDate.daysInMonth() / daysInYear);
   }
 
   private getTranchesByMonthsIndex(monthsIndex: number): TrancheData[] {
@@ -152,4 +161,3 @@ export class CalculatorService {
     this.summary.numberOfMonths = this.calculation.length;
   }
 }
-

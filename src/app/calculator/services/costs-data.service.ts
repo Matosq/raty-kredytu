@@ -58,7 +58,7 @@ export class CostsDataService {
           value = Math.round((cost.value * 100000) * saldo) / 100000;
           break
         default:
-          console.warn('Niepoprawny typ kosztu dodatkowego.');
+          console.error('Niepoprawny typ kosztu dodatkowego.');
       }
       return {
         value: value,

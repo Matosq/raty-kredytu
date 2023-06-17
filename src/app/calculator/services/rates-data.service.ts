@@ -3,6 +3,7 @@ import { MonthsPeriodIndexes } from '../models/date.model';
 import { RatePosition } from '../models/rate.model';
 import { RateService } from '../rate/rate.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
+import { LoanParametersService } from './loan-parameters.service';
 
 export type RateData = RatePosition & MonthsPeriodIndexes;
 @Injectable({
@@ -13,7 +14,8 @@ export class RatesDataService {
   private ratesToMonthsMap: Map<number, number> = new Map();
   constructor(
     private rateService: RateService,
-    private datePeriodIndexerService: DatePeriodIndexerService
+    private datePeriodIndexerService: DatePeriodIndexerService,
+    private loanParams: LoanParametersService
   ) { }
 
   public calculateRates(): void {
@@ -29,7 +31,7 @@ export class RatesDataService {
     });
   }
 
-  public getRateValueByMonthIndex(monthsIndex: number): number | undefined {
-    return this.ratesToMonthsMap.get(monthsIndex);
+  public getRateValueByMonthIndex(monthsIndex: number): number {
+    return this.ratesToMonthsMap.get(monthsIndex) || this.loanParams.getRate() * 0.01;
   }
 }
