@@ -1,0 +1,1 @@
+export const INSTALLMENTS_IN_YEAR = 12;

@@ -52,10 +52,10 @@ export class CostsDataService {
           value = cost.value;
           break;
         case CostsType.CREDIT_AMOUNT_RATE:
-          value = Math.round((cost.value * 100000) * amountOfLoan) / 100000;
+          value = Math.round((cost.value * 100000) * amountOfLoan) / 10000000;
           break;
         case CostsType.BALANCE_RATE:
-          value = Math.round((cost.value * 100000) * saldo) / 100000;
+          value = Math.round((cost.value * 100000) * saldo) / 10000000;
           break
         default:
           console.error('Niepoprawny typ kosztu dodatkowego.');

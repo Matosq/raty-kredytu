@@ -32,6 +32,6 @@ export class RatesDataService {
   }
 
   public getRateValueByMonthIndex(monthsIndex: number): number {
-    return this.ratesToMonthsMap.get(monthsIndex) || this.loanParams.getRate() * 0.01;
+    return Math.round((this.ratesToMonthsMap.get(monthsIndex) || this.loanParams.getRate() * 0.01) * 10000) / 10000;
   }
 }
