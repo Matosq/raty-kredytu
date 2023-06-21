@@ -4,7 +4,7 @@ import { DonutChartData } from 'src/app/shared/donut-chart/donut-chart.component
 import { Legend } from '../models/legend.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { LoanParametersService } from '../services/loan-parameters.service';
-import { SummaryCalculation, SummaryDataService } from '../services/summary-data.service';
+import { Summary, SummaryCalculation, SummaryDataService } from '../services/summary-data.service';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { ReportService } from '../services/report.service';
@@ -18,12 +18,12 @@ import { getInstallmentsAsText } from '../utils/utils';
 })
 export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
   public readonly cardHeader = SectionCardHeader.SUMMARY;
-  public chartBars: DonutChartData[] = [];
-  public legends: Legend[] = [];
-  public totalCost = 0;
-  public installments = '';
-  public loanPeriod = '';
-
+  protected chartBars: DonutChartData[] = [];
+  protected legends: Legend[] = [];
+  protected totalCost = 0;
+  protected installments = '';
+  protected loanPeriod = '';
+  protected isSummaryData = false;
   protected downloadReportButton: ButtonConfig = {
     text: 'Pobierz symulację kredytu',
     icon: IconName.DOWNLOAD
@@ -39,12 +39,7 @@ export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
   public ngOnInit(): void {
     this.summarySubscription = this.summaryDataService.getSummaryData$().subscribe(
       summaryData => {
-        console.log(summaryData);
-        this.legends = summaryData.legends;
-        this.chartBars = summaryData.chart;
-        this.takeTotalCostAndNumberOfMonths(summaryData.summary);
-        this.takeLoanParameters();
-        this.changeDetector.detectChanges();
+        this.onSummaryDataChange(summaryData);
       }
     );
     this.reportService.subscribeData();
@@ -57,6 +52,16 @@ export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
 
   public downloadReport(): void {
     this.reportService.getReport();
+  }
+
+  private onSummaryDataChange(summary: Summary): void {
+    this.isSummaryData = summary !== null;
+    if (this.isSummaryData === null) { return; }
+    this.legends = summary.legends;
+    this.chartBars = summary.chart;
+    this.takeTotalCostAndNumberOfMonths(summary.summary);
+    this.takeLoanParameters();
+    this.changeDetector.detectChanges();
   }
 
   private takeTotalCostAndNumberOfMonths(data: SummaryCalculation) {

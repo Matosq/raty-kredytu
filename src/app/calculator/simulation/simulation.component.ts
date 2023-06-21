@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from '../services/simulation-data.service';
+import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 
 @Component({
   selector: 'app-simulation',
@@ -10,11 +10,13 @@ import { SimulationDataService } from '../services/simulation-data.service';
   styleUrls: ['./simulation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimulationComponent implements OnInit {
-  public monthsCalculation: MonthCalculation[] = [];
-  public chosenMonth!: MonthCalculation;
-  public sliderMaxValue = 0;
-  public sliderValue = 1;
+export class SimulationComponent implements SectionCard, OnInit {
+  public readonly cardHeader = SectionCardHeader.SIMULATION;
+  protected monthsCalculation: MonthCalculation[] = [];
+  protected chosenMonth!: MonthCalculation;
+  protected sliderMaxValue = 0;
+  protected sliderValue = 1;
+  protected isSimulationData = false;
   private simulationDataSubsription!: Subscription;
   constructor(
     private simulationData: SimulationDataService,
@@ -24,10 +26,7 @@ export class SimulationComponent implements OnInit {
   ngOnInit(): void {
     this.simulationDataSubsription = this.simulationData.getSimulationData$().subscribe(
       (calculation: MonthCalculation[]) => {
-        this.monthsCalculation = calculation;
-        this.sliderMaxValue = calculation.length;
-        this.changeDetector.detectChanges();
-        this.onSliderChanges(1);
+        this.onDataChange(calculation);
       }
     );
   }
@@ -48,5 +47,13 @@ export class SimulationComponent implements OnInit {
 
   public getSimulationCardTitle(): string {
     return this.chosenMonth?.index ? String(this.chosenMonth.index) : "Wybierz ratę";
+  }
+
+  private onDataChange(calculation: MonthCalculation[]): void {
+    this.isSimulationData = calculation.length > 0;
+    if (!this.isSimulationData) { return };
+    this.monthsCalculation = calculation;
+    this.sliderMaxValue = calculation.length;
+    this.onSliderChanges(1);
   }
 }

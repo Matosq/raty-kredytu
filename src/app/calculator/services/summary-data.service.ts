@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DonutChartData } from 'src/app/shared/donut-chart/donut-chart.component';
 import { Legend, LegendColor } from '../models/legend.model';
 
@@ -21,7 +21,7 @@ export interface Summary {
   providedIn: 'root'
 })
 export class SummaryDataService {
-  private summarySubject = new Subject<Summary>();
+  private summarySubject = new BehaviorSubject<Summary | null>(null);
   private donutChart: DonutChartData[] = [];
   private sum = 0;
   constructor() { }

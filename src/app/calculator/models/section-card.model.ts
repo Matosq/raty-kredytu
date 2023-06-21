@@ -8,5 +8,6 @@ export enum SectionCardHeader {
     COSTS = 'koszty dodatkowe',
     OVERPAYMENTS = 'nadpłaty',
     RATE = 'oprocentowanie',
-    SUMMARY = 'podsumowanie'
+    SUMMARY = 'podsumowanie',
+    SIMULATION = 'raty kredytu'
 }

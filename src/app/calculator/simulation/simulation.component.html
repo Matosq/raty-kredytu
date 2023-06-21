@@ -1,9 +1,12 @@
-<div class="card-wrapper">
+<div class="card-wrapper" *ngIf="isSimulationData">
     <div class="simulation-card">
-        <p>Rata nr {{chosenMonth?.index}}</p>
+        <div class="simulation-header">
+            <app-card-header [header]="cardHeader"></app-card-header>
+        </div>
+
+        <p>Rata nr {{chosenMonth.index}}</p>
         <app-slider [value]="sliderValue" [maxValue]="getMaxValueOfSlider()"
-            (valueChange)="onSliderChanges($event)"
-        ></app-slider>
+            (valueChange)="onSliderChanges($event)"></app-slider>
 
         <app-card *ngIf="!!chosenMonth" [data]="chosenMonth"></app-card>
     </div>
