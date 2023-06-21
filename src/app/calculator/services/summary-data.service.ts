@@ -32,7 +32,7 @@ export class SummaryDataService {
 
   public setSummaryData(data: SummaryCalculation): void {
     this.donutChart = [];
-    this.sum = data.sumCosts + data.interests + data.principals + data.overpayments;
+    this.sum = this.sumTotalCosts(data);
     this.calculateDonutChart(LegendColor.PRINCIPALS, data.principals);
     this.calculateDonutChart(LegendColor.INTERESTS, data.interests);
     this.calculateDonutChart(LegendColor.COSTS, data.sumCosts);
@@ -45,6 +45,10 @@ export class SummaryDataService {
       { value: data.overpayments, name: 'nadpłaty', color: LegendColor.OVERPAYMENTS },
     ]
     this.summarySubject.next({ summary: data, chart: this.donutChart, legends: legends });
+  }
+
+  public sumTotalCosts(data: SummaryCalculation): number {
+    return data.sumCosts + data.principals + data.interests + data.overpayments;
   }
 
   private calculateDonutChart(color: string, value: number): void {
