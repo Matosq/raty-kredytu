@@ -3,9 +3,9 @@ import { Moment } from 'moment';
 import { Installments } from 'src/app/shared/button-toggle/installment.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { CalculatorService } from '../services/calculator.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 import { LoanParameters } from './loan-parameters';
+import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({
   selector: 'app-loan',
@@ -21,7 +21,7 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
 
   constructor(
     private loanParametersService: LoanParametersService,
-    private calculatorService: CalculatorService
+    private calculateTriggerService: CalculateTriggerService
   ) {
     super();
   }
@@ -60,7 +60,7 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
   }
 
   public calculateLoan: () => void = () => {
-    this.calculatorService.calculateLoan();
+    this.calculateTriggerService.triggerLoanCalculation();
     this.scrollToSimulation();
   }
 

@@ -10,6 +10,7 @@ import { InputFieldValue } from '../models/credit-parameter.model';
 import { Overpayment, OverpaymentsType } from '../models/overpayments.model';
 import { defaultOverpayment, OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
+import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({
   selector: 'app-overpayments',
@@ -37,7 +38,9 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   };
   private isValueFieldValid = true;
   private isNumberOfMonthsValid = true;
-  constructor(private overpaymentsService: OverpaymentsService) {
+  constructor(
+    private overpaymentsService: OverpaymentsService,
+    private calculateTriggerService: CalculateTriggerService) {
     super();
   }
 
@@ -63,6 +66,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpaymentsService.addOverpayment(this.overpayment);
     this.clearFields();
     this.currentOverpayments = this.overpaymentsService.getOverpayments();
+    this.calculateLoan();
   }
 
   public deleteOverpayment(overpayment: OverpaymentPosition): void {
@@ -71,6 +75,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentOverpayments = this.overpaymentsService.getOverpayments();
     });
+    this.calculateLoan();
   }
 
   public isOverpaymentDeleted(overpayment: OverpaymentPosition): boolean {
@@ -93,5 +98,9 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.monthsInputField.value = 1;
     this.overpaymentDateField = cloneDeep(this.overpaymentDateField);
     this.overpaymentDateField.date = this.overpayment.date;
+  }
+
+  private calculateLoan(): void {
+    this.calculateTriggerService.triggerLoanCalculation();
   }
 }

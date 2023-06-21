@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'; import { cloneDeep } from 'lodash';
 import moment from 'moment';
-;
 import { Moment } from 'moment';
 import { delay, of, Subscription } from 'rxjs';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
@@ -11,6 +10,7 @@ import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { Tranche } from '../models/tranche.model';
 import { TranchesParameters } from './tranches-parameters';
 import { TranchePosition, TranchesService } from './tranches.service';
+import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({
   selector: 'app-tranches',
@@ -41,7 +41,8 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
   private isTrancheValueFieldValid = true;
   constructor(
     private tranchesService: TranchesService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private calculateTriggerService: CalculateTriggerService
   ) { super() }
 
   public ngOnInit(): void {
@@ -76,6 +77,7 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
     this.tranchesService.addTranche(this.newTranche);
     this.clearFieldsValue();
     this.tranches = this.tranchesService.getTranches();
+    this.calculateLoan();
   }
 
   public deleteTranche(tranche: TranchePosition): void {
@@ -84,6 +86,7 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
     of(null).pipe(delay(0)).subscribe(() => {
       this.tranches = this.tranchesService.getTranches();
     });
+    this.calculateLoan();
   }
 
   public isTrancheDeleted(tranche: TranchePosition): boolean {
@@ -107,5 +110,9 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
     this.newTranche.date = moment();
     this.datePickerField = cloneDeep(this.datePickerField);
     this.datePickerField.date = this.newTranche.date;
+  }
+
+  private calculateLoan(): void {
+    this.calculateTriggerService.triggerLoanCalculation();
   }
 }

@@ -11,6 +11,7 @@ import { RateParameters } from './rate-parameters';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { cloneDeep } from 'lodash';
+import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({
   selector: 'app-rate',
@@ -38,7 +39,8 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   }
   constructor(
     private loanParameters: LoanParametersService,
-    private rateService: RateService) {
+    private rateService: RateService,
+    private calculateTriggerService: CalculateTriggerService) {
     super();
   }
 
@@ -73,6 +75,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.rateService.addRate(this.rate);
     this.resetFields();
     this.rateChanges = this.rateService.getRates();
+    this.calculateLoan();
   }
 
   public deleteRate(rate: RatePosition): void {
@@ -81,6 +84,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     of(null).pipe(delay(0)).subscribe(() => {
       this.rateChanges = this.rateService.getRates();
     });
+    this.calculateLoan();
   }
 
   public areFieldsValid(): boolean {
@@ -113,5 +117,9 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.monthsInputField.value = 1;
     this.rate.numberOfMonths = this.monthsInputField.value;
     this.rateInputField.value = this.currentLoanRate;
+  }
+
+  private calculateLoan(): void {
+    this.calculateTriggerService.triggerLoanCalculation();
   }
 }

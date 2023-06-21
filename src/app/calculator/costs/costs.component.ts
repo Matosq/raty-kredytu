@@ -10,6 +10,7 @@ import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CostsParameters, defaultCost, defaultCostPercentage } from './costs-parameters';
 import { CostPosition, CostsService } from './costs.service';
+import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({
   selector: 'app-costs',
@@ -32,7 +33,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
   public readonly CostsType = CostsType;
-  
+
   public readonly addCostsButton: ButtonConfig = {
     text: 'dodaj koszt',
     icon: IconName.ADD
@@ -44,7 +45,9 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     type: ButtonType.SMALL
   }
 
-  constructor(private costsService: CostsService) {
+  constructor(
+    private costsService: CostsService,
+    private calculateTriggerService: CalculateTriggerService) {
     super();
   }
 
@@ -75,6 +78,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     this.costsService.addCost(this.cost);
     this.clearFieldsValue();
     this.currentCosts = this.costsService.getCosts();
+    this.calculateLoan();
   }
 
   public deleteCost(cost: CostPosition): void {
@@ -83,6 +87,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentCosts = this.costsService.getCosts();
     });
+    this.calculateLoan();
   }
 
   public areCurrentCosts(): boolean {
@@ -126,8 +131,12 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   }
 
   private clearDate(): void {
-    this.cost.date = moment(),
+    this.cost.date = moment();
     this.datePicker = cloneDeep(this.datePicker);
     this.datePicker.date = this.cost.date;
+  }
+
+  private calculateLoan(): void {
+    this.calculateTriggerService.triggerLoanCalculation();
   }
 }
