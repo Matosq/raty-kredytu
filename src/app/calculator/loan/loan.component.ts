@@ -22,7 +22,7 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
   constructor(
     private loanParametersService: LoanParametersService,
     private calculatorService: CalculatorService
-    ) {
+  ) {
     super();
   }
 
@@ -59,11 +59,17 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
     this.loanParametersService.setFirstPaymentDate(value);
   }
 
-  public calculateLoan: () => void  = () => {
-   this.calculatorService.calculateLoan();
+  public calculateLoan: () => void = () => {
+    this.calculatorService.calculateLoan();
+    this.scrollToSimulation();
   }
 
   public areParametersFieldsValid(): boolean {
     return this.isAmounLoanFieldValid && this.isMonthsOfCreditFieldValid && this.isRateFieldValid;
+  }
+
+  private scrollToSimulation(): void {
+    const element = document.getElementById('simulation-card');
+    element?.scrollIntoView({ behavior: "smooth" });
   }
 }

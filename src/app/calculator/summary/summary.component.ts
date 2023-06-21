@@ -55,8 +55,8 @@ export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
   }
 
   private onSummaryDataChange(summary: Summary): void {
-    this.isSummaryData = summary !== null;
-    if (this.isSummaryData === null) { return; }
+    this.isSummaryData = summary !== null && summary !== undefined;
+    if (!this.isSummaryData) { return; }
     this.legends = summary.legends;
     this.chartBars = summary.chart;
     this.takeTotalCostAndNumberOfMonths(summary.summary);
