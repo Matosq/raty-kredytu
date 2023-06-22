@@ -1,16 +1,14 @@
 import { EventEmitter } from "@angular/core";
 import { FormControlStatus } from "@angular/forms";
 import { Moment } from "moment";
-import { Installments } from "src/app/shared/button-toggle/installment.model";
 import { CostsOption } from "./costs.model";
-import { OverpaymentsType } from "./overpayments.model";
 
 export interface InputFieldValue {
   value: number,
   status: FormControlStatus
 }
 export interface ParameterField {
-  configuration: CreditParameterInputField | CreditParameterButtonTogle | CreditParameterDatepicker | CreditParameterTextField | CreditParameterSelectField;
+  configuration: CreditParameterInputField | CreditParameterButtonToggle<unknown> | CreditParameterDatepicker | CreditParameterTextField | CreditParameterSelectField;
   valueChange: EventEmitter<any>;
 }
 
@@ -36,8 +34,13 @@ export interface CreditParameterInputField extends CreditParameterField {
   }
 }
 
-export interface CreditParameterButtonTogle extends CreditParameterField {
-  value: Installments | OverpaymentsType;
+export interface Toggle<T> {
+  value: T;
+}
+
+export interface CreditParameterButtonToggle<T> extends CreditParameterField {
+  first: Toggle<T>;
+  second: Toggle<T>;
 }
 
 export interface CreditParameterDatepicker extends CreditParameterField {

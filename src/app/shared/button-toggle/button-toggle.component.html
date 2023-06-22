@@ -1,8 +1,8 @@
 <app-field-title [config]="configuration.fieldTitle"></app-field-title>
 
 <div class="toggle-button-wrapper">
-    <mat-button-toggle-group (change)="onToggle($event)" [value]="configuration.value" aria-label="Rodzaj rat">
-        <mat-button-toggle [value]="installmentEqual">równe</mat-button-toggle>
-        <mat-button-toggle [value]="installmentDeacrising">malejące</mat-button-toggle>
+    <mat-button-toggle-group (change)="onToggle($event)" [value]="configuration.first.value" aria-label="Rodzaj rat">
+        <mat-button-toggle [value]="configuration.first.value">{{configuration.first.value}}</mat-button-toggle>
+        <mat-button-toggle [value]="configuration.second.value">{{configuration.second.value}}</mat-button-toggle>
     </mat-button-toggle-group>
 </div>

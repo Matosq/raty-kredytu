@@ -1,4 +1,4 @@
-import { CreditParameterButtonTogle, CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model"
+import { CreditParameterButtonToggle, CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model"
 import { OverpaymentsType } from "../models/overpayments.model";
 import { Section } from "../section/section";
 
@@ -22,9 +22,10 @@ export class OverpaymentsParameters extends Section {
     stepValue: 1,
     validation: { min: 0, max: 1200, integerOnly: true }
   }
-  
-  public readonly overpayments: CreditParameterButtonTogle = {
-    fieldTitle: { title: 'Nadpłata kredytu' },
-    value: OverpaymentsType.LOAN_PERIOD_REDUCTION,
+
+  public readonly overpayments: CreditParameterButtonToggle<OverpaymentsType> = {
+    fieldTitle: { title: 'nadpłata' },
+    second: { value: OverpaymentsType.LOAN_PERIOD_REDUCTION },
+    first: { value: OverpaymentsType.INSTALLMENT_REDUCTION },
   }
 }

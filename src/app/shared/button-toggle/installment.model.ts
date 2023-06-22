@@ -1,5 +1,5 @@
 
 export enum Installments {
-    EQUAL = 'EQUAL',
-    DEACRISING = 'DEACRISING'
+    EQUAL = 'równe',
+    DEACRISING = 'malejące'
 }

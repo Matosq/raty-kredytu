@@ -4,12 +4,14 @@
         <mat-expansion-panel-header>
             <app-card-header [header]="cardHeader"></app-card-header>
         </mat-expansion-panel-header>
-        <!-- <app-button-toggle [configuration]="overpayments"
-        (valueChange)="onOverpaymentsButtonToggle($event)">
-        </app-button-toggle> -->
+
         <div class="flex-row-wrapper">
             <app-input-field [configuration]="overpaymentValueInputField"
             (valueChange)="onValueChange($event)"></app-input-field>
+
+            <app-button-toggle [configuration]="overpayments"
+            (valueChange)="onOverpaymentsButtonToggle($event)">
+            </app-button-toggle>
 
             <app-datepicker [configuration]="overpaymentDateField"
             (valueChange)="onDateChange($event)"></app-datepicker>
@@ -29,7 +31,8 @@
             <div *ngIf="!isOverpaymentDeleted(overpayment)" @fadeSlideInOut class="flex-wrapper current-overpayments">
                 <span class="current-overpayments-months-period">{{overpayment.monthYearPeriod}}</span>
                 <span class="current-overpayments-months-period-shortcut">{{overpayment.monthYearPeriodShortcut}}</span>
-                <span class="current-overpayments-value">{{overpayment.value | currency:'zł'}}</span>
+                <span>{{overpayment.value | currency:'zł'}}</span>
+                <span>{{overpayment.type}}</span>
                 <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (onClick)="deleteOverpayment(overpayment)"></app-button>
             </div>
         </div>

@@ -34,7 +34,8 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   private overpayment: Overpayment = {
     value: defaultOverpayment,
     date: moment(),
-    numberOfMonths: 1
+    numberOfMonths: 1,
+    type: OverpaymentsType.INSTALLMENT_REDUCTION
   };
   private isValueFieldValid = true;
   private isNumberOfMonthsValid = true;
@@ -45,7 +46,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   }
 
   public onOverpaymentsButtonToggle(value: OverpaymentsType): void {
-    this.overpaymentsService.setOverpaymentsType(value);
+    this.overpayment.type = value;
   }
 
   public onValueChange(inputFieldValue: InputFieldValue): void {

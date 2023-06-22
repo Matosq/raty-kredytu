@@ -12,6 +12,7 @@ import { RatesDataService } from './rates-data.service';
 import { TrancheData, TranchesDataService } from './tranches-data.service';
 import { SummaryCalculation, SummaryDataService } from './summary-data.service';
 import { INSTALLMENTS_IN_YEAR } from '../models/consts.model';
+import { round } from '../utils/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,9 @@ import { INSTALLMENTS_IN_YEAR } from '../models/consts.model';
 export class CalculatorService {
   private monthCalculationDate!: Moment;
   private numberOfMonths = 0;
+  private numberOfMonthsForInstallmentsCalculation = 0;
+  private currentDebt = 0;
+  private currentDebtForEqualInstallmentsCalculation = 0;
   private calculation: MonthCalculation[] = [];
   private summary: SummaryCalculation = {
     numberOfMonths: 0, principals: 0, interests: 0, sumCosts: 0, overpayments: 0, costs: new Map<number, number>()
@@ -41,6 +45,9 @@ export class CalculatorService {
     this.calculation = [];
     this.calculateParametersData();
     this.numberOfMonths = this.loanParams.getNumberOfMonths();
+    this.currentDebt = this.loanParams.getAmountLoan();
+    this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths;
+    this.currentDebtForEqualInstallmentsCalculation = this.currentDebt;
     this.calculateInstallments();
   }
 
@@ -64,9 +71,18 @@ export class CalculatorService {
 
     for (let monthIndex = 1; monthIndex <= this.numberOfMonths; monthIndex++) {
       const tranchesValue = this.sumTranchesValue(monthIndex);
-      const currentOverpayment = this.overpaymentsDataService.getOverpaymentValueByMonthsIndex(monthIndex);
+      const overpaymentLoanReduction = this.overpaymentsDataService.getOverpaymentLoanReductionValueByMonthsIndex(monthIndex);
+      const overpaymentInstallmentReduction = this.overpaymentsDataService.getOverpaymentInstallmentReductionValueByMonthsIndex(monthIndex);
+      const currentOverpayment = overpaymentLoanReduction + overpaymentInstallmentReduction;
 
-      currentSaldo = currentSaldo + tranchesValue - currentOverpayment;
+      this.currentDebt = this.currentDebt - currentOverpayment;
+      currentSaldo = currentSaldo + tranchesValue;
+
+      if (overpaymentInstallmentReduction > 0) {
+        this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths - monthIndex + 1;
+        this.currentDebtForEqualInstallmentsCalculation = currentSaldo - overpaymentInstallmentReduction;
+      }
+      currentSaldo = currentSaldo - currentOverpayment;
 
       const currentRate = this.ratesDataService.getRateValueByMonthIndex(monthIndex);
       const interests = this.calculateInterests(currentSaldo, currentRate);
@@ -74,6 +90,7 @@ export class CalculatorService {
       const costs = this.getCosts(monthIndex, currentSaldo);
 
       currentSaldo = currentSaldo - principal;
+      console.warn('i: ', monthIndex, ' currentSaldo: ', currentSaldo, ' interests: ', interests, ' principal: ', principal);
       const sumCosts = this.getSumOfCosts(costs);
 
       const month: MonthCalculation = {
@@ -92,7 +109,7 @@ export class CalculatorService {
       };
       this.calculation.push(month);
       this.updateSummary(month);
-      if (currentSaldo <= 0) { break; }
+      if (round(currentSaldo) <= 0) { break; }
     }
     console.log(this.calculation);
     this.setCalculationResult();
@@ -122,14 +139,14 @@ export class CalculatorService {
   }
 
   private calculateEqualInstallment(rate: number): number {
-    // nR = kwota_udzielonego_kredytu * oprocentowanie_kredytu
-    const nR = this.loanParams.getAmountLoan() * rate;
+    // nR = wysokosc_kredytu * oprocentowanie_kredytu
+    const nR = this.currentDebtForEqualInstallmentsCalculation * rate;
 
     // kR = liczba_rat_w_roku / (liczba_rat_w_roku + oprocentowanie_kredytu)
     const kR = INSTALLMENTS_IN_YEAR / (INSTALLMENTS_IN_YEAR + rate);
 
-    // rata = nR / [ liczba_rat_w_roku * ( 1 - (liczba_rat_w_roku / [ kR ])^liczba_rat ) ]
-    return nR / (INSTALLMENTS_IN_YEAR * (1 - (Math.pow(kR, this.numberOfMonths))));
+    // rata = nR / [ liczba_rat_w_roku * ( 1 - ([ kR ]^liczba_rat ) ]
+    return nR / (INSTALLMENTS_IN_YEAR * (1 - (Math.pow(kR, this.numberOfMonthsForInstallmentsCalculation))));
   }
 
   private calculatePrincipal(rate: number, interests: number, monthIndex: number): number {
@@ -140,19 +157,24 @@ export class CalculatorService {
     } else {
       principal = this.calculatePrincipalForDecreasingInstallemnts();
     }
-    if (monthIndex === this.numberOfMonths) {
-      principal = this.equalizeLastInstallment(principal);
-    }
+    principal = this.equalizeLastInstallment(principal, monthIndex);
     return principal;
   }
 
-  private equalizeLastInstallment(principal: number): number {
+  private equalizeLastInstallment(principal: number, monthIndex: number): number {
     const calculatedPrincipals = this.summary.principals + principal;
-    const lastInstallmentEqualization = Math.abs(calculatedPrincipals - this.loanParams.getAmountLoan());
-    if (calculatedPrincipals > this.loanParams.getAmountLoan()) {
+    if (!this.isLastInstallment(monthIndex, calculatedPrincipals)) {
+      return principal;
+    }
+    const lastInstallmentEqualization = Math.abs(calculatedPrincipals - this.currentDebt);
+    if (calculatedPrincipals > this.currentDebt) {
       return principal - lastInstallmentEqualization;
     }
     return principal + lastInstallmentEqualization;
+  }
+
+  private isLastInstallment(monthIndex: number, calculatedPrincipals: number): boolean {
+    return (monthIndex === this.numberOfMonths) || (calculatedPrincipals > this.currentDebt);
   }
 
   private getCosts(monthsIndex: number, saldo: number): CostData[] {
