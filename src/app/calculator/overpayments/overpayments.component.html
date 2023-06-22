@@ -9,16 +9,16 @@
             <app-input-field [configuration]="overpaymentValueInputField"
             (valueChange)="onValueChange($event)"></app-input-field>
 
-            <app-button-toggle [configuration]="overpayments"
-            (valueChange)="onOverpaymentsButtonToggle($event)">
-            </app-button-toggle>
-
             <app-datepicker [configuration]="overpaymentDateField"
             (valueChange)="onDateChange($event)"></app-datepicker>
 
             <app-input-field [configuration]="monthsInputField"
             (valueChange)="onNumberOfMonthsChange($event)"></app-input-field>
 
+            <app-button-toggle [configuration]="overpayments"
+            (valueChange)="onOverpaymentsButtonToggle($event)">
+            </app-button-toggle>
+    
             <div class="empty-space"></div>
         </div>
 

@@ -53,20 +53,20 @@ $custom-typography: mat-typography-config($font-family: 'Archivo',
 @include mat.form-field-typography($custom-typography);
 @include mat.input-typography($custom-typography);
 
-@media only screen and (max-width: 768px) {
-    .card-wrapper {
-        // przyjrzec sie szerokosci kart dla malych ekranow
-        // min-width: 90vw;
-        // max-width: 100%
-        // padding: 1rem 2rem;
-    }
-}
+// @media only screen and (max-width: 768px) {
+//     .card-wrapper {
+//         // przyjrzec sie szerokosci kart dla malych ekranow
+//         // min-width: 90vw;
+//         // max-width: 100%
+//         // padding: 1rem 2rem;
+//     }
+// }
 
-@media only screen and (min-width: 768px) {
-    .card-wrapper {
-        // padding: 1rem 2rem;
-    }
-}
+// @media only screen and (min-width: 768px) {
+//     .card-wrapper {
+//         // padding: 1rem 2rem;
+//     }
+// }
 
 .empty-space {
     width: 281px;
@@ -89,8 +89,26 @@ $custom-typography: mat-typography-config($font-family: 'Archivo',
     padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
-.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-    padding: 0 26px !important;
+.mat-mdc-form-field {
+    width: 185px;
+}
+
+.mat-button-toggle {
+    width: 50%;
+    white-space: unset !important;
+}
+
+.mat-button-toggle-group {
+    white-space: unset !important;
+}
+
+.mat-button-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.mat-button-toggle-label-content {
+    line-height: 1.2rem !important;
 }
 
 .mat-button-toggle-checked .mat-button-toggle-focus-overlay {
@@ -235,7 +253,7 @@ input[type=number] {
 
 .datepicker .mat-mdc-text-field-wrapper {
     cursor: pointer;
-    left: 40px;
+    left: 48px;
 }
 
 .datepicker input {
@@ -255,4 +273,9 @@ input[type=number] {
 .mdc-tooltip__surface {
     color: var(--antique-white) !important;
     background-color: var(--scampi) !important;
+}
+
+.select-field {
+    left: 48px;
+    position: relative;
 }

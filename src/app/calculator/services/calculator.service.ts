@@ -22,7 +22,7 @@ export class CalculatorService {
   private numberOfMonths = 0;
   private numberOfMonthsForInstallmentsCalculation = 0;
   private currentDebt = 0;
-  private currentDebtForEqualInstallmentsCalculation = 0;
+  private currentDebtForInstallmentsCalculation = 0;
   private calculation: MonthCalculation[] = [];
   private summary: SummaryCalculation = {
     numberOfMonths: 0, principals: 0, interests: 0, sumCosts: 0, overpayments: 0, costs: new Map<number, number>()
@@ -47,7 +47,7 @@ export class CalculatorService {
     this.numberOfMonths = this.loanParams.getNumberOfMonths();
     this.currentDebt = this.loanParams.getAmountLoan();
     this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths;
-    this.currentDebtForEqualInstallmentsCalculation = this.currentDebt;
+    this.currentDebtForInstallmentsCalculation = this.currentDebt;
     this.calculateInstallments();
   }
 
@@ -80,7 +80,7 @@ export class CalculatorService {
 
       if (overpaymentInstallmentReduction > 0) {
         this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths - monthIndex + 1;
-        this.currentDebtForEqualInstallmentsCalculation = currentSaldo - overpaymentInstallmentReduction;
+        this.currentDebtForInstallmentsCalculation = currentSaldo - overpaymentInstallmentReduction;
       }
       currentSaldo = currentSaldo - currentOverpayment;
 
@@ -90,7 +90,6 @@ export class CalculatorService {
       const costs = this.getCosts(monthIndex, currentSaldo);
 
       currentSaldo = currentSaldo - principal;
-      console.warn('i: ', monthIndex, ' currentSaldo: ', currentSaldo, ' interests: ', interests, ' principal: ', principal);
       const sumCosts = this.getSumOfCosts(costs);
 
       const month: MonthCalculation = {
@@ -121,7 +120,7 @@ export class CalculatorService {
   }
 
   private calculatePrincipalForDecreasingInstallemnts(): number {
-    return this.loanParams.getAmountLoan() / this.numberOfMonths;
+    return this.currentDebtForInstallmentsCalculation / this.numberOfMonthsForInstallmentsCalculation;
   }
 
   private sumTranchesValue(monthsIndex: number): number {
@@ -140,7 +139,7 @@ export class CalculatorService {
 
   private calculateEqualInstallment(rate: number): number {
     // nR = wysokosc_kredytu * oprocentowanie_kredytu
-    const nR = this.currentDebtForEqualInstallmentsCalculation * rate;
+    const nR = this.currentDebtForInstallmentsCalculation * rate;
 
     // kR = liczba_rat_w_roku / (liczba_rat_w_roku + oprocentowanie_kredytu)
     const kR = INSTALLMENTS_IN_YEAR / (INSTALLMENTS_IN_YEAR + rate);

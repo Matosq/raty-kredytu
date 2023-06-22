@@ -1,3 +1,7 @@
+:host {
+    width: 281px;
+}
+
 ::ng-deep {
     .mat-mdc-form-field {
         ::placeholder {
@@ -11,13 +15,11 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: baseline;
 }
 
 .mat-mdc-form-field-error {
     display: flex;
     align-items: center;
-    gap: 10px
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {

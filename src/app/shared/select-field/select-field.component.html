@@ -1,7 +1,6 @@
 <app-field-title [config]="configuration.fieldTitle"></app-field-title>
 
 <mat-form-field class="select-field" appearance="outline">
-    <!-- <mat-label>Favorite food</mat-label> -->
     <mat-select [formControl]="selectedValueForm">
         <mat-option *ngFor="let option of configuration.options" [value]="option.value">
             {{option.value}}

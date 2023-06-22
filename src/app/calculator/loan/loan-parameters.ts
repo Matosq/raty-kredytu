@@ -6,7 +6,10 @@ import { Section } from "../section/section";
 
 export class LoanParameters extends Section {
   public readonly amountLoanField: CreditParameterInputField = {
-    fieldTitle: { title: 'kwota kredytu', tooltip: 'Całkowita kwota kredytu, to kwota, którą rzeczywiście otrzymamy od banku, na podstawie zawartej wcześniej umowy kredytowej.' },
+    fieldTitle: {
+      title: 'kwota kredytu',
+      tooltip: 'Całkowita kwota kredytu, to kwota, którą rzeczywiście otrzymamy od banku, na podstawie zawartej wcześniej umowy kredytowej.'
+    },
     label: 'zł',
     placeholder: 'wpisz kwotę kredytu',
     value: 300000,

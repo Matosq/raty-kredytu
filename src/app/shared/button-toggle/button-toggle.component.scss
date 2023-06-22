@@ -3,10 +3,11 @@
 }
 
 .mat-button-toggle-group {
-    left: 40px;
+    left: 48px;
     border-radius: 6px;
     border-color: var(--antique-white);
-
+    width: 185px;
+    height: 56px;
 }
 
 .toggle-button-wrapper {
@@ -25,12 +26,6 @@
 
 .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
     border-left: solid 1px var(--antique-white);
-}
-
-::ng-deep {
-        .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-            line-height: 52px !important;
-    }
 }
 
 .mat-button-toggle-checked {
