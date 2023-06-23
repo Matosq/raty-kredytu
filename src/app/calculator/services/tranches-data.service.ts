@@ -34,4 +34,8 @@ export class TranchesDataService {
   public getTranchesByMonthsIndex(monthsIndex: number): TrancheData[] {
     return this.tranchesData.filter((tranche: TrancheData) => tranche.startMonth === monthsIndex);
   }
+
+  public areTranches(): boolean {
+    return this.tranchesData.length > 0;
+  }
 }

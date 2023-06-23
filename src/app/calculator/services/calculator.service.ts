@@ -45,10 +45,14 @@ export class CalculatorService {
     this.calculation = [];
     this.calculateParametersData();
     this.numberOfMonths = this.loanParams.getNumberOfMonths();
-    this.currentDebt = this.loanParams.getAmountLoan();
+    this.currentDebt = this.getInitialDebt();
     this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths;
     this.currentDebtForInstallmentsCalculation = this.currentDebt;
     this.calculateInstallments();
+  }
+
+  private getInitialDebt(): number {
+    return this.tranchesDataService.areTranches() ? 0 : this.loanParams.getAmountLoan();
   }
 
   private cleanSummary(): void {
@@ -67,7 +71,7 @@ export class CalculatorService {
   }
 
   private calculateInstallments(): void {
-    let currentSaldo = this.getPrimarySaldo();
+    let currentSaldo = this.currentDebt;
 
     for (let monthIndex = 1; monthIndex <= this.numberOfMonths; monthIndex++) {
       const tranchesValue = this.sumTranchesValue(monthIndex);
@@ -75,21 +79,21 @@ export class CalculatorService {
       const overpaymentInstallmentReduction = this.overpaymentsDataService.getOverpaymentInstallmentReductionValueByMonthsIndex(monthIndex);
       const currentOverpayment = overpaymentLoanReduction + overpaymentInstallmentReduction;
 
-      this.currentDebt = this.currentDebt - currentOverpayment;
-      currentSaldo = currentSaldo + tranchesValue;
+      this.currentDebt = this.currentDebt - currentOverpayment + tranchesValue;
+      currentSaldo += tranchesValue;
 
-      if (overpaymentInstallmentReduction > 0) {
+      if (overpaymentInstallmentReduction > 0 || tranchesValue > 0) {
         this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths - monthIndex + 1;
         this.currentDebtForInstallmentsCalculation = currentSaldo - overpaymentInstallmentReduction;
       }
-      currentSaldo = currentSaldo - currentOverpayment;
+      currentSaldo -= currentOverpayment;
 
       const currentRate = this.ratesDataService.getRateValueByMonthIndex(monthIndex);
       const interests = this.calculateInterests(currentSaldo, currentRate);
       const principal = this.calculatePrincipal(currentRate, interests, monthIndex);
       const costs = this.getCosts(monthIndex, currentSaldo);
 
-      currentSaldo = currentSaldo - principal;
+      currentSaldo -= principal;
       const sumCosts = this.getSumOfCosts(costs);
 
       const month: MonthCalculation = {
@@ -112,11 +116,6 @@ export class CalculatorService {
     }
     console.log(this.calculation);
     this.setCalculationResult();
-  }
-
-  private getPrimarySaldo(): number {
-    const saldo = this.sumTranchesValue(1);
-    return saldo ? saldo : this.loanParams.getAmountLoan();
   }
 
   private calculatePrincipalForDecreasingInstallemnts(): number {
