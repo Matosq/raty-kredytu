@@ -30,6 +30,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   private isValueFieldValid = true;
   private isMonthsFieldValid = true;
   public currentCosts: CostPosition[] = [];
+  public numberOfCurrentCosts = 0;
   public readonly cardHeader = SectionCardHeader.COSTS;
   public selectedCostsType = CostsType.FIXED_AMOUNT;
   public readonly CostsType = CostsType;
@@ -78,12 +79,14 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     this.costsService.addCost(this.cost);
     this.clearFieldsValue();
     this.currentCosts = this.costsService.getCosts();
+    this.numberOfCurrentCosts = this.currentCosts.length;
     this.calculateLoan();
   }
 
   public deleteCost(cost: CostPosition): void {
     cost.isDeleted = true;
     this.costsService.deleteCost(cost);
+    this.numberOfCurrentCosts = this.costsService.getCosts().length;
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentCosts = this.costsService.getCosts();
     });

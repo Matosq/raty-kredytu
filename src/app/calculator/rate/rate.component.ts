@@ -27,6 +27,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   private isRateFieldValid = true;
   private isNumberOfMonthsValid = true;
   public rateChanges: RatePosition[] = [];
+  public numberOfRateChanges = 0;
   public readonly cardHeader = SectionCardHeader.RATE;
   public addRateButton: ButtonConfig = {
     text: 'zmień oprocentowanie',
@@ -75,12 +76,14 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.rateService.addRate(this.rate);
     this.resetFields();
     this.rateChanges = this.rateService.getRates();
+    this.numberOfRateChanges = this.rateChanges.length;
     this.calculateLoan();
   }
 
   public deleteRate(rate: RatePosition): void {
     rate.isDeleted = true;
     this.rateService.deleteRate(rate);
+    this.numberOfRateChanges = this.rateService.getRates().length;
     of(null).pipe(delay(0)).subscribe(() => {
       this.rateChanges = this.rateService.getRates();
     });

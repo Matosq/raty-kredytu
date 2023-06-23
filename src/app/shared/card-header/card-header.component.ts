@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class CardHeaderComponent implements OnInit {
   @Input() header = '';
+  @Input() value = 0;
   constructor() { }
 
   ngOnInit(): void {

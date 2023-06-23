@@ -6,3 +6,13 @@ h2 {
     line-height: 26px;
     margin: 0 0;
 }
+
+.flex-card-header {
+    display: flex;
+    align-items: baseline
+}
+
+.card-header-value {
+    padding-left: 1rem;
+    color: var(--swiss-coffe);
+}

@@ -22,6 +22,7 @@ import { CalculateTriggerService } from '../services/calculate-trigger.service';
 export class TranchesComponent extends TranchesParameters implements SectionCard, OnInit, OnDestroy {
   public cardHeader = SectionCardHeader.TRANCHES;
   public tranches: TranchePosition[] = [];
+  public numberOfTranches = 0;
   public readonly addTrancheButton: ButtonConfig = {
     text: 'dodaj transzę',
     icon: IconName.ADD
@@ -77,12 +78,14 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
     this.tranchesService.addTranche(this.newTranche);
     this.clearFieldsValue();
     this.tranches = this.tranchesService.getTranches();
+    this.numberOfTranches = this.tranches.length;
     this.calculateLoan();
   }
 
   public deleteTranche(tranche: TranchePosition): void {
     tranche.isDeleted = true;
     this.tranchesService.deleteTranche(tranche);
+    this.numberOfTranches = this.tranchesService.getTranches().length;
     of(null).pipe(delay(0)).subscribe(() => {
       this.tranches = this.tranchesService.getTranches();
     });

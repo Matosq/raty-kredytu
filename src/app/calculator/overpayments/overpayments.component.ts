@@ -21,6 +21,7 @@ import { CalculateTriggerService } from '../services/calculate-trigger.service';
 })
 export class OverpaymentsComponent extends OverpaymentsParameters implements SectionCard {
   public currentOverpayments: OverpaymentPosition[] = [];
+  public numberOfCurrentOverpayments = 0;
   public readonly cardHeader = SectionCardHeader.OVERPAYMENTS;
   public readonly addOverpaymentButton: ButtonConfig = {
     text: 'dodaj nadpłatę',
@@ -67,12 +68,14 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
     this.overpaymentsService.addOverpayment(this.overpayment);
     this.clearFields();
     this.currentOverpayments = this.overpaymentsService.getOverpayments();
+    this.numberOfCurrentOverpayments = this.currentOverpayments.length;
     this.calculateLoan();
   }
 
   public deleteOverpayment(overpayment: OverpaymentPosition): void {
     overpayment.isDeleted = true;
     this.overpaymentsService.deleteOverpayment(overpayment);
+    this.numberOfCurrentOverpayments = this.overpaymentsService.getOverpayments().length;
     of(null).pipe(delay(0)).subscribe(() => {
       this.currentOverpayments = this.overpaymentsService.getOverpayments();
     });
