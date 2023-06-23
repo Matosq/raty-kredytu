@@ -283,4 +283,8 @@ input[type=number] {
 .icon-align {
     position: relative;
     top: 3px;
-  }
+}
+
+.mat-mdc-form-field-error-wrapper {
+    padding: 0 4px !important;
+}
