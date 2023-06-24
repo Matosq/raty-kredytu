@@ -1,0 +1,25 @@
+.scroll-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.flexbox-row-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.flexbox-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

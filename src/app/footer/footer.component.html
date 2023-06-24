@@ -1,0 +1,25 @@
+<section class="card-wrapper">
+    <div class="footer-wrapper">
+
+        <div class="footer-flex">
+            <div class="footer-about">
+                <h3>O stronie</h3>
+                <div>Kalkulator kredytowy to całkowicie darmowe narzędzie, które umożliwia sumylację wysokości rat
+                    kredytu.
+                    Pozwala on oszacować koszty kredytu.
+                    Rzeczywiste wartości rat Twojego kredytu mogą się różnić z wynikiem symulacji. Zależą one od
+                    indywidualnych parametrów kredytu i oferty bankowej.</div>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Kontakt</h3>
+                <div>Pytania związane z działaniem kalkulatora oraz zgłaszanie błędów można kierować na adres email.
+                </div>
+                <div class="footer-contact-email"><app-icon class="icon-align" [icon]="icon"></app-icon>
+                    {{email}}
+                    <button class="copy-button" [cdkCopyToClipboard]="email">Skopiuj email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

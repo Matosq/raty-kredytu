@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculatorModule } from './calculator/calculator.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainNavModule } from './main-nav/main-nav.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     CalculatorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MainNavModule,
+    FooterModule
   ],
   providers: [{
     provide: LOCALE_ID, useValue: 'pl-PL'

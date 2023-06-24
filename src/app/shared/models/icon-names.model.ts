@@ -6,5 +6,6 @@ export enum IconName {
     PERCENT = 'percent',
     INFO = 'info',
     ERROR = 'error',
-    DOWNLOAD = 'download'
+    DOWNLOAD = 'download',
+    MAIL = 'mail'
 }

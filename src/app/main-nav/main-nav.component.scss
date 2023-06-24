@@ -1,0 +1,21 @@
+h1 {
+    font-size: 6rem;
+    line-height: 5.5rem;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 992px) {
+    h1 {
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+}
+
+.header-wrapper {
+    padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.card-wrapper {
+    border-radius: 0px 0px 4px 4px !important;
+    width: 100vw;
+}
