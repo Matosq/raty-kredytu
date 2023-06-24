@@ -13,7 +13,6 @@ import { SimulationComponent } from './simulation/simulation.component';
 import { CostsComponent } from './costs/costs.component';
 import { TextFieldModule } from '../shared/text-field/text-field.module';
 import { SelectFieldModule } from '../shared/select-field/select-field.module';
-import { DatepickerRangeModule } from '../shared/datepicker-range/datepicker-range.module';
 import { OverpaymentsComponent } from './overpayments/overpayments.component';
 import { DividerModule } from '../shared/divider/divider.module';
 import { RateComponent } from './rate/rate.component';
@@ -46,7 +45,6 @@ import { LegendComponent } from './legend/legend.component';
     DatepickerModule,
     TextFieldModule,
     SelectFieldModule,
-    DatepickerRangeModule,
     DividerModule,
     MatExpansionModule,
     BarChartModule,
