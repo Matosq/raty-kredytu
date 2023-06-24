@@ -102,6 +102,10 @@ $custom-typography: mat-typography-config($font-family: 'Archivo',
     white-space: unset !important;
 }
 
+.mat-button-toggle-button {
+    height: 100%;
+}
+
 .mat-button-toggle {
     display: flex;
     align-items: center;
@@ -109,10 +113,6 @@ $custom-typography: mat-typography-config($font-family: 'Archivo',
 
 .mat-button-toggle-label-content {
     line-height: 1.2rem !important;
-}
-
-.mat-button-toggle-checked .mat-button-toggle-focus-overlay {
-    border-bottom: solid 52px !important;
 }
 
 @media only screen and (max-width: 658px) {
