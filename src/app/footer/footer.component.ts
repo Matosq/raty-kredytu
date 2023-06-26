@@ -8,5 +8,5 @@ import { IconName } from '../shared/models/icon-names.model';
 })
 export class FooterComponent {
   protected icon = IconName.MAIL;
-  protected email = 'mateuszgonet15@gmail.com';
+  protected email = 'kontakt@ratykredytu.pl';
 }
