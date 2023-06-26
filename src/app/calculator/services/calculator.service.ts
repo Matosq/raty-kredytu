@@ -82,7 +82,7 @@ export class CalculatorService {
       this.currentDebt = this.currentDebt - currentOverpayment + tranchesValue;
       currentSaldo += tranchesValue;
 
-      if (overpaymentInstallmentReduction > 0 || tranchesValue > 0) {
+      if (overpaymentInstallmentReduction > 0 || tranchesValue > 0 || this.isFirstPaymentMonth()) {
         this.numberOfMonthsForInstallmentsCalculation = this.numberOfMonths - monthIndex + 1;
         this.currentDebtForInstallmentsCalculation = currentSaldo - overpaymentInstallmentReduction;
       }
@@ -114,8 +114,11 @@ export class CalculatorService {
       this.updateSummary(month);
       if (round(currentSaldo) <= 0) { break; }
     }
-    console.log(this.calculation);
     this.setCalculationResult();
+  }
+
+  private isFirstPaymentMonth(): boolean {
+    return this.monthCalculationDate.isSame(this.loanParams.getFirstPaymentDate(), 'day');
   }
 
   private calculatePrincipalForDecreasingInstallemnts(): number {
@@ -149,6 +152,9 @@ export class CalculatorService {
 
   private calculatePrincipal(rate: number, interests: number, monthIndex: number): number {
     let principal = 0;
+    if (this.isCreditActivated()) {
+      return principal;
+    }
     if (this.loanParams.getInstallments() === Installments.EQUAL) {
       const installment = this.calculateEqualInstallment(rate);
       principal = installment - interests;
@@ -157,6 +163,10 @@ export class CalculatorService {
     }
     principal = this.equalizeLastInstallment(principal, monthIndex);
     return principal;
+  }
+
+  private isCreditActivated(): boolean {
+    return this.monthCalculationDate.isBefore(this.loanParams.getFirstPaymentDate(), 'day');
   }
 
   private equalizeLastInstallment(principal: number, monthIndex: number): number {
