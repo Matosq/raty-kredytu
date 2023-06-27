@@ -11,6 +11,7 @@
     --medium-devices-width: 768px;
     --large-devices-width: 992px;
     --bronze-metallic: #a08e5f;
+    --west-side: #FF9914;
 }
 
 // /* Extra small devices (phones, 600px and down) */
@@ -69,21 +70,6 @@ $custom-typography: mat-typography-config($font-family: 'Archivo',
 @include mat-button-toggle-typography($custom-typography);
 @include mat.form-field-typography($custom-typography);
 @include mat.input-typography($custom-typography);
-
-// @media only screen and (max-width: 768px) {
-//     .card-wrapper {
-//         // przyjrzec sie szerokosci kart dla malych ekranow
-//         // min-width: 90vw;
-//         // max-width: 100%
-//         // padding: 1rem 2rem;
-//     }
-// }
-
-// @media only screen and (min-width: 768px) {
-//     .card-wrapper {
-//         // padding: 1rem 2rem;
-//     }
-// }
 
 .empty-space {
     width: 281px;
@@ -160,7 +146,7 @@ input[type=number] {
 }
 
 .mat-mdc-select-arrow {
-    color: var(--antique-white);
+    color: var(--antique-white) !important;
 }
 
 .mat-mdc-select-value {
@@ -177,7 +163,7 @@ input[type=number] {
 }
 
 .mat-mdc-select-panel {
-    background: var(--scampi);
+    background: var(--scampi) !important;
 }
 
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
@@ -254,17 +240,17 @@ input[type=number] {
 }
 
 .mat-mdc-slider {
-    --mdc-slider-handle-color: #FF9914 !important;
-    --mdc-slider-focus-handle-color: #FF9914 !important;
-    --mdc-slider-hover-handle-color: #FF9914 !important;
-    --mdc-slider-active-track-color: #FF9914 !important;
-    --mdc-slider-inactive-track-color: #FF9914 !important;
-    --mdc-slider-with-tick-marks-inactive-container-color: #FF9914 !important;
-    --mat-mdc-slider-ripple-color: #FF9914 !important;
+    --mdc-slider-handle-color: var(--west-side) !important;
+    --mdc-slider-focus-handle-color: var(--west-side) !important;
+    --mdc-slider-hover-handle-color: var(--west-side) !important;
+    --mdc-slider-active-track-color: var(--west-side) !important;
+    --mdc-slider-inactive-track-color: var(--west-side) !important;
+    --mdc-slider-with-tick-marks-inactive-container-color: var(--west-side) !important;
+    --mat-mdc-slider-ripple-color: var(--west-side) !important;
     --mat-mdc-slider-hover-ripple-color: rgba(255, 153, 20, 0.05) !important;
     --mat-mdc-slider-focus-ripple-color: rgba(255, 153, 20, 0.05) !important;
 
-    --mdc-slider-label-container-color: #FF9914 !important;
+    --mdc-slider-label-container-color: var(--west-side) !important;
     --mdc-slider-label-label-text-color: #1F172E !important;
 }
 
