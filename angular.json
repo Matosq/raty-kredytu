@@ -40,7 +40,8 @@
               "mergeStrategies": {
                 "externals": "prepend"
               }
-            }
+            },
+            "allowedCommonJsDependencies": ["lodash", "moment"]
           },
           "configurations": {
             "production": {
