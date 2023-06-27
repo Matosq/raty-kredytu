@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import moment, { Moment } from 'moment';
 import { delay, of } from 'rxjs';
 import { SectionCard, SectionCardHeader } from 'src/app/calculator/models/section-card.model';

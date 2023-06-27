@@ -2,13 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CreditParameterDatepicker, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
 import { DatepickerRangeFormat, DateRange } from 'src/app/calculator/models/date.model';
-const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-datepicker-range',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import { Moment } from 'moment';
 import { DateRange, MonthsPeriodIndexes, MonthYear, MonthYearPeriod } from '../models/date.model';
 import { LoanParametersService } from './loan-parameters.service';

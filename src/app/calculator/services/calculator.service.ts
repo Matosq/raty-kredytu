@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { Installments } from 'src/app/shared/button-toggle/installment.model';
 import { LoanParametersService } from './loan-parameters.service';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from './simulation-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';

@@ -23,12 +23,17 @@
       "dom"
     ],
     "allowSyntheticDefaultImports": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "typeRoots": ["node_modules/@types", "manual_typings"],
+    "paths": {
+      "lodash/*": ["node_modules/@types/lodash-es/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "import-blacklist": [true, "lodash"]
 }

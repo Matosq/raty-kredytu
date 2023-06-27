@@ -10,7 +10,7 @@ import { LoanParametersService } from '../services/loan-parameters.service';
 import { RateParameters } from './rate-parameters';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({

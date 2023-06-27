@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/raty-kredytu",
             "index": "src/index.html",
@@ -33,7 +33,14 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true,
+              "mergeStrategies": {
+                "externals": "prepend"
+              }
+            }
           },
           "configurations": {
             "production": {
@@ -41,7 +48,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1.5mb"
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",

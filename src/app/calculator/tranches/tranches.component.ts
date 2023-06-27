@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'; import { cloneDeep } from 'lodash';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import cloneDeep from 'lodash/cloneDeep';
 import moment from 'moment';
 import { Moment } from 'moment';
 import { delay, of, Subscription } from 'rxjs';

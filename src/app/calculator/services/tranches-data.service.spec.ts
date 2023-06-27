@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import moment, { Moment } from 'moment';
 import { TranchePosition, TranchesService } from '../tranches/tranches.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
