@@ -36,13 +36,30 @@ body {
 
 body {
     background-color: var(--scampi);
-    background-image: url("./assets/background-photo-min-1.png");
     background-size: cover;
     background-position: center;
     height: 100vh;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+}
+
+@media (min-width: 1025px) {
+    .background {
+        background-image: url("./assets/background-desktop-1.jpg");
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    .background {
+        background-image: url("./assets/background-tablet-1.jpg");
+    }
+}
+
+@media (max-width: 480px) {
+    .background {
+        background-image: url("./assets/background-mobile-1.jpg");
+    }
 }
 
 $custom-typography: mat-typography-config($font-family: 'Archivo',
@@ -235,7 +252,6 @@ input[type=number] {
 .mat-expansion-indicator:after {
     color: var(--swiss-coffe);
 }
-
 
 .mat-mdc-slider {
     --mdc-slider-handle-color: #FF9914 !important;

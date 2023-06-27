@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'raty kredytu';
+export class AppComponent implements OnInit {
+  protected title = 'raty kredytu';
+  private backgroundImageCssClassName = 'background';
+
+  public ngOnInit(): void {
+    this.lazyLoadBackgroundImage();
+  }
+
+  private lazyLoadBackgroundImage(): void {
+    const bodyElement = document.body;
+    if (bodyElement) {
+      bodyElement.classList.add(this.backgroundImageCssClassName);
+    }
+  }
 }
