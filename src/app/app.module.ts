@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import '@angular/common/locales/global/pl';
 import { AppComponent } from './app.component';
 import { CalculatorModule } from './calculator/calculator.module';
@@ -18,9 +18,11 @@ import { FooterModule } from './footer/footer.module';
     MainNavModule,
     FooterModule
   ],
-  providers: [{
-    provide: LOCALE_ID, useValue: 'pl-PL'
-  }],
+  providers: [
+    provideClientHydration(),
+    {
+      provide: LOCALE_ID, useValue: 'pl-PL'
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
