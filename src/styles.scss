@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap');
 @import '@angular/material/theming';
 
 :root {
@@ -8,8 +7,6 @@
     --scampi: #6768AB;
     --kimberly: #7573A9;
     --swiss-coffe: #DED2D3;
-    --medium-devices-width: 768px;
-    --large-devices-width: 992px;
     --bronze-metallic: #a08e5f;
     --west-side: #FF9914;
 }
