@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { DonutChartData } from '../models/donut-chart-data.model';
 
-
-export interface DonutChartData {
-  color: string,
-  width: number,
-  rotate: number
-};
 @Component({
   selector: 'app-donut-chart',
   templateUrl: './donut-chart.component.html',

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import cloneDeep from 'lodash/cloneDeep';
 import moment, { Moment } from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Installments } from 'src/app/shared/button-toggle/installment.model';
-
+import { Installments } from 'src/app/calculator/models/installment.model';
 
 export interface CreditPeriod {
   startDate: Moment;

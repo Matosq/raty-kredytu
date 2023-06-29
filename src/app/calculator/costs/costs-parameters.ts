@@ -6,13 +6,13 @@ export const defaultCost = 100;
 export const defaultCostPercentage = 0.1;
 export class CostsParameters extends Section {
   public readonly costsNameTextField: CreditParameterTextField = {
-    fieldTitle: { title: 'nazwa'},
+    fieldTitle: { title: 'nazwa' },
     value: '',
     placeholder: 'np. ubezpieczenie'
   }
 
   public readonly selectField: CreditParameterSelectField = {
-    fieldTitle: { title: 'rodzaj kosztu'},
+    fieldTitle: { title: 'rodzaj kosztu' },
     options: [
       { value: CostsType.FIXED_AMOUNT },
       { value: CostsType.BALANCE_RATE },
@@ -22,12 +22,12 @@ export class CostsParameters extends Section {
   }
 
   public datePicker: CreditParameterDatepicker = {
-    fieldTitle: { title: 'data pierwszej płatności'},
+    fieldTitle: { title: 'data pierwszej płatności' },
     label: 'miesiąc i rok'
   }
 
   public readonly monthsInputField: CreditParameterInputField = {
-    fieldTitle: { title: 'okres trwania płatności'},
+    fieldTitle: { title: 'okres trwania płatności' },
     label: 'liczba miesięcy',
     value: 1,
     stepValue: 1,
@@ -35,7 +35,7 @@ export class CostsParameters extends Section {
   }
 
   public readonly costsInputField: CreditParameterInputField = {
-    fieldTitle: { title: 'miesięczny koszt'},
+    fieldTitle: { title: 'miesięczny koszt' },
     label: 'zł',
     value: defaultCost,
     stepValue: 100,
@@ -43,7 +43,7 @@ export class CostsParameters extends Section {
   }
 
   public readonly costsBalanceRateInputField: CreditParameterInputField = {
-    fieldTitle: { title: 'oprocentowanie salda kredytu'},
+    fieldTitle: { title: 'oprocentowanie salda kredytu' },
     label: '%',
     value: defaultCostPercentage,
     stepValue: 0.1,
@@ -51,7 +51,7 @@ export class CostsParameters extends Section {
   }
 
   public readonly costsCreditRateInputField: CreditParameterInputField = {
-    fieldTitle: { title: 'oprocentowanie kwoty kredytu'},
+    fieldTitle: { title: 'oprocentowanie kwoty kredytu' },
     label: '%',
     value: defaultCostPercentage,
     stepValue: 0.1,

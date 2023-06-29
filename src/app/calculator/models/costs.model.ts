@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { MonthYearPeriod } from "./date.model";
 
 export interface CostsOption {
   value: CostsType;
@@ -17,3 +18,12 @@ export interface Cost {
   type: CostsType,
   value: number
 }
+
+export interface CostData {
+  value: number,
+  type: CostsType,
+  name: string,
+  indexOfCost: number
+}
+
+export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number, isDeleted?: boolean };

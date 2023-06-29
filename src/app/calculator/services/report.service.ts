@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SimulationDataService } from './simulation-data.service';
-import { Summary, SummaryDataService } from './summary-data.service';
+import { SummaryDataService } from './summary-data.service';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { LoanParametersService } from './loan-parameters.service';
-import { Installments } from 'src/app/shared/button-toggle/installment.model';
 import { getInstallmentsAsText, round } from '../utils/utils';
+import { Summary } from '../models/summary.model';
 
 @Injectable({
   providedIn: 'root'

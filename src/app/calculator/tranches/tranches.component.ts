@@ -8,9 +8,9 @@ import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.mo
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
-import { Tranche } from '../models/tranche.model';
+import { Tranche, TranchePosition } from '../models/tranche.model';
 import { TranchesParameters } from './tranches-parameters';
-import { TranchePosition, TranchesService } from './tranches.service';
+import { TranchesService } from './tranches.service';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
 
 @Component({

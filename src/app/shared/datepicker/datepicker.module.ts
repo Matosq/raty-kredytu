@@ -22,7 +22,7 @@ import { FieldTitleModule } from '../field-title/field-title.module';
     MatNativeDateModule,
     ReactiveFormsModule,
     MatInputModule,
-    FieldTitleModule 
+    FieldTitleModule
   ],
   exports: [
     DatepickerComponent

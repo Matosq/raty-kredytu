@@ -1,4 +1,4 @@
-import { Installments } from "src/app/shared/button-toggle/installment.model";
+import { Installments } from "src/app/calculator/models/installment.model";
 import { ButtonConfig } from "src/app/shared/models/button-config.model";
 import { IconName } from "src/app/shared/models/icon-names.model";
 import { CreditParameterButtonToggle, CreditParameterDatepicker, CreditParameterInputField } from "../models/credit-parameter.model";

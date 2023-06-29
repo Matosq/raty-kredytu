@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DonutChartData } from 'src/app/shared/donut-chart/donut-chart.component';
 import { Legend } from '../models/legend.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { LoanParametersService } from '../services/loan-parameters.service';
-import { Summary, SummaryCalculation, SummaryDataService } from '../services/summary-data.service';
+import { SummaryDataService } from '../services/summary-data.service';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { ReportService } from '../services/report.service';
 import { getInstallmentsAsText } from '../utils/utils';
+import { Summary, SummaryCalculation } from '../models/summary.model';
+import { DonutChartData } from 'src/app/shared/models/donut-chart-data.model';
 
 @Component({
   selector: 'app-summary',
@@ -79,5 +80,4 @@ export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
   private takeLoanParameters(): void {
     this.installments = getInstallmentsAsText(this.loanParametersService.getInstallments());
   }
-
 }

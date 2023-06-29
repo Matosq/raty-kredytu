@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { Installments } from 'src/app/shared/button-toggle/installment.model';
+import { Installments } from 'src/app/calculator/models/installment.model';
 import { LoanParametersService } from './loan-parameters.service';
 import cloneDeep from 'lodash/cloneDeep';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from './simulation-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';
-import { CostData, CostsDataService } from './costs-data.service';
+import { CostsDataService } from './costs-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { RatesDataService } from './rates-data.service';
-import { TrancheData, TranchesDataService } from './tranches-data.service';
-import { SummaryCalculation, SummaryDataService } from './summary-data.service';
+import { TranchesDataService } from './tranches-data.service';
+import { SummaryDataService } from './summary-data.service';
 import { INSTALLMENTS_IN_YEAR } from '../models/consts.model';
 import { round } from '../utils/utils';
+import { CostData } from '../models/costs.model';
+import { SummaryCalculation } from '../models/summary.model';
+import { TrancheData } from '../models/tranche.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { MonthYear } from '../models/date.model';
-import { Tranche } from '../models/tranche.model';
+import { Observable, Subject } from 'rxjs';;
+import { Tranche, TranchePosition } from '../models/tranche.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
 
-export type TranchePosition = Tranche & MonthYear & { isDeleted?: boolean };
 @Injectable({
   providedIn: 'root'
 })

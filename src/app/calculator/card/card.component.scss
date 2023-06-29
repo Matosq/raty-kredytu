@@ -42,7 +42,6 @@
     .payment-date {
         margin-bottom: 0.6rem;
     }
-    
 }
 
 @media only screen and (min-width: 951px) {
@@ -53,7 +52,9 @@
         align-items: stretch;
     }
 
-    .payment-wrapper, .saldo-wrapper, .bar-wrapper {
+    .payment-wrapper,
+    .saldo-wrapper,
+    .bar-wrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -83,7 +84,9 @@
     display: flex;
 }
 
-.payment-wrapper, .saldo-wrapper, .bar-wrapper {
+.payment-wrapper,
+.saldo-wrapper,
+.bar-wrapper {
     display: flex;
 }
 
@@ -97,7 +100,9 @@
     padding: 0.4rem 0;
 }
 
-.payment-description, .saldo-description, .rate-description {
+.payment-description,
+.saldo-description,
+.rate-description {
     color: var(--swiss-coffe);
 }
 
@@ -105,11 +110,13 @@
     padding-bottom: 0.6rem;
 }
 
-.saldo-text, .rate-text {
+.saldo-text,
+.rate-text {
     font-size: 1rem;
 }
 
-.legend-wrapper, .legend__desktop  {
+.legend-wrapper,
+.legend__desktop {
     display: flex;
     flex-wrap: nowrap;
 }

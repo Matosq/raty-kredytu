@@ -2,9 +2,11 @@
     .small-button .wrapper {
         display: inline !important;
     }
+
     .small-button .button-text {
         display: none !important;
     }
+
     .small-button .button-icon {
         margin-right: 0px !important;
     }
@@ -35,11 +37,13 @@
     padding-left: 1.4rem;
     padding-right: 1.4rem;
     border-color: var(--antique-white) !important;
+
     &:hover {
         outline: 3px solid var(--antique-white);
         background-color: transparent;
         color: var(--antique-white);
     }
+
     &:focus {
         outline: 3px solid var(--antique-white);
     }

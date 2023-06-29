@@ -5,11 +5,11 @@ import { delay, of } from 'rxjs';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import { ButtonConfig, ButtonType } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
-import { Cost, CostsType } from '../models/costs.model';
+import { Cost, CostPosition, CostsType } from '../models/costs.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CostsParameters, defaultCost, defaultCostPercentage } from './costs-parameters';
-import { CostPosition, CostsService } from './costs.service';
+import { CostsService } from './costs.service';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
 import { getPeriodHintText } from '../utils/utils';
 

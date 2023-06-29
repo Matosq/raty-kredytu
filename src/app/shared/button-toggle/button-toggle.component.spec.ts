@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonToggleComponent } from './button-toggle.component';
-import { Installments } from './installment.model';
+import { Installments } from '../../calculator/models/installment.model';
 
 describe('ButtonToggleComponent', () => {
   let component: ButtonToggleComponent<Installments>;

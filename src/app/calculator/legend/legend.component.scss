@@ -1,18 +1,16 @@
 @media only screen and (max-width: 951px) {
   .legend__mobile {
-      display: flex;
-      flex-wrap: nowrap;
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
-      padding-right: 0.8rem;
-      padding-left: 0.3rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: 0.8rem;
+    padding-left: 0.3rem;
   }
 }
 
-
-
-.legend__desktop  {
+.legend__desktop {
   display: flex;
   flex-wrap: nowrap;
 }

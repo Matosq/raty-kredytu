@@ -23,7 +23,7 @@ export class SimulationComponent implements SectionCard, OnInit {
     private changeDetector: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.simulationDataSubsription = this.simulationData.getSimulationData$().subscribe(
       (calculation: MonthCalculation[]) => {
         this.onDataChange(calculation);

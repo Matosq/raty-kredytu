@@ -1,4 +1,4 @@
-import { Installments } from "src/app/shared/button-toggle/installment.model";
+import { Installments } from "src/app/calculator/models/installment.model";
 
 
 export function getInstallmentsAsText(installment: Installments): string {

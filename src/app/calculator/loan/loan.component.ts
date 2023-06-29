@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Moment } from 'moment';
-import { Installments } from 'src/app/shared/button-toggle/installment.model';
+import { Installments } from 'src/app/calculator/models/installment.model';
 import { InputFieldValue } from '../models/credit-parameter.model';
 import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { LoanParametersService } from '../services/loan-parameters.service';

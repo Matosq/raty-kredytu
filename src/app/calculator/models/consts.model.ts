@@ -1,1 +1,1 @@
-export const INSTALLMENTS_IN_YEAR = 12;
+export const INSTALLMENTS_IN_YEAR = 12 as const;

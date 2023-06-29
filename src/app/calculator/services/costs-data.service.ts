@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { CostPosition, CostsService } from '../costs/costs.service';
-import { CostsType } from '../models/costs.model';
+import { CostsService } from '../costs/costs.service';
+import { CostData, CostPosition, CostsType } from '../models/costs.model';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
-
-export interface CostData {
-  value: number,
-  type: CostsType,
-  name: string,
-  indexOfCost: number
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +13,6 @@ export class CostsDataService {
     private costsService: CostsService,
     private datePeriodIndexerService: DatePeriodIndexerService
   ) { }
-
 
   public calculateCosts(): void {
     this.costs = this.costsService.getCosts();

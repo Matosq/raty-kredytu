@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MonthsPeriodIndexes } from '../models/date.model';
 import { RatePosition } from '../models/rate.model';
 import { RateService } from '../rate/rate.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { LoanParametersService } from './loan-parameters.service';
 
-export type RateData = RatePosition & MonthsPeriodIndexes;
 @Injectable({
   providedIn: 'root'
 })

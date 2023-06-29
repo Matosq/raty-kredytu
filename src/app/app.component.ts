@@ -7,7 +7,7 @@ import { DOCUMENT } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  protected title = 'raty kredytu';
+  public title = 'raty kredytu';
   private backgroundImageCssClassName = 'background';
 
   constructor(@Inject(DOCUMENT) private document: Document) { }

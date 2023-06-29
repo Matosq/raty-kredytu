@@ -51,7 +51,7 @@ export class DatePeriodIndexerService {
       return {
         monthYearPeriod: `${startDatePl.format('MMMM')} ${startYear} (1)`,
         monthYearPeriodShortcut: `${startDatePl.format('MMM')} ${startYear} (1)`
-      } 
+      }
     }
     const endDate = cloneDeep(date);
     endDate.add(numberOfMonths - 1, 'months');

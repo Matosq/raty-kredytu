@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { Cost } from '../models/costs.model';
-import { MonthYearPeriod } from '../models/date.model';
+import { Cost, CostPosition } from '../models/costs.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
-
-export type CostPosition = Cost & MonthYearPeriod & { indexOfCost: number, isDeleted?: boolean  };
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +13,8 @@ export class CostsService {
 
   public addCost(cost: Cost): void {
     if (!cost.name) {
-      cost.name = `koszt dodatkowy ${this.index+1}`
-    } 
+      cost.name = `koszt dodatkowy ${this.index + 1}`
+    }
     this.costs.unshift({
       ...cost,
       ...this.datePeriodIndexerService.translateDateToMonthYearPeriods(cost.date as Moment, cost.numberOfMonths),

@@ -1,22 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DonutChartData } from 'src/app/shared/donut-chart/donut-chart.component';
 import { Legend, LegendColor } from '../models/legend.model';
+import { Summary, SummaryCalculation } from '../models/summary.model';
+import { DonutChartData } from 'src/app/shared/models/donut-chart-data.model';
 
-export interface SummaryCalculation {
-  principals: number,
-  interests: number,
-  sumCosts: number,
-  costs: Map<number, number>,
-  overpayments: number,
-  numberOfMonths: number
-}
-
-export interface Summary {
-  chart: DonutChartData[],
-  summary: SummaryCalculation,
-  legends: Legend[];
-}
 @Injectable({
   providedIn: 'root'
 })

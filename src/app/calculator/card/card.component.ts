@@ -1,16 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Bar } from 'src/app/shared/bar-chart/bar-chart.component';
 import { LegendColor } from '../models/legend.model';
 import { MonthCalculation } from '../models/month-calculation.model';
-
-export enum BarId {
-  COST = 'cost',
-  PRINCIPAL = ' principal',
-  INTEREST = 'interest',
-  OVERPAYMENTS = 'overpayments'
-}
-
-export type BarData = Bar & { id: BarId, name: string, value: number };
+import { BarData, BarId } from '../models/bar.model';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

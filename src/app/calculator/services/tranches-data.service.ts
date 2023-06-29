@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MonthsPeriodIndexes } from '../models/date.model';
-import { TranchePosition, TranchesService } from '../tranches/tranches.service';
+import { TranchesService } from '../tranches/tranches.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
+import { TrancheData, TranchePosition } from '../models/tranche.model';
 
-export type TrancheData = TranchePosition & MonthsPeriodIndexes;
 @Injectable({
   providedIn: 'root'
 })

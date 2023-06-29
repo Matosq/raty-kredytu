@@ -12,7 +12,7 @@ import { SimulationDataService } from './simulation-data.service';
 import moment from 'moment';
 
 import { MonthCalculation } from '../models/month-calculation.model';
-import { Installments } from 'src/app/shared/button-toggle/installment.model';
+import { Installments } from 'src/app/calculator/models/installment.model';
 import { take } from 'rxjs';
 
 

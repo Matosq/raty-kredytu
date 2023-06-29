@@ -1,12 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { LegendColor } from 'src/app/calculator/models/legend.model';
 import { widthResizeAnimation } from 'src/app/core/animations/widthResize';
-
-export interface Bar {
-  color: LegendColor,
-  width: number
-}
-
+import { Bar } from '../models/bar.model';
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',

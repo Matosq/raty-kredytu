@@ -1,8 +1,8 @@
-
 @media only screen and (max-width: 992px) {
     .flex-wrapper {
         align-items: center;
     }
+
     .small-button .flex-wrapper {
         align-items: center;
         row-gap: 30px;
@@ -22,6 +22,7 @@
         align-items: baseline;
         column-gap: 25px;
     }
+
     .small-button .flex-wrapper {
         align-items: baseline;
     }
@@ -34,7 +35,7 @@
         display: none;
     }
 
-    .current-cost-name{
+    .current-cost-name {
         margin-left: 1rem;
     }
 }

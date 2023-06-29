@@ -1,22 +1,22 @@
-
 @media only screen and (max-width: 992px) {
-    .tranche-date {
-        display: none;
-    }
+  .tranche-date {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 992px) {
-    .tranche-date-shortcut {
-        display: none;
-    }
-    .tranche-date {
-        margin-left: 1rem;
-    }
+  .tranche-date-shortcut {
+    display: none;
+  }
+
+  .tranche-date {
+    margin-left: 1rem;
+  }
 }
 
 .tranches {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }

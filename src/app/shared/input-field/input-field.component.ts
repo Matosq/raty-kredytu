@@ -54,24 +54,24 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
 
   private initFormControl(): void {
     this.numberFormControl = new UntypedFormControl('',
-    [
-      Validators.required,
-      Validators.min(this.configuration?.validation?.min as number + 0.000000001),
-      Validators.max(this.configuration?.validation?.max as number),
-      ...(this.configuration?.validation?.integerOnly as boolean ? [Validators.pattern("^[0-9]*$")] : [])
-    ]
+      [
+        Validators.required,
+        Validators.min(this.configuration?.validation?.min as number + 0.000000001),
+        Validators.max(this.configuration?.validation?.max as number),
+        ...(this.configuration?.validation?.integerOnly as boolean ? [Validators.pattern("^[0-9]*$")] : [])
+      ]
     );
     this.setValueAndMarkAsTouched(this.configuration.value as number);
   }
 
   private subscribeToFormControlChanges(): void {
     combineLatest([this.numberFormControl.valueChanges, this.numberFormControl.statusChanges])
-    .pipe(debounceTime(50))
-    .subscribe(
-      (formControl: [number, FormControlStatus]) => {
-        this.onChange({ value: formControl[0], status: formControl[1] });
-      }
-    );
+      .pipe(debounceTime(50))
+      .subscribe(
+        (formControl: [number, FormControlStatus]) => {
+          this.onChange({ value: formControl[0], status: formControl[1] });
+        }
+      );
   }
 
   private throttleValueUpdates(): void {

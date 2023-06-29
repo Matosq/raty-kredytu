@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { MonthYearPeriod } from '../models/date.model';
-import { Overpayment } from '../models/overpayments.model';
+import { Overpayment, OverpaymentPosition } from '../models/overpayments.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
-
-export type OverpaymentPosition = Overpayment & { indexOfOverpayment: number, isDeleted?: boolean } & MonthYearPeriod;
 
 @Injectable({
   providedIn: 'root'
