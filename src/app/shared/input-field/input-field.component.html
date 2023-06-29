@@ -11,7 +11,9 @@
         <mat-label>{{configuration.label}}</mat-label>
         <input type="number" matInput [formControl]="numberFormControl" [(ngModel)]="configuration.value"
             placeholder={{configuration.placeholder}}>
-        <mat-hint class="hint">{{configuration.hint | currency:'zł'}}</mat-hint>
+        <mat-hint class="hint">{{ configuration.isCurrencyHint ? (configuration.hint| currency:'zł') :
+            (configuration.hint)}}</mat-hint>
+
         <mat-error *ngIf="!!numberFormControl.errors">
             <app-icon class="icon-align error-icon" [icon]="IconNameType.ERROR"></app-icon>
             {{getErrorText()}}

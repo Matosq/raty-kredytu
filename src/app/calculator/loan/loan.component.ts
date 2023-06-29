@@ -6,6 +6,7 @@ import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { LoanParametersService } from '../services/loan-parameters.service';
 import { LoanParameters } from './loan-parameters';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
+import { getPeriodHintText } from '../utils/utils';
 
 @Component({
   selector: 'app-loan',
@@ -40,6 +41,7 @@ export class LoanComponent extends LoanParameters implements SectionCard, OnInit
   public onMonthsOfCredit(inputFieldValue: InputFieldValue): void {
     this.loanParametersService.setNumberOfMonths(inputFieldValue.value);
     this.isMonthsOfCreditFieldValid = this.isFieldValid(inputFieldValue.status);
+    this.monthsOfCredit.hint = getPeriodHintText(inputFieldValue.value);
   }
 
   public onRate(inputFieldValue: InputFieldValue): void {

@@ -11,6 +11,7 @@ import { Overpayment, OverpaymentsType } from '../models/overpayments.model';
 import { defaultOverpayment, OverpaymentsParameters } from './overpayments-parameters';
 import { OverpaymentPosition, OverpaymentsService } from './overpayments.service';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
+import { getPeriodHintText } from '../utils/utils';
 
 @Component({
   selector: 'app-overpayments',
@@ -62,6 +63,7 @@ export class OverpaymentsComponent extends OverpaymentsParameters implements Sec
   public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
     this.overpayment.numberOfMonths = inputFieldValue.value;
     this.isNumberOfMonthsValid = this.isFieldValid(inputFieldValue.status);
+    this.monthsInputField.hint = getPeriodHintText(inputFieldValue.value);
   }
 
   public addOverpayment(): void {

@@ -11,6 +11,7 @@ import { SectionCard, SectionCardHeader } from '../models/section-card.model';
 import { CostsParameters, defaultCost, defaultCostPercentage } from './costs-parameters';
 import { CostPosition, CostsService } from './costs.service';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
+import { getPeriodHintText } from '../utils/utils';
 
 @Component({
   selector: 'app-costs',
@@ -73,6 +74,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   public onMonthsFieldChange(inputFieldValue: InputFieldValue): void {
     this.cost.numberOfMonths = inputFieldValue.value;
     this.isMonthsFieldValid = this.isFieldValid(inputFieldValue.status);
+    this.monthsInputField.hint = getPeriodHintText(inputFieldValue.value);
   }
 
   public addCost(): void {

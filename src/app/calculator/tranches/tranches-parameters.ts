@@ -11,6 +11,7 @@ export class TranchesParameters extends Section {
     label: '%',
     value: 10,
     stepValue: 5,
-    validation: { min: 0, max: 100 }
+    validation: { min: 0, max: 100 },
+    isCurrencyHint: true
   };
 }

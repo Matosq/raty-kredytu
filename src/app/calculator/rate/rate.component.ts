@@ -12,6 +12,7 @@ import { InputFieldValue } from '../models/credit-parameter.model';
 import { fadeSlideInOutAnimation } from 'src/app/core/animations/fadeSlideIn';
 import cloneDeep from 'lodash/cloneDeep';
 import { CalculateTriggerService } from '../services/calculate-trigger.service';
+import { getPeriodHintText } from '../utils/utils';
 
 @Component({
   selector: 'app-rate',
@@ -66,6 +67,7 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
   public onNumberOfMonthsChange(inputFieldValue: InputFieldValue): void {
     this.rate.numberOfMonths = inputFieldValue.value;
     this.isNumberOfMonthsValid = this.isFieldValid(inputFieldValue.status);
+    this.monthsInputField.hint = getPeriodHintText(inputFieldValue.value);
   }
 
   public areRateChanges(): boolean {
