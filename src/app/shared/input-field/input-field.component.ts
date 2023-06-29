@@ -16,7 +16,6 @@ export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
   private updateValueSubscription!: Subscription;
   public readonly IconNameType = IconName;
   public numberFormControl!: UntypedFormControl;
-  constructor() { }
 
   public ngOnInit(): void {
     this.initFormControl();

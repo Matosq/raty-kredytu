@@ -22,7 +22,7 @@ export class CostsDataService {
       if (!!startMonth && !!endMonth) {
         for (let i = startMonth; i <= endMonth; i++) {
           const allCostsForMonth = this.costsToMonthsIndexMap.get(i);
-          if (!!allCostsForMonth) {
+          if (allCostsForMonth) {
             allCostsForMonth.push(cost);
           } else {
             this.costsToMonthsIndexMap.set(i, [cost])

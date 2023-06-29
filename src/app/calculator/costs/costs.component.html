@@ -28,7 +28,7 @@
             <div class="empty-space"></div>
         </div>
         <div class="action-button-right">
-            <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (onClick)="addCost()"></app-button>
+            <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (userClick)="addCost()"></app-button>
         </div>
 
         <app-divider [isShown]="areCurrentCosts()"></app-divider>
@@ -43,7 +43,7 @@
                     <span class="current-cost-type">{{currentCost.type}}</span>
                     <span class="current-cost-value">{{isCostTypeWithCurrency(currentCost.type) ? (currentCost.value | currency:'zł') : (currentCost.value / 100 | percent: '1.0-6')}}</span>
                 </div>
-                <app-button class="remove-button" [configuration]="deleteCostButton" (onClick)="deleteCost(currentCost)"></app-button>
+                <app-button class="remove-button" [configuration]="deleteCostButton" (userClick)="deleteCost(currentCost)"></app-button>
             </div>
         </div>
     </mat-expansion-panel>

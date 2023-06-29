@@ -46,7 +46,7 @@ export class DatepickerComponent implements ParameterField, OnInit, OnChanges {
 
   public chosenYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());;
+    ctrlValue.year(normalizedYear.year());
     this.date.setValue(ctrlValue);
   }
 

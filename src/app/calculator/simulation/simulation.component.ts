@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { SimulationDataService } from '../services/simulation-data.service';
@@ -10,7 +10,7 @@ import { SectionCard, SectionCardHeader } from '../models/section-card.model';
   styleUrls: ['./simulation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimulationComponent implements SectionCard, OnInit {
+export class SimulationComponent implements SectionCard, OnInit, OnDestroy {
   public readonly cardHeader = SectionCardHeader.SIMULATION;
   protected monthsCalculation: MonthCalculation[] = [];
   protected chosenMonth!: MonthCalculation;
@@ -51,7 +51,7 @@ export class SimulationComponent implements SectionCard, OnInit {
 
   private onDataChange(calculation: MonthCalculation[]): void {
     this.isSimulationData = calculation.length > 0;
-    if (!this.isSimulationData) { return };
+    if (!this.isSimulationData) { return; }
     this.monthsCalculation = calculation;
     this.sliderMaxValue = calculation.length;
     this.onSliderChanges(1);

@@ -14,7 +14,7 @@
         </div>
 
         <div class="action-button-right">
-            <app-button [configuration]="addTrancheButton" [isDisabled]="!isTrancheFieldValid()" (onClick)="addTranche()">
+            <app-button [configuration]="addTrancheButton" [isDisabled]="!isTrancheFieldValid()" (userClick)="addTranche()">
             </app-button>
         </div>
 
@@ -27,7 +27,7 @@
                 <span class="tranche-percentage">{{tranche.percentage / 100 | percent: '1.0-6'}}</span>
                 <span class="tranche-value">{{tranche.value | currency:'zł'}}</span>
 
-                <app-button class="remove-button" [configuration]="deleteTrancheButton" (onClick)="deleteTranche(tranche)">
+                <app-button class="remove-button" [configuration]="deleteTrancheButton" (userClick)="deleteTranche(tranche)">
                 </app-button>
             </div>
         </div>

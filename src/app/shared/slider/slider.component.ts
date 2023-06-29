@@ -12,7 +12,6 @@ export class SliderComponent {
   @Input() value = 1;
   @Output() valueChange = new EventEmitter<number>();
   public readonly IconNameType = IconName;
-  constructor() { }
 
   public increase(): void {
     if (this.value >= this.maxValue) { return; }
@@ -26,7 +25,7 @@ export class SliderComponent {
     this.valueChange.emit(this.value);
   }
 
-  public onChanges(value: any): void {
+  public onChanges(value: number): void {
     this.value = value;
     this.valueChange.emit(value);
   }

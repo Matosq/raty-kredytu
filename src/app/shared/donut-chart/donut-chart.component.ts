@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DonutChartData } from '../models/donut-chart-data.model';
 
 @Component({
@@ -7,11 +7,6 @@ import { DonutChartData } from '../models/donut-chart-data.model';
   styleUrls: ['./donut-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DonutChartComponent implements OnInit {
+export class DonutChartComponent {
   @Input() bars: DonutChartData[] = [];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

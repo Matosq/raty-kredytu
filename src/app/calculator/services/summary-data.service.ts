@@ -11,7 +11,6 @@ export class SummaryDataService {
   private summarySubject = new BehaviorSubject<Summary | null>(null);
   private donutChart: DonutChartData[] = [];
   private sum = 0;
-  constructor() { }
 
   public getSummaryData$(): Observable<Summary> {
     return this.summarySubject.asObservable() as Observable<Summary>;

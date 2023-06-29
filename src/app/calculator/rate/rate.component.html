@@ -19,7 +19,7 @@
         </div>
 
         <div class="action-button-right">
-            <app-button [configuration]="addRateButton" [isDisabled]="!areFieldsValid()" (onClick)="addRate()"></app-button>
+            <app-button [configuration]="addRateButton" [isDisabled]="!areFieldsValid()" (userClick)="addRate()"></app-button>
         </div>
 
         <app-divider [isShown]="areRateChanges()"></app-divider>
@@ -30,7 +30,7 @@
                 <span class="current-rate-value">{{rate.value / 100 | percent: '1.0-6'}}</span>
                 <span class="current-rate-months-period">{{rate.monthYearPeriod}}</span>
                 <span class="current-rate-months-period-shortcut">{{rate.monthYearPeriodShortcut}}</span>
-                <app-button class="remove-button" [configuration]="deleteRateButton" (onClick)="deleteRate(rate)"></app-button>
+                <app-button class="remove-button" [configuration]="deleteRateButton" (userClick)="deleteRate(rate)"></app-button>
             </div>
 
         </div>

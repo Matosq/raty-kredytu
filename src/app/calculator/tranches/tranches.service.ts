@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';;
+import { Observable, Subject } from 'rxjs';
 import { Tranche, TranchePosition } from '../models/tranche.model';
 import { DatePeriodIndexerService } from '../services/date-period-indexer.service';
 import { LoanParametersService } from '../services/loan-parameters.service';
@@ -9,7 +9,7 @@ import { LoanParametersService } from '../services/loan-parameters.service';
 })
 export class TranchesService {
   private tranches: TranchePosition[] = [];
-  private amountLoan: number = 0;
+  private amountLoan = 0;
   private tranchesValueSubject = new Subject<boolean>();
   private trancheIndex = 2;
   constructor(

@@ -13,7 +13,8 @@
     "dev:ssr": "ng run raty-kredytu:serve-ssr",
     "serve:ssr": "node dist/raty-kredytu/server/main.js",
     "build:ssr": "ng build && ng run raty-kredytu:server",
-    "prerender": "ng run raty-kredytu:prerender"
+    "prerender": "ng run raty-kredytu:prerender",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,11 @@
   "devDependencies": {
     "@angular-builders/custom-webpack": "^16.0.0",
     "@angular-devkit/build-angular": "^16.1.0",
+    "@angular-eslint/builder": "16.0.3",
+    "@angular-eslint/eslint-plugin": "16.0.3",
+    "@angular-eslint/eslint-plugin-template": "16.0.3",
+    "@angular-eslint/schematics": "16.0.3",
+    "@angular-eslint/template-parser": "16.0.3",
     "@angular/cli": "^16.1.0",
     "@angular/compiler-cli": "^16.1.1",
     "@nguniversal/builders": "^16.1.1",
@@ -46,7 +52,10 @@
     "@types/jasmine": "~3.10.0",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^12.20.55",
+    "@typescript-eslint/eslint-plugin": "5.59.7",
+    "@typescript-eslint/parser": "5.59.7",
     "angular-cli-ghpages": "^0.6.2",
+    "eslint": "^8.40.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

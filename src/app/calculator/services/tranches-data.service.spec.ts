@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import cloneDeep from 'lodash/cloneDeep';
 import moment, { Moment } from 'moment';
-import { TranchePosition, TranchesService } from '../tranches/tranches.service';
+import { TranchesService } from '../tranches/tranches.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { LoanParametersService } from './loan-parameters.service';
-
 import { TranchesDataService } from './tranches-data.service';
+import { TranchePosition } from '../models/tranche.model';
 
 const mockMoment = moment();
 const mockTranchePosition: TranchePosition[] = [

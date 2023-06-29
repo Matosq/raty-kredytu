@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 import moment, { Moment } from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Installments } from 'src/app/calculator/models/installment.model';
-
-export interface CreditPeriod {
-  startDate: Moment;
-  endDate?: Moment;
-}
+import { CreditPeriod } from '../models/credit-period.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoanParametersService {
-  private amountLoan: number = 0;
-  private numberOfMonths: number = 0;
-  private rate: number = 0;
+  private amountLoan = 0;
+  private numberOfMonths = 0;
+  private rate = 0;
   private installments: Installments = Installments.EQUAL;
   private firstPaymentDate: Moment = moment();
   private creditPeriod: CreditPeriod = {
@@ -28,8 +24,6 @@ export class LoanParametersService {
   private installmentsSubject = new BehaviorSubject<Installments>(this.installments);
   private creditPeriodSubject = new BehaviorSubject<CreditPeriod>(this.creditPeriod);
   private firstPaymentDateSubject = new BehaviorSubject<Moment>(this.firstPaymentDate);
-
-  constructor() { }
 
   public setAmountLoan(value: number): void {
     this.amountLoan = value;

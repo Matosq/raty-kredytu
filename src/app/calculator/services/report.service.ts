@@ -21,8 +21,8 @@ export class ReportService {
   ) { }
 
   public subscribeData(): void {
-    this.subscriptions.add(this.simulationDataService.getSimulationData$().subscribe(d => this.simulationData = d));
-    this.subscriptions.add(this.summaryDataService.getSummaryData$().subscribe(d => this.summaryData = d));
+    this.subscriptions.add(this.simulationDataService.getSimulationData$().subscribe((d: MonthCalculation[]) => this.simulationData = d));
+    this.subscriptions.add(this.summaryDataService.getSummaryData$().subscribe((d: Summary) => this.summaryData = d));
   }
 
   public unsubscribe(): void {
@@ -30,7 +30,7 @@ export class ReportService {
   }
 
   public getReport(): void {
-    let blob = new Blob([this.createReport()],
+    const blob = new Blob([this.createReport()],
       { type: "text/plain;charset=utf-8" });
     this.downloadBlob(blob);
   }

@@ -9,6 +9,7 @@ export interface InputFieldValue {
 }
 export interface ParameterField {
   configuration: CreditParameterInputField | CreditParameterButtonToggle<unknown> | CreditParameterDatepicker | CreditParameterTextField | CreditParameterSelectField;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   valueChange: EventEmitter<any>;
 }
 

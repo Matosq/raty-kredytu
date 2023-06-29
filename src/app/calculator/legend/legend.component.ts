@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Legend } from '../models/legend.model';
 
 @Component({
@@ -6,11 +6,6 @@ import { Legend } from '../models/legend.model';
   templateUrl: './legend.component.html',
   styleUrls: ['./legend.component.scss']
 })
-export class LegendComponent implements OnInit {
+export class LegendComponent {
   @Input() data!: Legend;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

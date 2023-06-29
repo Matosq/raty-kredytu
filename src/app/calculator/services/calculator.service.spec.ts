@@ -2,18 +2,19 @@ import { TestBed } from '@angular/core/testing';
 
 import { CalculatorService } from './calculator.service';
 import { LoanParametersService } from './loan-parameters.service';
-import { SummaryCalculation, SummaryDataService } from './summary-data.service';
+import { SummaryDataService } from './summary-data.service';
 import { OverpaymentsDataService } from './overpayments-data.service';
 import { CostsDataService } from './costs-data.service';
 import { RatesDataService } from './rates-data.service';
-import { TrancheData, TranchesDataService } from './tranches-data.service';
+import { TranchesDataService } from './tranches-data.service';
 import { DatePeriodIndexerService } from './date-period-indexer.service';
 import { SimulationDataService } from './simulation-data.service';
 import moment from 'moment';
-
 import { MonthCalculation } from '../models/month-calculation.model';
 import { Installments } from 'src/app/calculator/models/installment.model';
 import { take } from 'rxjs';
+import { SummaryCalculation } from '../models/summary.model';
+import { TrancheData } from '../models/tranche.model';
 
 
 class SummaryDataServiceMock {

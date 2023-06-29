@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LegendColor } from '../models/legend.model';
 import { MonthCalculation } from '../models/month-calculation.model';
 import { BarData, BarId } from '../models/bar.model';
@@ -8,7 +8,7 @@ import { BarData, BarId } from '../models/bar.model';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() data!: MonthCalculation;
   public bars: BarData[] = [
     {
@@ -40,27 +40,23 @@ export class CardComponent implements OnInit {
       value: 0
     }
   ];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public calcBars(): BarData[] {
-    const principal = this.bars.find(b => b.id === BarId.PRINCIPAL)!;
-    principal.width = this.calcPercentage(this.data.principal);
-    principal.value = this.data.principal;
+    const principal = this.bars.find(b => b.id === BarId.PRINCIPAL);
+    (principal as BarData).width = this.calcPercentage(this.data.principal);
+    (principal as BarData).value = this.data.principal;
 
-    const interest = this.bars.find(b => b.id === BarId.INTEREST)!;
-    interest.width = this.calcPercentage(this.data.interest);
-    interest.value = this.data.interest;
+    const interest = this.bars.find(b => b.id === BarId.INTEREST);
+    (interest as BarData).width = this.calcPercentage(this.data.interest);
+    (interest as BarData).value = this.data.interest;
 
-    const sumExtraCosts = this.bars.find(b => b.id === BarId.COST)!;
-    sumExtraCosts.width = this.calcPercentage(this.data.sumExtraCosts);
-    sumExtraCosts.value = this.data.sumExtraCosts;
+    const sumExtraCosts = this.bars.find(b => b.id === BarId.COST);
+    (sumExtraCosts as BarData).width = this.calcPercentage(this.data.sumExtraCosts);
+    (sumExtraCosts as BarData).value = this.data.sumExtraCosts;
 
-    const overpayments = this.bars.find(b => b.id === BarId.OVERPAYMENTS)!;
-    overpayments.width = this.calcPercentage(this.data.overpayments);
-    overpayments.value = this.data.overpayments;
+    const overpayments = this.bars.find(b => b.id === BarId.OVERPAYMENTS);
+    (overpayments as BarData).width = this.calcPercentage(this.data.overpayments);
+    (overpayments as BarData).value = this.data.overpayments;
     return this.bars.filter(b => b.width > 0);
   }
 

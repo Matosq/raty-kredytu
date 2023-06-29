@@ -1,6 +1,6 @@
 <app-field-title [config]="configuration.fieldTitle"></app-field-title>
 
-<mat-form-field class="range-datepicker" appearance="outline" (onClick)="picker.open()">
+<mat-form-field class="range-datepicker" appearance="outline" (userClick)="picker.open()">
     <mat-label>{{configuration.label}}</mat-label>
     <mat-date-range-input [formGroup]="dateSelectorGroup" [rangePicker]="picker">
         <input formControlName="startDate" matStartDate placeholder="początek" tabindex="-1" readonly>

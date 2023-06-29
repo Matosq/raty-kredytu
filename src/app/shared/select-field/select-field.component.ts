@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CostsType } from 'src/app/calculator/models/costs.model';
@@ -10,12 +10,11 @@ import { CreditParameterSelectField, ParameterField } from 'src/app/calculator/m
   templateUrl: './select-field.component.html',
   styleUrls: ['./select-field.component.scss']
 })
-export class SelectFieldComponent implements ParameterField, OnInit {
+export class SelectFieldComponent implements ParameterField, OnInit, OnDestroy {
   @Input() configuration!: CreditParameterSelectField;
   @Output() valueChange = new EventEmitter<CostsType>();
   public selectedValueForm = new UntypedFormControl(CostsType.FIXED_AMOUNT);
   private selectedValueFormSubscription!: Subscription;
-  constructor() { }
 
   public ngOnInit(): void {
     this.selectedValueFormSubscription = this.selectedValueForm.valueChanges.subscribe((value: CostsType) => {

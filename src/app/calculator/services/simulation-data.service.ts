@@ -8,7 +8,6 @@ import { MonthCalculation } from '../models/month-calculation.model';
 export class SimulationDataService {
   private simulation: MonthCalculation[] = [];
   private simulationSubject = new BehaviorSubject<MonthCalculation[]>(this.simulation);
-  constructor() { }
 
   public setSimulationData(data: MonthCalculation[]): void {
     this.simulation = data;

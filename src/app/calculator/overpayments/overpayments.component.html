@@ -23,7 +23,7 @@
         </div>
 
         <div class="action-button-right">
-            <app-button [configuration]="addOverpaymentButton" [isDisabled]="!areFieldsValid()" (onClick)="addOverpayment()"></app-button>
+            <app-button [configuration]="addOverpaymentButton" [isDisabled]="!areFieldsValid()" (userClick)="addOverpayment()"></app-button>
         </div>
 
         <app-divider [isShown]="areCurrentOverpayments()"></app-divider>
@@ -33,7 +33,7 @@
                 <span class="current-overpayments-months-period-shortcut">{{overpayment.monthYearPeriodShortcut}}</span>
                 <span>{{overpayment.value | currency:'zł'}}</span>
                 <span>{{overpayment.type}}</span>
-                <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (onClick)="deleteOverpayment(overpayment)"></app-button>
+                <app-button class="remove-button" [configuration]="deleteOverpaymentButton" (userClick)="deleteOverpayment(overpayment)"></app-button>
             </div>
         </div>
     </mat-expansion-panel>

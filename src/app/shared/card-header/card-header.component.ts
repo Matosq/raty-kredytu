@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-header',
@@ -6,12 +6,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardHeaderComponent implements OnInit {
+export class CardHeaderComponent {
   @Input() header = '';
   @Input() value = 0;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
