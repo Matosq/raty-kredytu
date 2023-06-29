@@ -21,7 +21,6 @@ export function getPeriodHintText(value: number): string {
     hint += numerals.includes(years.toString()) ? 'lata' : 'lat';
   }
   const months = value % 12;
-  console.warn('months: ', months);
   if (months < 1) { return hint; }
   if (months === 1) {
     hint += ' 1 miesiąc';
