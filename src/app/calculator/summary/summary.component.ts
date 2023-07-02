@@ -7,7 +7,7 @@ import { SummaryDataService } from '../services/summary-data.service';
 import { ButtonConfig } from 'src/app/shared/models/button-config.model';
 import { IconName } from 'src/app/shared/models/icon-names.model';
 import { ReportService } from '../services/report.service';
-import { getInstallmentsAsText } from '../utils/utils';
+import { getInstallmentsAsText, getPeriodHintText } from '../utils/utils';
 import { Summary, SummaryCalculation } from '../models/summary.model';
 import { DonutChartData } from 'src/app/shared/models/donut-chart-data.model';
 
@@ -67,14 +67,7 @@ export class SummaryComponent implements SectionCard, OnInit, OnDestroy {
 
   private takeTotalCostAndNumberOfMonths(data: SummaryCalculation) {
     this.totalCost = this.summaryDataService.sumTotalCosts(data);
-    if (data.numberOfMonths === 1) {
-      this.loanPeriod = `1 miesiąc`;
-      return;
-    }
-    const lastChar = `${data.numberOfMonths}`.slice(-1);
-    const numerals = ['2', '3', '4'];
-    this.loanPeriod = `${data.numberOfMonths} `;
-    this.loanPeriod += numerals.includes(lastChar) ? 'miesiące' : 'miesięcy';
+    this.loanPeriod = getPeriodHintText(data.numberOfMonths);
   }
 
   private takeLoanParameters(): void {
