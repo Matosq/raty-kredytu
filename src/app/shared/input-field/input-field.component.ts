@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UntypedFormControl, FormControlStatus, Validators } from '@angular/forms';
 import { combineLatest, debounceTime, Subject, Subscription } from 'rxjs';
 import { CreditParameterInputField, InputFieldValue, ParameterField } from 'src/app/calculator/models/credit-parameter.model';
@@ -7,7 +7,8 @@ import { IconName } from '../models/icon-names.model';
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
-  styleUrls: ['./input-field.component.scss']
+  styleUrls: ['./input-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFieldComponent implements ParameterField, OnInit, OnDestroy {
   @Input() configuration!: CreditParameterInputField;

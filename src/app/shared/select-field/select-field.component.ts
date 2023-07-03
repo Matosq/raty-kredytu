@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CostsType } from 'src/app/calculator/models/costs.model';
@@ -8,7 +8,8 @@ import { CreditParameterSelectField, ParameterField } from 'src/app/calculator/m
 @Component({
   selector: 'app-select-field',
   templateUrl: './select-field.component.html',
-  styleUrls: ['./select-field.component.scss']
+  styleUrls: ['./select-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectFieldComponent implements ParameterField, OnInit, OnDestroy {
   @Input() configuration!: CreditParameterSelectField;
