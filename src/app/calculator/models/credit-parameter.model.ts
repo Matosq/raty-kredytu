@@ -22,6 +22,7 @@ export interface CreditParameterField {
   fieldTitle: FieldTitleConfig;
   hint?: string | number;
   isCurrencyHint?: boolean;
+  id?: string;
 }
 
 export interface CreditParameterInputField extends CreditParameterField {

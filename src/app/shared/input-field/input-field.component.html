@@ -9,7 +9,7 @@
     <mat-form-field appearance="outline" hideRequiredMarker>
 
         <mat-label>{{configuration.label}}</mat-label>
-        <input type="number" matInput [formControl]="numberFormControl" [(ngModel)]="configuration.value"
+        <input id={{configuration.id}} type="number" matInput [formControl]="numberFormControl" [(ngModel)]="configuration.value"
             placeholder={{configuration.placeholder}}>
         <mat-hint class="hint">{{ configuration.isCurrencyHint ? (configuration.hint | currency:'zł') :
             (configuration.hint)}}</mat-hint>

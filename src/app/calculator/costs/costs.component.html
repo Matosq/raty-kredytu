@@ -1,6 +1,6 @@
 <section>
     <mat-expansion-panel class="card-wrapper">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header data-cy="costs-panel-header">
             <app-card-header [header]="cardHeader" [value]="numberOfCurrentCosts"></app-card-header>
         </mat-expansion-panel-header>
 
@@ -14,7 +14,7 @@
             <app-input-field [configuration]="monthsInputField"
             (valueChange)="onMonthsFieldChange($event)"></app-input-field>
 
-            <app-select-field [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
+            <app-select-field data-cy="costs-type-select" [configuration]="selectField" (valueChange)="onSelectFieldChange($event)"></app-select-field>
 
             <app-input-field *ngIf="selectedCostsType === CostsType.FIXED_AMOUNT" [configuration]="costsInputField"
                 (valueChange)="onInputFieldChange($event)">
@@ -28,11 +28,11 @@
             <div class="empty-space"></div>
         </div>
         <div class="action-button-right">
-            <app-button [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (userClick)="addCost()"></app-button>
+            <app-button data-cy="add-cost-button" [configuration]="addCostsButton" [isDisabled]="!areFieldsValuesValid()" (userClick)="addCost()"></app-button>
         </div>
 
         <app-divider [isShown]="areCurrentCosts()"></app-divider>
-        <div *ngFor="let currentCost of currentCosts">
+        <div data-cy="current-costs" *ngFor="let currentCost of currentCosts">
             <div *ngIf="!isCostDeleted(currentCost)" @fadeSlideInOut class="flex-wrapper current-cost">
                 <div class="flex-item">
                     <span class="current-cost-name">{{currentCost.name}}</span>

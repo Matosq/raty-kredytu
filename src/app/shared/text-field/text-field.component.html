@@ -1,7 +1,6 @@
-
 <app-field-title [config]="configuration.fieldTitle"></app-field-title>
 
 <mat-form-field appearance="outline">
-    <input type="text" matInput maxlength="50" placeholder={{configuration.placeholder}} [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
+    <input id={{configuration.id}} type="text" matInput maxlength="50" placeholder={{configuration.placeholder}}
+        [(ngModel)]="configuration.value" (ngModelChange)="onChange($event)">
 </mat-form-field>
-  

@@ -1,6 +1,6 @@
 <section class="card-wrapper">
 
-    <div class="loan-panel">
+    <div data-cy="loan-panel" class="loan-panel">
         <app-card-header [header]="cardHeader"></app-card-header>
 
         <div class="flex-row-wrapper">
@@ -28,8 +28,10 @@
         </div>
 
         <div class="action-button-right">
-            <app-button [configuration]="calculateButton" [isDisabled]="!areParametersFieldsValid()"
-            (userClick)="calculateLoan()"
+            <app-button data-cy="calculate-button"
+                [configuration]="calculateButton"
+                [isDisabled]="!areParametersFieldsValid()"
+                (userClick)="calculateLoan()"
             ></app-button>
         </div>
     </div>

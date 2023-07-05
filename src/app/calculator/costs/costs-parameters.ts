@@ -8,7 +8,8 @@ export class CostsParameters extends Section {
   public readonly costsNameTextField: CreditParameterTextField = {
     fieldTitle: { title: 'nazwa' },
     value: '',
-    placeholder: 'np. ubezpieczenie'
+    placeholder: 'np. ubezpieczenie',
+    id: 'costs-name-input'
   }
 
   public readonly selectField: CreditParameterSelectField = {
@@ -18,7 +19,7 @@ export class CostsParameters extends Section {
       { value: CostsType.BALANCE_RATE },
       { value: CostsType.CREDIT_AMOUNT_RATE }
     ],
-    defaultValue: { value: CostsType.FIXED_AMOUNT },
+    defaultValue: { value: CostsType.FIXED_AMOUNT }
   }
 
   public datePicker: CreditParameterDatepicker = {
@@ -31,7 +32,8 @@ export class CostsParameters extends Section {
     label: 'liczba miesięcy',
     value: 1,
     stepValue: 1,
-    validation: { min: 0, max: 1200, integerOnly: true }
+    validation: { min: 0, max: 1200, integerOnly: true },
+    id: 'costs-months-input'
   }
 
   public readonly costsInputField: CreditParameterInputField = {
@@ -47,7 +49,8 @@ export class CostsParameters extends Section {
     label: '%',
     value: defaultCostPercentage,
     stepValue: 0.1,
-    validation: { min: 0, max: 100 }
+    validation: { min: 0, max: 100 },
+    id: 'costs-balance-input'
   }
 
   public readonly costsCreditRateInputField: CreditParameterInputField = {

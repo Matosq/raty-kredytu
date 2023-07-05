@@ -14,7 +14,8 @@ export class LoanParameters extends Section {
     placeholder: 'wpisz kwotę kredytu',
     value: 300000,
     stepValue: 10000,
-    validation: { min: 0, max: 100000000000 }
+    validation: { min: 0, max: 100000000000 },
+    id: 'amount-loan-input'
   }
 
   public readonly monthsOfCredit: CreditParameterInputField = {
@@ -22,7 +23,8 @@ export class LoanParameters extends Section {
     label: 'liczba miesięcy',
     value: 300,
     stepValue: 1,
-    validation: { min: 0, max: 1200, integerOnly: true }
+    validation: { min: 0, max: 1200, integerOnly: true },
+    id: 'months-credit-input'
   }
 
   public readonly rate: CreditParameterInputField = {
@@ -30,7 +32,8 @@ export class LoanParameters extends Section {
     label: '%',
     value: 5.12,
     stepValue: 0.1,
-    validation: { min: 0, max: 100 }
+    validation: { min: 0, max: 100 },
+    id: 'rate-input'
   }
 
   public readonly installments: CreditParameterButtonToggle<Installments> = {

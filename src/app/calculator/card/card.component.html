@@ -3,19 +3,19 @@
     <div class="payment-wrapper">
 
         <div class="payment-date">{{data.date}}</div>
-        <div class="payment-text">{{data.payment | currency: 'zł'}}</div>
+        <div data-cy="simulation-payment" class="payment-text">{{data.payment | currency: 'zł'}}</div>
         <div class="payment-description">kwota do zapłaty</div>
 
     </div>
 
     <div class="saldo-wrapper">
         <div class="saldo">
-            <div class="saldo-text">{{data.saldo | currency: 'zł'}}</div>
+            <div data-cy="simulation-saldo" class="saldo-text">{{data.saldo | currency: 'zł'}}</div>
             <div class="saldo-description">saldo kredytu</div>
         </div>
 
         <div class="rate">
-            <div class="rate-text">{{data.rate | percent: '1.0-6'}}</div>
+            <div data-cy="simulation-rate" class="rate-text">{{data.rate | percent: '1.0-6'}}</div>
             <div class="rate-description">oprocentowanie</div>
         </div>
 
@@ -24,7 +24,7 @@
     <div class="bar-wrapper">
         <app-bar-chart class="bar" [bars]="calcBars()"></app-bar-chart>
 
-        <div class="legend-wrapper">
+        <div data-cy="simulation-legend" class="legend-wrapper">
             <app-legend *ngFor="let bar of bars" [data]="bar"></app-legend>
         </div>
 

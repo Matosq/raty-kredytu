@@ -8,18 +8,18 @@
 
     <div class="summary-wrapper">
       <div class="total-cost-wrapper">
-        <div class="total-cost-text">{{totalCost | currency: 'zł'}}</div>
+        <div data-cy="summary-total-cost" class="total-cost-text">{{totalCost | currency: 'zł'}}</div>
         <div class="total-cost-description">całkowity koszt kredytu</div>
       </div>
 
       <div class="installments-wrapper">
         <div>
-          <div class="installments-text">{{installments}}</div>
+          <div data-cy="summary-installments" class="installments-text">{{installments}}</div>
           <div class="installments-description">rodzaj rat</div>
         </div>
 
         <div>
-          <div class="installments-period">{{loanPeriod}}</div>
+          <div data-cy="summary-period" class="installments-period">{{loanPeriod}}</div>
           <div class="installments-period-description">okres kredytowania</div>
         </div>
       </div>
@@ -28,7 +28,7 @@
     <div class="chart-wrapper">
       <app-donut-chart class="chart" [bars]="chartBars"></app-donut-chart>
 
-      <div class="legend-wrapper">
+      <div data-cy="summary-legend" class="legend-wrapper">
         <app-legend class="legend-item" *ngFor="let legend of legends" [data]="legend"></app-legend>
       </div>
     </div>
