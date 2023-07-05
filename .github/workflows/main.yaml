@@ -4,7 +4,30 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-and-deploy:
+  cypress-run:
+    name: Cypress run
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Set up node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
+  
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,7 +44,4 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: E2E
-        run: npm run e2e
 
