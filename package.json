@@ -32,6 +32,7 @@
     "@angular/platform-browser": "^16.1.1",
     "@angular/platform-browser-dynamic": "^16.1.1",
     "@angular/platform-server": "^16.1.1",
+    "@cypress/github-action": "^5.8.3",
     "@nguniversal/express-engine": "^16.1.1",
     "express": "^4.15.2",
     "lodash-es": "^4.17.21",
