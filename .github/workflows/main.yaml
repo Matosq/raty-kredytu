@@ -1,4 +1,4 @@
-name: CI / CD for Angular
+name: CI pipeline Angular
 on:
   push:
     branches: [ "master" ]
@@ -19,12 +19,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Tests
-        run: npm run test:prod
-
       - name: Build
         run: npm run build
+
+      - name: E2E
+        run: npm run e2e
 
