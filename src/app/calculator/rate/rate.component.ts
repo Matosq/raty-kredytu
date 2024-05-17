@@ -120,8 +120,10 @@ export class RateComponent extends RateParameters implements SectionCard, OnInit
     this.datePickerField = cloneDeep(this.datePickerField);
     this.datePickerField.date = this.rate.date;
     this.monthsInputField.value = 1;
-    this.rate.numberOfMonths = this.monthsInputField.value;
+    this.monthsInputField = cloneDeep(this.monthsInputField);
+    this.rate.numberOfMonths = 1;
     this.rateInputField.value = this.currentLoanRate;
+    this.rateInputField = cloneDeep(this.rateInputField);
   }
 
   private calculateLoan(): void {

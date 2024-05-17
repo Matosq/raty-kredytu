@@ -110,6 +110,7 @@ export class TranchesComponent extends TranchesParameters implements SectionCard
   private clearFieldsValue(): void {
     this.newTranche.percentage = 10;
     this.newTranchePercentageInput.value = this.newTranche.percentage;
+    this.newTranchePercentageInput = cloneDeep(this.newTranchePercentageInput);
     this.newTranche.value = this.newTranche.percentage * 0.01 * this.tranchesService.getAmountLoan();
     this.newTranche.date = moment();
     this.datePickerField = cloneDeep(this.datePickerField);

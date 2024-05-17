@@ -4,7 +4,7 @@ import { Section } from "../section/section";
 
 export const defaultOverpayment = 100;
 export class OverpaymentsParameters extends Section {
-  public readonly overpaymentValueInputField: CreditParameterInputField = {
+  public overpaymentValueInputField: CreditParameterInputField = {
     fieldTitle: { title: 'miesięczna wartość nadpłaty' },
     label: 'zł',
     value: defaultOverpayment,
@@ -15,7 +15,7 @@ export class OverpaymentsParameters extends Section {
     fieldTitle: { title: 'data pierwszej nadpłaty' },
     label: 'miesiąc i rok',
   }
-  public readonly monthsInputField: CreditParameterInputField = {
+  public monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres nadpłacania' },
     label: 'liczba miesięcy',
     value: 1,

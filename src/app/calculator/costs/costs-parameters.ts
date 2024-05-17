@@ -5,7 +5,7 @@ import { Section } from "../section/section";
 export const defaultCost = 100;
 export const defaultCostPercentage = 0.1;
 export class CostsParameters extends Section {
-  public readonly costsNameTextField: CreditParameterTextField = {
+  public costsNameTextField: CreditParameterTextField = {
     fieldTitle: { title: 'nazwa' },
     value: '',
     placeholder: 'np. ubezpieczenie',
@@ -27,7 +27,7 @@ export class CostsParameters extends Section {
     label: 'miesiąc i rok'
   }
 
-  public readonly monthsInputField: CreditParameterInputField = {
+  public monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres trwania płatności' },
     label: 'liczba miesięcy',
     value: 1,
@@ -36,7 +36,7 @@ export class CostsParameters extends Section {
     id: 'costs-months-input'
   }
 
-  public readonly costsInputField: CreditParameterInputField = {
+  public costsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'miesięczny koszt' },
     label: 'zł',
     value: defaultCost,
@@ -44,7 +44,7 @@ export class CostsParameters extends Section {
     validation: { min: 0, max: 100000000000 }
   }
 
-  public readonly costsBalanceRateInputField: CreditParameterInputField = {
+  public costsBalanceRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie salda kredytu' },
     label: '%',
     value: defaultCostPercentage,
@@ -53,7 +53,7 @@ export class CostsParameters extends Section {
     id: 'costs-balance-input'
   }
 
-  public readonly costsCreditRateInputField: CreditParameterInputField = {
+  public costsCreditRateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'oprocentowanie kwoty kredytu' },
     label: '%',
     value: defaultCostPercentage,

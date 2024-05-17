@@ -2,7 +2,7 @@ import { CreditParameterDatepicker, CreditParameterInputField } from "../models/
 import { Section } from "../section/section"
 
 export class RateParameters extends Section {
-  public readonly rateInputField: CreditParameterInputField = {
+  public rateInputField: CreditParameterInputField = {
     fieldTitle: { title: 'nowa wartość oprocentowania' },
     value: 0,
     stepValue: 0.1,
@@ -13,7 +13,7 @@ export class RateParameters extends Section {
     fieldTitle: { title: 'data zmiany' },
     label: 'miesiąc i rok'
   }
-  public readonly monthsInputField: CreditParameterInputField = {
+  public monthsInputField: CreditParameterInputField = {
     fieldTitle: { title: 'okres zmiany oprocentowania' },
     value: 1,
     stepValue: 1,

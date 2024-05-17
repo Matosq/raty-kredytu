@@ -121,6 +121,7 @@ export class CostsComponent extends CostsParameters implements SectionCard {
   private clearNameField(): void {
     this.cost.name = '';
     this.costsNameTextField.value = '';
+    this.costsNameTextField = cloneDeep(this.costsNameTextField);
   }
 
   private clearValueFields(): void {
@@ -128,11 +129,15 @@ export class CostsComponent extends CostsParameters implements SectionCard {
     this.costsBalanceRateInputField.value = defaultCostPercentage;
     this.costsCreditRateInputField.value = defaultCostPercentage;
     this.cost.value = this.cost.type === CostsType.FIXED_AMOUNT ? defaultCost : defaultCostPercentage;
+    this.costsInputField = cloneDeep(this.costsInputField);
+    this.costsBalanceRateInputField = cloneDeep(this.costsBalanceRateInputField);
+    this.costsCreditRateInputField = cloneDeep(this.costsCreditRateInputField);
   }
 
   private clearMonths(): void {
     this.monthsInputField.value = 1;
     this.cost.numberOfMonths = 1;
+    this.monthsInputField = cloneDeep(this.monthsInputField);
   }
 
   private clearDate(): void {
