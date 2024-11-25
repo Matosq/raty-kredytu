@@ -28,6 +28,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets/favicon",
+              "src/assets/banknot-200-zlotych.png",
               "src/robots.txt",
               "src/sitemap.xml"
             ],
